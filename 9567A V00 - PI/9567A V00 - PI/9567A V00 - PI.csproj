@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D6B87081-B477-4B97-95AB-688A67C6219B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>_9567A_V00___PI</RootNamespace>
+    <AssemblyName>9567A V00 - PI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>_9567A_V00___PI.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Imagens\Automasul.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=1.2.7.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.7\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=3.2.0.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.3.2.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="DataBase\SqlFunctionsEquips.cs" />
+    <Compile Include="DataBase\SqlFunctionsUsers.cs" />
+    <Compile Include="DataBase\SqlGlobalFuctions.cs" />
+    <Compile Include="Desenho\Motor.xaml.cs">
+      <DependentUpon>Motor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\controleAtuadorBifurcada.xaml.cs">
+      <DependentUpon>controleAtuadorBifurcada.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Controle\controleAtuadorAnalogico.xaml.cs">
+      <DependentUpon>controleAtuadorAnalogico.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Controle\controleAtuadorLinear.xaml.cs">
+      <DependentUpon>controleAtuadorLinear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Controle\controleAtuadorLinearBifurcada.xaml.cs">
+      <DependentUpon>controleAtuadorLinearBifurcada.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Controle\controleInversor.xaml.cs">
+      <DependentUpon>controleInversor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Controle\controleMoinho.xaml.cs">
+      <DependentUpon>controleMoinho.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Controle\controlePartidaDireta.xaml.cs">
+      <DependentUpon>controlePartidaDireta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Outras Telas\configuracoesINV.xaml.cs">
+      <DependentUpon>configuracoesINV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Outras Telas\configuracoesMoinho.xaml.cs">
+      <DependentUpon>configuracoesMoinho.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Outras Telas\configuracoesPartidas.xaml.cs">
+      <DependentUpon>configuracoesPartidas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Outras Telas\controleAlarmes.xaml.cs">
+      <DependentUpon>controleAlarmes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Principal\principalControleAtuadorAnalogico.xaml.cs">
+      <DependentUpon>principalControleAtuadorAnalogico.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Principal\principalControleAtuadorLinear.xaml.cs">
+      <DependentUpon>principalControleAtuadorLinear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Principal\principalControleAtuadorLinearBifurcada.xaml.cs">
+      <DependentUpon>principalControleAtuadorLinearBifurcada.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Principal\principalControleInversor.xaml.cs">
+      <DependentUpon>principalControleInversor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Principal\principalControleMoinho.xaml.cs">
+      <DependentUpon>principalControleMoinho.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partidas\Principal\principalPartidaDireta.xaml.cs">
+      <DependentUpon>principalPartidaDireta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Teclados\keyboard.cs" />
+    <Compile Include="Teclados\keypad.xaml.cs">
+      <DependentUpon>keypad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Fluxo.xaml.cs">
+      <DependentUpon>Fluxo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TelasAuxiliares\Buffer_Diag.xaml.cs">
+      <DependentUpon>Buffer_Diag.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TelasAuxiliares\Diagnosticos.xaml.cs">
+      <DependentUpon>Diagnosticos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TelasAuxiliares\FirstLoading.xaml.cs">
+      <DependentUpon>FirstLoading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilidades\Conversions.cs" />
+    <Compile Include="Utilidades\convertTextInputToVisibility.cs" />
+    <Compile Include="Utilidades\EquipsControl.cs" />
+    <Compile Include="Utilidades\ListtoDataTableConverter.cs" />
+    <Compile Include="Utilidades\messageBox.xaml.cs">
+      <DependentUpon>messageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilidades\Move_Bits.cs" />
+    <Compile Include="Utilidades\TopMost.cs" />
+    <Compile Include="Utilidades\VariaveisGlobais.cs" />
+    <Page Include="Desenho\Motor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TelaInicial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Comunicacao\CallCommunicationPLC.cs" />
+    <Compile Include="Comunicacao\Sharp7.cs" />
+    <Compile Include="TelaInicial.xaml.cs">
+      <DependentUpon>TelaInicial.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Partidas\controleAtuadorBifurcada.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Controle\controleAtuadorAnalogico.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Controle\controleAtuadorLinear.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Controle\controleAtuadorLinearBifurcada.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Controle\controleInversor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Controle\controleMoinho.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Controle\controlePartidaDireta.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Outras Telas\configuracoesINV.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Outras Telas\configuracoesMoinho.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Outras Telas\configuracoesPartidas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Outras Telas\controleAlarmes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Principal\principalControleAtuadorAnalogico.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Principal\principalControleAtuadorLinear.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Principal\principalControleAtuadorLinearBifurcada.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Principal\principalControleInversor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Principal\principalControleMoinho.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Partidas\Principal\principalPartidaDireta.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Teclados\keypad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Fluxo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TelasAuxiliares\Buffer_Diag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TelasAuxiliares\Diagnosticos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TelasAuxiliares\FirstLoading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Utilidades\messageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Imagens\Automasul.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Automasul_horiz_branco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Desligar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Ligar3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Logo_Automasul.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Manutenção_Ativada.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Manutenção_Desativada.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Reset1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Rosca.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\roscaPreta.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Layout1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\Layout2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\LayoutCorreto.PNG" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

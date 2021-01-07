@@ -1,0 +1,9 @@
+﻿<Application x:Class="_9567A_V00___PI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:_9567A_V00___PI"
+             StartupUri="TelaInicial.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
