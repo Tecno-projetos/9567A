@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:_9567A_V00___PI.Telas_Fluxo"
-             xmlns:Desenho="clr-namespace:_9567A_V00___PI.Desenho" x:Class="_9567A_V00___PI.Telas_Fluxo.Fluxo"
+             xmlns:Desenho="clr-namespace:_9567A_V00___PI.Desenho" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="_9567A_V00___PI.Telas_Fluxo.Fluxo"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Width="1024" Height="675">
     <Grid Background="#FF7F7F7F" RenderTransformOrigin="0.5,0.5">
 
-        <Image HorizontalAlignment="Left" Height="705" VerticalAlignment="Top" Width="565" Source="/9567A V00 - PI;component/Imagens/LayoutCorreto.PNG" Margin="-2,0,0,-30"/>
+        <Image HorizontalAlignment="Left" Height="680" VerticalAlignment="Top" Width="550" Source="/9567A V00 - PI;component/Imagens/LayoutCorreto.PNG" Margin="472,0,0,-5"/>
 
-        <Desenho:Motor HorizontalAlignment="Left" Height="40" Margin="223,315,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
+        <Desenho:Motor x:Name="BMP1_Designer" HorizontalAlignment="Left" Height="40" Margin="798,330,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
             <Desenho:Motor.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
@@ -21,36 +21,90 @@
                 </TransformGroup>
             </Desenho:Motor.RenderTransform>
         </Desenho:Motor>
-        <Desenho:Motor HorizontalAlignment="Left" Height="40" Margin="65,110,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
+        <Label Content="BMP-1" HorizontalAlignment="Left" Height="28" Margin="788,312,0,335" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="BMP2_Designer" HorizontalAlignment="Left" Height="40" Margin="798,399,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
             <Desenho:Motor.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-90.292"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Desenho:Motor.RenderTransform>
-        </Desenho:Motor>
-        <Desenho:Motor HorizontalAlignment="Left" Height="40" Margin="258,515,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
-            <Desenho:Motor.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-90.292"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Desenho:Motor.RenderTransform>
-        </Desenho:Motor>
-        <Desenho:Motor HorizontalAlignment="Left" Height="40" Margin="120,510,0,0" VerticalAlignment="Top" Width="61" RenderTransformOrigin="0.5,0.5">
-            <Desenho:Motor.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1.5" ScaleY="1.5"/>
                     <SkewTransform/>
                     <RotateTransform/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Desenho:Motor.RenderTransform>
         </Desenho:Motor>
+        <Label Content="BMP-2" HorizontalAlignment="Left" Height="28" Margin="788,381,0,266" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="TD1_Designer" HorizontalAlignment="Left" Height="40" Margin="544,490,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
+            <Desenho:Motor.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:Motor.RenderTransform>
+        </Desenho:Motor>
+        <Label Content="TD-1" HorizontalAlignment="Left" Height="28" Margin="534,472,0,175" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="FM1_Designer" HorizontalAlignment="Left" Height="40" Margin="544,70,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
+            <Desenho:Motor.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:Motor.RenderTransform>
+        </Desenho:Motor>
+        <Label Content="FM-1" HorizontalAlignment="Left" Height="28" Margin="534,52,0,595" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <DataGrid x:Name="DataGrid_Receita" Margin="11,45,579,0" CanUserAddRows="False"
+            HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Black" Foreground="Black"
+            HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlTextColor}}"
+            VerticalGridLinesBrush="{DynamicResource MaterialDesignDarkBackground}" BorderBrush="{x:Null}" BorderThickness="1"
+            CanUserDeleteRows ="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"   
+            ScrollViewer.VerticalScrollBarVisibility="Auto" Height="500" Cursor="Hand" IsReadOnly="True" AlternatingRowBackground="#FF7F7F7F" 
+            RowBackground="White" HorizontalScrollBarVisibility="Hidden" Background="White" FontSize="24" FontFamily="Segoe UI Emoji" GridLinesVisibility="All" 
+            SelectionMode="Single"  AutoGenerateColumns="True" RowHeight="40" MouseLeftButtonUp="DataGrid_Receita_MouseLeftButtonUp" >
+
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FF3C3C3C" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontSize" Value="25"/>
+                </Style>
+
+            </DataGrid.ColumnHeaderStyle>
+        </DataGrid>
+        <Label Content="Receitas" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="445" Foreground="White" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="11,33,0,0" Stroke="White" VerticalAlignment="Top" Width="434"/>
+
+        <Button x:Name="btUpList" Margin="192,558,755,67" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btUpList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowUpBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btDownList" Margin="192,613,755,12" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btDownList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btLeftList" Margin="110,583,837,42" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btLeftList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowLeftBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btRightList" Margin="274,583,673,42" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btRightList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowRightBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
 
     </Grid>
 </UserControl>
