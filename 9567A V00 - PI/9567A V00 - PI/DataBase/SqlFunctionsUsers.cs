@@ -142,7 +142,6 @@ namespace _9567A_V00___PI.DataBase
             return Data1;
         }
 
-
         public static DataTable GetTableDBCA_DescID(string TableName)
         {
             DataTable Data = new DataTable();

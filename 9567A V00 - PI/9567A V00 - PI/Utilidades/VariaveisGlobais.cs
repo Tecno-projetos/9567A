@@ -850,17 +850,16 @@ namespace _9567A_V00___PI.Utilidades
 
         static bool DB_Connected;
         private static bool SQLCe;
-        private static string Connection_DB_Create = "";
-        private static string Connection_DB_Users = @"Data Source =" + folderSql + "\\" + "BeckerUsers" + ".sdf";
-        private static string Connection_DB_Equip = @"Data Source =" + folderSql + "\\" + "BeckerEquip" + ".sdf";
-        private static string Connection_DB_Current = "";
-        private static string Connection_DB_Receitas = @"Data Source =" + folderSql + "\\" + "BeckerReceitas" + ".sdf";
+        private static string Connection_DB_Create = @"Server=172.16.1.88\AVELL_AUTOMASUL\automasul,1433;Integrated Security=false;User ID=sa;Password=33162600";
+        private static string Connection_DB_Users = @"Server=172.16.1.88\AVELL_AUTOMASUL\automasul,1433;Database=DB_Users_IHM;Integrated Security=false;User ID=sa;Password=33162600";
+        private static string Connection_DB_Equip = @"Server=172.16.1.88\AVELL_AUTOMASUL\automasul,1433;Database=DB_Equips_IHM;Integrated Security=false;User ID=sa;Password=33162600";
+        private static string Connection_DB_Producao = @"Server=172.16.1.88\AVELL_AUTOMASUL\automasul,1433;Database=DB_Producao_IHM;Integrated Security=false;User ID=sa;Password=33162600";
 
         public static string Connection_DB_Users_GS { get => Connection_DB_Users; set => Connection_DB_Users = value; }
         public static string Connection_DB_Equip_GS { get => Connection_DB_Equip; set => Connection_DB_Equip = value; }
-        public static string Connection_DB_Current_GS { get => Connection_DB_Current; set => Connection_DB_Current = value; }
+        public static string Connection_DB_Producao_GS { get => Connection_DB_Producao; set => Connection_DB_Producao = value; }
+
         public static string Connection_DB_Create_GS { get => Connection_DB_Create; set => Connection_DB_Create = value; }
-        public static string Connection_DB_Receitas_GS { get => Connection_DB_Receitas; set => Connection_DB_Receitas = value; }
 
         public static bool SQLCe_GS { get => SQLCe; set => SQLCe = value; }
 
@@ -910,11 +909,11 @@ namespace _9567A_V00___PI.Utilidades
 
         public static void Load_Connection()
         {
-            //Cria pastas para Apliacação
-            createFolder(folderSql);
-            createFolder(folderLogs);
+            SQLCe_GS = false;
 
-            SQLCe_GS = true;
+            DataBase.SqlGlobalFuctions.Create_DB("DB_Users_IHM", Connection_DB_Create);
+            DataBase.SqlGlobalFuctions.Create_DB("DB_Equips_IHM", Connection_DB_Create);
+            DataBase.SqlGlobalFuctions.Create_DB("DB_Producao_IHM", Connection_DB_Create);
 
             DB_Connected_GS = true;
 
@@ -1232,128 +1231,11 @@ namespace _9567A_V00___PI.Utilidades
         /// <returns></returns>
         public class EspecificacoesEquipamentos
         {
-            public float VolumeMaximoPermitidoSilo1_2 { get; set; } //Volume máximo permitido no silo 1 e silo 2 m³
-
-            public float VolumeMaximoPermitidoBalanca { get; set; } //Volume máximo permitido na balança
-
-            public float VolumeMaximoPermitidoPreMisturador { get; set; } //Volume máximo permitido no Pré Misturador
-
-            public float VolumeMaximoPermitidoPosMisturador { get; set; } //Volume máximo permitido no Pos Misturador
 
             public float PesoMaximoPermitidoBalanca { get; set; } //Peso máximo permitido na balança
 
-            public float PesoMaximoPermitidoSilo1_2 { get; set; } //Peso máximo permitido no silo 1 e 2
+            public Int32 TempoMistura { get; set; } //Tempo mistura
 
-            public float PesoMaximoPermitidoPreMisturador { get; set; } //Peso máximo permitido no Pré Misturador
-
-            public float PesoMaximoPermitidoPosMisturador { get; set; } //Peso máximo permitido no Pos Misturador
-
-            public Int32 TempoPreMistura { get; set; } //Tempo de pré mistura
-
-            public Int32 TempoPosMistura { get; set; } //Tempo de pos mistura
-
-            public float VolumeMaximoPermitidoBatelada()
-            {
-                float value = VolumeMaximoPermitidoBalanca;
-
-                if (VolumeMaximoPermitidoPreMisturador < value)
-                {
-                    value = VolumeMaximoPermitidoPreMisturador;
-                }
-
-                if (VolumeMaximoPermitidoPosMisturador < value)
-                {
-                    value = VolumeMaximoPermitidoPosMisturador;
-                }
-
-                return value;
-            }
-
-            public float PesoMaximoPermitidoBatelada()
-            {
-                float value = PesoMaximoPermitidoBalanca;
-
-                if (PesoMaximoPermitidoPreMisturador < value)
-                {
-                    value = PesoMaximoPermitidoPreMisturador;
-                }
-
-                if (PesoMaximoPermitidoPosMisturador < value)
-                {
-                    value = PesoMaximoPermitidoPosMisturador;
-                }
-
-                return value;
-            }
-
-            public bool ValoresPreenchidos()
-            {
-                if (VolumeMaximoPermitidoSilo1_2 != 0)
-                {
-                    if (VolumeMaximoPermitidoBalanca != 0)
-                    {
-                        if (VolumeMaximoPermitidoPreMisturador != 0)
-                        {
-                            if (VolumeMaximoPermitidoPosMisturador != 0)
-                            {
-                                if (PesoMaximoPermitidoBalanca != 0)
-                                {
-                                    if (PesoMaximoPermitidoPreMisturador != 0)
-                                    {
-                                        if (PesoMaximoPermitidoPosMisturador != 0)
-                                        {
-                                            if (TempoPreMistura != 0)
-                                            {
-                                                if (TempoPosMistura != 0)
-                                                {
-                                                    return true;
-                                                }
-                                                else
-                                                {
-                                                    return false;
-                                                }
-                                            }
-                                            else
-                                            {
-                                                return false;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            return false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        return false;
-                                    }
-                                }
-                                else
-                                {
-                                    return false;
-                                }
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-
-            }
         }
   
     }
