@@ -105,6 +105,36 @@
                 <materialDesign:PackIcon Kind="ArrowRightBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
             </Grid>
         </Button>
+        <Desenho:registro x:Name="RP1_Designer" HorizontalAlignment="Left" Height="30" Margin="550,335,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
+            <Desenho:registro.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:registro.RenderTransform>
+        </Desenho:registro>
+        <Desenho:registro x:Name="RP2_Designer" HorizontalAlignment="Left" Height="30" Margin="550,420,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
+            <Desenho:registro.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:registro.RenderTransform>
+        </Desenho:registro>
+        <Desenho:registro x:Name="RP3_Designer" HorizontalAlignment="Left" Height="30" Margin="805,535,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
+            <Desenho:registro.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:registro.RenderTransform>
+        </Desenho:registro>
 
     </Grid>
 </UserControl>

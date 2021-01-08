@@ -97,6 +97,9 @@
     <Compile Include="Desenho\Motor.xaml.cs">
       <DependentUpon>Motor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Desenho\registro.xaml.cs">
+      <DependentUpon>registro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Partidas\controleAtuadorBifurcada.xaml.cs">
       <DependentUpon>controleAtuadorBifurcada.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,10 @@
     <Compile Include="Utilidades\TopMost.cs" />
     <Compile Include="Utilidades\VariaveisGlobais.cs" />
     <Page Include="Desenho\Motor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Desenho\registro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
