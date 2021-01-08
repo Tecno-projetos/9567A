@@ -24,5 +24,39 @@ namespace _9567A_V00___PI.Telas_Fluxo
         {
             InitializeComponent();
         }
+
+
+        #region Click List
+
+        private void btLeftList_Click(object sender, RoutedEventArgs e)
+        {
+            var scroll = (VisualTreeHelper.GetChild(DataGrid_Receita, 0) as Decorator).Child as ScrollViewer;
+
+            scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset - 20);
+        }
+
+        private void btDownList_Click(object sender, RoutedEventArgs e)
+        {
+            var scroll = (VisualTreeHelper.GetChild(DataGrid_Receita, 0) as Decorator).Child as ScrollViewer;
+
+            scroll.ScrollToVerticalOffset(scroll.VerticalOffset + 5);
+        }
+
+        private void btRightList_Click(object sender, RoutedEventArgs e)
+        {
+            var scroll = (VisualTreeHelper.GetChild(DataGrid_Receita, 0) as Decorator).Child as ScrollViewer;
+
+            scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset + 20);
+        }
+
+        private void btUpList_Click(object sender, RoutedEventArgs e)
+        {
+            var scroll = (VisualTreeHelper.GetChild(DataGrid_Receita, 0) as Decorator).Child as ScrollViewer;
+
+            scroll.ScrollToVerticalOffset(scroll.VerticalOffset - 5);
+        }
+
+#endregion
+
     }
 }

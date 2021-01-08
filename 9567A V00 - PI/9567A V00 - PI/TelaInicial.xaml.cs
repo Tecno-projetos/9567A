@@ -1,6 +1,7 @@
 ﻿using _9567A_V00___PI.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace _9567A_V00___PI
 {
@@ -21,13 +23,76 @@ namespace _9567A_V00___PI
     /// </summary>
     public partial class TelaInicial : Window
     {
+
+        #region Dispacher Timers
+
+        DispatcherTimer timer50ms = new DispatcherTimer(); //Roda o CLP
+
+        DispatcherTimer timer1s = new DispatcherTimer(); //Roda ciclos de 1 segundo
+
+        DispatcherTimer timer4h = new DispatcherTimer(); //Roda ciclos de 1 segundo
+
+        DispatcherTimer Clock_TickTack = new DispatcherTimer(); //Roda ciclos de 1 segundo
+
+        #endregion
+
+
         public TelaInicial()
         {
             InitializeComponent();
 
+
+            #region Verifica se existe alguma instãnca do arquivo aberta se existir fecha todos
+
+            string nomeProcesso = Process.GetCurrentProcess().ProcessName;
+
+            // Obtém todos os processos com o nome do atual
+            Process[] processes = Process.GetProcessesByName(nomeProcesso);
+
+            // Maior do que 1, porque a instância atual também conta
+            if (processes.Length > 1)
+            {
+
+                VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = "Supervisório Aberto! Fechando todas as instâncias.";
+
+                Process[] proc1 = Process.GetProcessesByName(nomeProcesso);
+                proc1[0].Kill();
+
+                Process proc = Process.GetCurrentProcess();
+                proc.Kill();
+
+                return;
+            }
+
+
+            VariaveisGlobais.Load_Connection();
+
+            #endregion
+
+
+
+            VariaveisGlobais.Fluxo.BMP1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 0, 0, "Misturador Motor 1", "BMP-1", "1", "12");
+            VariaveisGlobais.Fluxo.BMP2_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 0, 0, "Misturador Motor 2", "BMP-2", "2", "13");
+            VariaveisGlobais.Fluxo.TD1_Designer.loadEquip(Utilidades.typeEquip.INV, Utilidades.typeCommand.INV, 0, 0, "Rosca Ensaque", "TD-1", "3", "14");
+            VariaveisGlobais.Fluxo.FM1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 0, 0, "Captação de Pó", "FM-1", "4", "15");
+
+
+
+
+
+
+
+
             VariaveisGlobais.windowFirstLoading.Close();
 
             spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
+        
+        
+        
+        
+        
+        
+        
         }
 
 
