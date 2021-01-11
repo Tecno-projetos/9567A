@@ -12,7 +12,7 @@ using System.Windows.Media;
 namespace _9567A_V00___PI.Utilidades
 {
     public enum typeEquip { PD, INV, SS, Atuador, BF, TRF }
-    public enum typeCommand { PD, INV, SS, Atuador_Digital, Atuador_Analogico }
+    public enum typeCommand { PD, INV, SS, Atuador_Digital, Atuador_Analogico, Registro }
 
     public class VariaveisGlobais
     {
@@ -608,6 +608,45 @@ namespace _9567A_V00___PI.Utilidades
 
         }
 
+        public struct type_Registro
+        {
+
+            public bool automatico;
+            public bool manual;
+            public bool Reset;
+            public bool Manutencao;
+            public bool Bloqueado;
+            public bool Sem_Bloqueio;
+            public bool Emergencia;
+            public bool bit07;
+            public bool Habilitado_Ligar_Rota;
+            public bool ligaManual;
+            public bool Abrindo;
+            public bool Fechando;
+            public bool Aberto;
+            public bool Fechado;
+            public bool Falha_Abrir;
+            public bool Falha_Fechar;
+            public bool Falha_Sem_Posicao;
+            public bool SensorAberto;
+            public bool SensorFechado;
+            public bool ErroGeral;
+            public bool Seleciona_Rota;
+            public bool bitReserva_3;
+            public bool bitReserva_4;
+            public bool bitReserva_5;
+            public bool bitReserva_6;
+            public bool bitReserva_7;
+            public bool bitReserva_8;
+            public bool bitReserva_9;
+            public bool bitReserva_10;
+            public bool bitReserva_11;
+            public bool bitReserva_12;
+            public bool bitReserva_13;
+            public bool bitReserva_14;
+
+        }
+
         public struct type_AtuadorAnalogico
         {
 
@@ -679,6 +718,7 @@ namespace _9567A_V00___PI.Utilidades
             public type_INV INV;
             public type_SS SS;
             public type_AtuadorDigital AtuadorD;
+            public type_Registro AtuadorR;
             public type_AtuadorAnalogico AtuadorA;
 
             public int initialOffSet;
@@ -715,6 +755,22 @@ namespace _9567A_V00___PI.Utilidades
             public bool AcionaLado1;
             public bool AcionaLado2;
             public bool Reposicionando;
+
+            public bool bit07;
+            public bool Habilitado_Ligar_Rota;
+            public bool Abrindo;
+            public bool Fechando;
+            public bool Aberto;
+            public bool Fechado;
+            public bool Falha_Abrir;
+            public bool Falha_Fechar;
+            public bool Falha_Sem_Posicao;
+            public bool SensorAberto;
+            public bool SensorFechado;
+            public bool ErroGeral;
+            public bool Seleciona_Rota;
+
+
 
             //Status Partidas
             public bool Ligado;

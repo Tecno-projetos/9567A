@@ -71,8 +71,9 @@ namespace _9567A_V00___PI.Desenho
             if (equip.Command_Get.Standard.FalhaAcionandoLado1 ||
                     equip.Command_Get.Standard.FalhaAcionandoLado2 ||
                     equip.Command_Get.Standard.Falha2PosicoesAtiva ||
-                    equip.Command_Get.Standard.FalhaConfirmacaoContatorLado1 ||
-                    equip.Command_Get.Standard.FalhaConfirmacaoContatorLado2)
+                    equip.Command_Get.Standard.Falha_Abrir ||
+                    equip.Command_Get.Standard.Falha_Fechar ||
+                    equip.Command_Get.Standard.Falha_Sem_Posicao)
             {
                 if (ticktack)
                 {
@@ -99,7 +100,7 @@ namespace _9567A_V00___PI.Desenho
                 R2.Dispatcher.Invoke(delegate { R2.Fill = Brushes.Yellow; });
 
             }
-            else if (equip.Command_Get.Standard.AcionandoLado1)
+            else if (equip.Command_Get.Standard.AcionandoLado1 || equip.Command_Get.Standard.Abrindo)
             {
                 if (ticktack)
                 {
@@ -116,7 +117,7 @@ namespace _9567A_V00___PI.Desenho
 
                 }
             }
-            else if (equip.Command_Get.Standard.AcionandoLado2)
+            else if (equip.Command_Get.Standard.AcionandoLado2 || equip.Command_Get.Standard.Fechando)
             {
                 if (ticktack)
                 {
@@ -133,13 +134,13 @@ namespace _9567A_V00___PI.Desenho
 
                 }
             }
-            else if (equip.Command_Get.Standard.EmPosicaoLado1)
+            else if (equip.Command_Get.Standard.EmPosicaoLado1 || equip.Command_Get.Standard.Aberto)
             {
                 R1.Dispatcher.Invoke(delegate { R1.Fill = Brushes.Green; });
                 R2.Dispatcher.Invoke(delegate { R2.Fill = Brushes.Green; });
 
             }
-            else if (equip.Command_Get.Standard.EmPosicaoLado2)
+            else if (equip.Command_Get.Standard.EmPosicaoLado2 || equip.Command_Get.Standard.Fechado)
             {
                 R1.Dispatcher.Invoke(delegate { R1.Fill = Brushes.Gray; });
                 R2.Dispatcher.Invoke(delegate { R2.Fill = Brushes.Gray; });

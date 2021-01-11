@@ -77,9 +77,9 @@ namespace _9567A_V00___PI
             VariaveisGlobais.Fluxo.TD1_Designer.loadEquip(Utilidades.typeEquip.INV, Utilidades.typeCommand.INV, 42, 0, "Rosca Ensaque", "TD-1", "3", "14");
             VariaveisGlobais.Fluxo.FM1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 94, 0, "Captação de Pó", "FM-1", "4", "15");
            
-            VariaveisGlobais.Fluxo.RP1_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 114, 0, "Atuador 1", "RP-1", "-", "16/17");
-            VariaveisGlobais.Fluxo.RP2_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 118, 0, "Atuador 2", "RP-2", "-", "16/17");
-            VariaveisGlobais.Fluxo.RP3_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 122, 0, "Atuador 3", "RP-3", "-", "16/17");
+            VariaveisGlobais.Fluxo.RP1_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Registro, 114, 0, "Atuador 1", "RP-1", "-", "16/17");
+            VariaveisGlobais.Fluxo.RP2_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Registro, 118, 0, "Atuador 2", "RP-2", "-", "16/17");
+            VariaveisGlobais.Fluxo.RP3_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Registro, 122, 0, "Atuador 3", "RP-3", "-", "16/17");
 
 
             #region Configuração Buffers PLC
