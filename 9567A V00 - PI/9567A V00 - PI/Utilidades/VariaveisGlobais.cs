@@ -825,7 +825,7 @@ namespace _9567A_V00___PI.Utilidades
         //Cria comunicação com CLP
         public static Comunicacao.CallCommunicationPLC CommunicationPLC = new Comunicacao.CallCommunicationPLC(0, 10);
 
-        private static string IP_Plc = "192.168.0.104";
+        private static string IP_Plc = "172.16.1.112";
 
         private static int Rack_PLC = 0;
         private static int Slot_PLC = 1;
@@ -850,9 +850,11 @@ namespace _9567A_V00___PI.Utilidades
 
         static bool DB_Connected;
         private static bool SQLCe;
-        private static string Connection_DB_Create = "";
-        private static string Connection_DB_Users = @"Data Source =" + folderSql + "\\" + "BeckerUsers" + ".sdf";
-        private static string Connection_DB_Equip = @"Data Source =" + folderSql + "\\" + "BeckerEquip" + ".sdf";
+        private static string Connection_DB_Create = @"Data Source=DESKTOP-MNCIP9G\SQLEXPRESS;User ID=sa;Password=33162600";
+
+
+        private static string Connection_DB_Users = @"Data Source=DESKTOP-MNCIP9G\SQLEXPRESS;Initial Catalog=DarosUsers;User ID=sa;Password=33162600";
+        private static string Connection_DB_Equip = @"Data Source=DESKTOP-MNCIP9G\SQLEXPRESS;Initial Catalog=DarosEquip;User ID=sa;Password=33162600";
         private static string Connection_DB_Current = "";
         private static string Connection_DB_Receitas = @"Data Source =" + folderSql + "\\" + "BeckerReceitas" + ".sdf";
 
@@ -914,9 +916,18 @@ namespace _9567A_V00___PI.Utilidades
             createFolder(folderSql);
             createFolder(folderLogs);
 
-            SQLCe_GS = true;
+            SQLCe_GS = false;
 
             DB_Connected_GS = true;
+
+            DataBase.SqlGlobalFuctions.Create_DB("DarosUsers");
+            DataBase.SqlGlobalFuctions.Create_DB("DarosEquip");
+
+
+            //Inicializa Tabelas
+            DataBase.SqlFunctionsUsers.Initialize_ProgramDBCA();
+            DataBase.SqlFunctionsEquips.ExistTable();
+
 
 
         }

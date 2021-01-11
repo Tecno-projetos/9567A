@@ -36,6 +36,7 @@ namespace _9567A_V00___PI
 
         #endregion
 
+        Utilidades.messageBox inputDialog;
 
         public TelaInicial()
         {
@@ -71,14 +72,14 @@ namespace _9567A_V00___PI
 
 
 
-            VariaveisGlobais.Fluxo.BMP1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 0, 0, "Misturador Motor 1", "BMP-1", "1", "12");
-            VariaveisGlobais.Fluxo.BMP2_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 20, 0, "Misturador Motor 2", "BMP-2", "2", "13");
-            VariaveisGlobais.Fluxo.TD1_Designer.loadEquip(Utilidades.typeEquip.INV, Utilidades.typeCommand.INV, 40, 0, "Rosca Ensaque", "TD-1", "3", "14");
-            VariaveisGlobais.Fluxo.FM1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 92, 0, "Captação de Pó", "FM-1", "4", "15");
+            VariaveisGlobais.Fluxo.BMP1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 2, 0, "Misturador Motor 1", "BMP-1", "1", "12");
+            VariaveisGlobais.Fluxo.BMP2_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 22, 0, "Misturador Motor 2", "BMP-2", "2", "13");
+            VariaveisGlobais.Fluxo.TD1_Designer.loadEquip(Utilidades.typeEquip.INV, Utilidades.typeCommand.INV, 42, 0, "Rosca Ensaque", "TD-1", "3", "14");
+            VariaveisGlobais.Fluxo.FM1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 94, 0, "Captação de Pó", "FM-1", "4", "15");
            
-            VariaveisGlobais.Fluxo.RP1_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 112, 0, "Atuador 1", "RP-1", "-", "16/17");
-            VariaveisGlobais.Fluxo.RP2_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 116, 0, "Atuador 2", "RP-2", "-", "16/17");
-            VariaveisGlobais.Fluxo.RP3_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 120, 0, "Atuador 3", "RP-3", "-", "16/17");
+            VariaveisGlobais.Fluxo.RP1_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 114, 0, "Atuador 1", "RP-1", "-", "16/17");
+            VariaveisGlobais.Fluxo.RP2_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 118, 0, "Atuador 2", "RP-2", "-", "16/17");
+            VariaveisGlobais.Fluxo.RP3_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Atuador_Digital, 122, 0, "Atuador 3", "RP-3", "-", "16/17");
 
 
             #region Configuração Buffers PLC
@@ -86,7 +87,7 @@ namespace _9567A_V00___PI
             Utilidades.VariaveisGlobais.Buffer_PLC[0].Name = "DB Controle Todos Equipamentos";
             Utilidades.VariaveisGlobais.Buffer_PLC[0].DBNumber = 2;
             Utilidades.VariaveisGlobais.Buffer_PLC[0].Start = 0;
-            Utilidades.VariaveisGlobais.Buffer_PLC[0].Size = 128;
+            Utilidades.VariaveisGlobais.Buffer_PLC[0].Size = 130;
             Utilidades.VariaveisGlobais.Buffer_PLC[0].Enable_Read = true;
             Utilidades.VariaveisGlobais.Buffer_PLC[0].Enable_Write = false;
 
@@ -129,9 +130,9 @@ namespace _9567A_V00___PI
 
             #region Configuração Dispatcher
 
-            //timer50ms.Interval = TimeSpan.FromMilliseconds(50);
-            //timer50ms.Tick += timer_Tick;
-            //timer50ms.Start();
+            timer50ms.Interval = TimeSpan.FromMilliseconds(50);
+            timer50ms.Tick += timer_Tick;
+            timer50ms.Start();
             ////====================================================
             //timer1s.Interval = TimeSpan.FromSeconds(1);
             //timer1s.Tick += timer1s_Tick;
@@ -154,8 +155,45 @@ namespace _9567A_V00___PI
         
         }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
 
-        Utilidades.messageBox inputDialog;
+            VariaveisGlobais.CommunicationPLC.readBuffersPLC(); //Chama a leitura no PLC
+
+            //Verifica se esta lendo valor válido do CLP
+
+
+            int Connection = Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[0].Buffer, 0);
+
+            if (Connection == 1000)
+            {
+
+                ////Atualiza Niveis Silos
+                //Utilidades.VariaveisGlobais.niveis = Move_Bits.Dword_TO_NIveis(Comunicacao.Sharp7.S7.GetDWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[3].Buffer, 0), Utilidades.VariaveisGlobais.niveis);
+
+                ////Atualiza Dword Geral de auxiliares Processo.
+                //Utilidades.VariaveisGlobais.auxiliaresProcesso = Move_Bits.DwordTocontroleAuxiliaresProcesso(Comunicacao.Sharp7.S7.GetDWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[4].Buffer, 56), Utilidades.VariaveisGlobais.auxiliaresProcesso);
+
+
+                //Atualização Equip
+
+                VariaveisGlobais.Fluxo.BMP1_Designer.actualize_Equip = true;
+                VariaveisGlobais.Fluxo.BMP2_Designer.actualize_Equip = true;
+                VariaveisGlobais.Fluxo.TD1_Designer.actualize_Equip = true;
+                VariaveisGlobais.Fluxo.FM1_Designer.actualize_Equip = true;
+
+
+                VariaveisGlobais.Fluxo.RP1_Designer.actualize_Equip = true;
+                VariaveisGlobais.Fluxo.RP2_Designer.actualize_Equip = true;
+                VariaveisGlobais.Fluxo.RP3_Designer.actualize_Equip = true;
+
+
+            }
+
+            VariaveisGlobais.CommunicationPLC.writeBufferPLC();//Chama a escrita no PLC
+        }
+
+
 
         #region Login e Logout
 
@@ -251,8 +289,7 @@ namespace _9567A_V00___PI
 
                 //spInical.Children.Clear();
 
-          
-
+        
 
             }
         }
@@ -292,6 +329,11 @@ namespace _9567A_V00___PI
                 spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
 
             }
+        }
+
+        private void btLogin_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
