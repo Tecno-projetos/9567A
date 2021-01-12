@@ -40,7 +40,10 @@ namespace _9567A_V00___PI.Partidas.Controle
                 Command.Standard.FalhaAcionandoLado2 ||
                 Command.Standard.Falha2PosicoesAtiva ||
                 Command.Standard.FalhaConfirmacaoContatorLado1 ||
-                Command.Standard.FalhaConfirmacaoContatorLado2
+                Command.Standard.FalhaConfirmacaoContatorLado2 ||
+                Command.Standard.Falha_Abrir ||
+                Command.Standard.Falha_Fechar ||
+                Command.Standard.Falha_Sem_Posicao
                 )
             {
                 btManual.Dispatcher.Invoke(delegate { btManual.IsEnabled = false; });
@@ -65,7 +68,7 @@ namespace _9567A_V00___PI.Partidas.Controle
             btReset.Dispatcher.Invoke(delegate { btReset.IsEnabled = true; });
 
             //Atualiza status dos botões
-            if (Command.Standard.AcionaLado1 || (Command.Standard.EmPosicaoLado1 && !Command.Standard.AcionaLado2))
+            if (Command.Standard.AcionaLado1 || (Command.Standard.EmPosicaoLado1 && !Command.Standard.AcionaLado2) || (Command.Standard.Liga_Manual || (Command.Standard.Abrindo || Command.Standard.Aberto)))
             {
                 btLigar.Dispatcher.Invoke(delegate { btLigar.IsChecked = true; });
             }
@@ -120,19 +123,19 @@ namespace _9567A_V00___PI.Partidas.Controle
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Background = new SolidColorBrush(Colors.Red); });
 
             }
-            else if (Command.Standard.FalhaAcionandoLado1)
+            else if (Command.Standard.FalhaAcionandoLado1 || Command.Standard.Falha_Abrir)
             {
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Content = "Falha ao Abrir"; });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.White); });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Background = new SolidColorBrush(Colors.Red); });
             }
-            else if (Command.Standard.FalhaAcionandoLado2)
+            else if (Command.Standard.FalhaAcionandoLado2 || Command.Standard.Falha_Fechar)
             {
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Content = "Falha ao Fechar"; });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.White); });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Background = new SolidColorBrush(Colors.Red); });
             }
-            else if (Command.Standard.Falha2PosicoesAtiva)
+            else if (Command.Standard.Falha2PosicoesAtiva || Command.Standard.Falha_Sem_Posicao)
             {
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Content = "Falha 2 Posições Ativa"; });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.White); });
@@ -156,13 +159,13 @@ namespace _9567A_V00___PI.Partidas.Controle
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.White); });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Background = new SolidColorBrush(Colors.Blue); });
             }
-            else if (Command.Standard.AcionandoLado1)
+            else if (Command.Standard.AcionandoLado1 || Command.Standard.Abrindo)
             {
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Content = "Abrindo"; });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.Black); });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Background = new SolidColorBrush(Colors.ForestGreen); });
             }
-            else if (Command.Standard.AcionandoLado2)
+            else if (Command.Standard.AcionandoLado2 || Command.Standard.Fechando)
             {
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Content = "Fechando"; });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.Black); });
@@ -174,13 +177,13 @@ namespace _9567A_V00___PI.Partidas.Controle
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.Black); });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Background = new SolidColorBrush(Colors.Green); });
             }
-            else if (Command.Standard.EmPosicaoLado1)
+            else if (Command.Standard.EmPosicaoLado1 || Command.Standard.Aberto)
             {
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Content = "Aberto"; });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.Black); });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Background = new SolidColorBrush(Colors.Green); });
             }
-            else if (Command.Standard.EmPosicaoLado2)
+            else if (Command.Standard.EmPosicaoLado2 || Command.Standard.Fechado)
             {
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Content = "Fechado"; });
                 lbStatusMotor.Dispatcher.Invoke(delegate { lbStatusMotor.Foreground = new SolidColorBrush(Colors.White); });

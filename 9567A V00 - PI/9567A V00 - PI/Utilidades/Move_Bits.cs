@@ -579,6 +579,162 @@ namespace _9567A_V00___PI.Utilidades
             return Command.DWord;
         }
 
+        //Type Registro
+        //=====================================================================================================================================
+
+        public static Utilidades.VariaveisGlobais.type_All typeAtuadorR_TO_typeStandardGUI(Utilidades.VariaveisGlobais.type_All Command)
+        {
+
+
+            Command.Standard.Automatico = Command.AtuadorR.automatico;
+            Command.Standard.Manual =    Command.AtuadorR.manual;
+            Command.Standard.Reset = Command.AtuadorR.Reset;
+            Command.Standard.Manutencao = Command.AtuadorR.Manutencao;
+            Command.Standard.Liberado = !Command.AtuadorR.Bloqueado;
+            Command.Standard.Libera_Bloqueio = Command.AtuadorR.Sem_Bloqueio;
+            Command.Standard.Emergencia = Command.AtuadorR.Emergencia;
+            Command.Standard.Habilitado_Ligar_Rota = Command.AtuadorR.Habilitado_Ligar_Rota;
+            Command.Standard.Liga_Manual = Command.AtuadorR.ligaManual;
+            Command.Standard.Abrindo =  Command.AtuadorR.Abrindo; 
+            Command.Standard.Fechando = Command.AtuadorR.Fechando;
+            Command.Standard.Aberto = Command.AtuadorR.Aberto;
+            Command.Standard.Fechado = Command.AtuadorR.Fechado;
+            Command.Standard.Falha_Abrir = Command.AtuadorR.Falha_Abrir;
+            Command.Standard.Falha_Fechar = Command.AtuadorR.Falha_Fechar;
+            Command.Standard.Falha_Sem_Posicao = Command.AtuadorR.Falha_Sem_Posicao;
+            Command.Standard.SensorAberto  = Command.AtuadorR.SensorAberto;
+            Command.Standard.SensorFechado = Command.AtuadorR.SensorFechado;
+            Command.Standard.ErroGeral = Command.AtuadorR.ErroGeral;
+            Command.Standard.Seleciona_Rota =  Command.AtuadorR.Seleciona_Rota;
+
+            return Command;
+
+
+
+
+
+
+        }
+
+        public static Utilidades.VariaveisGlobais.type_All typeStandardGUI_TO_typeAtuadorR(Utilidades.VariaveisGlobais.type_All Command)
+        {
+            Command.AtuadorR.automatico = Command.Standard.Automatico;
+            Command.AtuadorR.manual = Command.Standard.Manual;
+            Command.AtuadorR.Reset = Command.Standard.Reset;
+            Command.AtuadorR.Manutencao = Command.Standard.Manutencao;
+            Command.AtuadorR.Bloqueado = !Command.Standard.Liberado;
+            Command.AtuadorR.Sem_Bloqueio = Command.Standard.Libera_Bloqueio;
+            Command.AtuadorR.Emergencia = Command.Standard.Emergencia;
+            Command.AtuadorR.Habilitado_Ligar_Rota = Command.Standard.Habilitado_Ligar_Rota;
+            Command.AtuadorR.ligaManual = Command.Standard.Liga_Manual;
+            Command.AtuadorR.Abrindo = Command.Standard.Abrindo;
+            Command.AtuadorR.Fechando = Command.Standard.Fechando;
+            Command.AtuadorR.Aberto = Command.Standard.Aberto;
+            Command.AtuadorR.Fechado = Command.Standard.Fechado;
+            Command.AtuadorR.Falha_Abrir = Command.Standard.Falha_Abrir;
+            Command.AtuadorR.Falha_Fechar = Command.Standard.Falha_Fechar;
+            Command.AtuadorR.Falha_Sem_Posicao = Command.Standard.Falha_Sem_Posicao;
+            Command.AtuadorR.SensorAberto = Command.Standard.SensorAberto;
+            Command.AtuadorR.SensorFechado = Command.Standard.SensorFechado;
+            Command.AtuadorR.ErroGeral = Command.Standard.ErroGeral;
+            Command.AtuadorR.Seleciona_Rota = Command.Standard.Seleciona_Rota;
+
+            return Command;
+
+        }
+
+        public static Utilidades.VariaveisGlobais.type_All Dword_TO_typeAtuadorR(UInt32 DWord, Utilidades.VariaveisGlobais.type_All Command)
+        {
+            bool[] bits = new bool[32];
+
+            Conversions.Dword_To_Bit(DWord, ref bits, true);
+
+            //Atualiza DWord
+            Command.DWord = DWord;
+
+            Command.AtuadorR.automatico = bits[0];
+            Command.AtuadorR.manual = bits[1];
+            Command.AtuadorR.Reset = bits[2];
+            Command.AtuadorR.Manutencao = bits[3];
+            Command.AtuadorR.Bloqueado = bits[4];
+            Command.AtuadorR.Sem_Bloqueio = bits[5];
+            Command.AtuadorR.Emergencia = bits[6];
+            Command.AtuadorR.bit07 = bits[7];
+            Command.AtuadorR.Habilitado_Ligar_Rota = bits[8];
+            Command.AtuadorR.ligaManual = bits[9];
+            Command.AtuadorR.Abrindo = bits[10];
+            Command.AtuadorR.Fechando = bits[11];
+            Command.AtuadorR.Aberto = bits[12];
+            Command.AtuadorR.Fechado = bits[13];
+            Command.AtuadorR.Falha_Abrir = bits[14];
+            Command.AtuadorR.Falha_Fechar = bits[15];
+            Command.AtuadorR.Falha_Sem_Posicao = bits[16];
+            Command.AtuadorR.SensorAberto = bits[17];
+            Command.AtuadorR.SensorFechado = bits[18];
+            Command.AtuadorR.ErroGeral = bits[19];
+            Command.AtuadorR.Seleciona_Rota = bits[20];
+            Command.AtuadorD.bitReserva_1 = bits[21];
+            Command.AtuadorD.bitReserva_2 = bits[22];
+            Command.AtuadorD.bitReserva_3 = bits[23];
+            Command.AtuadorD.bitReserva_4 = bits[24];
+            Command.AtuadorD.bitReserva_5 = bits[25];
+            Command.AtuadorD.bitReserva_6 = bits[26];
+            Command.AtuadorD.bitReserva_7 = bits[27];
+            Command.AtuadorD.bitReserva_8 = bits[28];
+            Command.AtuadorD.bitReserva_9 = bits[29];
+            Command.AtuadorD.bitReserva_10 = bits[30];
+            Command.AtuadorD.bitReserva_11 = bits[31];
+
+
+            return Command;
+        }
+
+        public static UInt32 typeAtuadorR_TO_Dword(Utilidades.VariaveisGlobais.type_All Command)
+        {
+            bool[] bits = new bool[32];
+
+
+            bits[0] = Command.AtuadorR.automatico;
+            bits[1] = Command.AtuadorR.manual;
+            bits[2] = Command.AtuadorR.Reset;
+            bits[3] = Command.AtuadorR.Manutencao;
+            bits[4] = Command.AtuadorR.Bloqueado;
+            bits[5] = Command.AtuadorR.Sem_Bloqueio;
+            bits[6] = Command.AtuadorR.Emergencia;
+            bits[7] = Command.AtuadorR.bit07;
+            bits[8] = Command.AtuadorR.Habilitado_Ligar_Rota;
+            bits[9] = Command.AtuadorR.ligaManual;
+            bits[10] = Command.AtuadorR.Abrindo;
+            bits[11] = Command.AtuadorR.Fechando;
+            bits[12] = Command.AtuadorR.Aberto;
+            bits[13] = Command.AtuadorR.Fechado;
+            bits[14] = Command.AtuadorR.Falha_Abrir;
+            bits[15] = Command.AtuadorR.Falha_Fechar;
+            bits[16] = Command.AtuadorR.Falha_Sem_Posicao;
+            bits[17] = Command.AtuadorR.SensorAberto;
+            bits[18] = Command.AtuadorR.SensorFechado;
+            bits[19] = Command.AtuadorR.ErroGeral;
+            bits[20] = Command.AtuadorR.Seleciona_Rota;
+            bits[21] = Command.AtuadorD.bitReserva_1;
+            bits[22] = Command.AtuadorD.bitReserva_2;
+            bits[23] = Command.AtuadorD.bitReserva_3;
+            bits[24] = Command.AtuadorD.bitReserva_4;
+            bits[25] = Command.AtuadorD.bitReserva_5;
+            bits[26] = Command.AtuadorD.bitReserva_6;
+            bits[27] = Command.AtuadorD.bitReserva_7;
+            bits[28] = Command.AtuadorD.bitReserva_8;
+            bits[29] = Command.AtuadorD.bitReserva_9;
+            bits[30] = Command.AtuadorD.bitReserva_10;
+            bits[31] = Command.AtuadorD.bitReserva_11;
+
+            Command.DWord = Conversions.Bit_To_Dword(ref bits, true);
+
+            return Command.DWord;
+        }
+
+
+
+
         //Type Atuador Analogico
         //=====================================================================================================================================
 
