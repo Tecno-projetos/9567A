@@ -176,18 +176,18 @@ namespace _9567A_V00___PI.DataBase
         {
             DataTable Data = new DataTable();
 
-            Data = DataBase.SqlGlobalFuctions.AutoSelectProducao("Producao", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, meses);
+            //Data = DataBase.SqlGlobalFuctions.AutoSelectProducao("Producao", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, meses);
 
-            foreach (DataRow row in Data.Rows)
-            {
-                int DeletarID;
-                DeletarID = Convert.ToInt32(row["Id"]);
+            //foreach (DataRow row in Data.Rows)
+            //{
+            //    int DeletarID;
+            //    DeletarID = Convert.ToInt32(row["Id"]);
 
-                DataBase.SqlGlobalFuctions.AutoDeleteFromIDProducao("Ensaques", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, DeletarID, "IdEnsaque");
-                DataBase.SqlGlobalFuctions.AutoDeleteFromIDProducao("ProducaoEnsaque", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, DeletarID, "IdProducao");
-                DataBase.SqlGlobalFuctions.AutoDeleteFromIDProducao("Bateladas", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, DeletarID, "IdProducao");
-                DataBase.SqlGlobalFuctions.AutoDeleteFromIDProducao("Producao", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, DeletarID, "Id");
-            }
+            //    DataBase.SqlGlobalFuctions.AutoDeleteFromIDProducao("Ensaques", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, DeletarID, "IdEnsaque");
+            //    DataBase.SqlGlobalFuctions.AutoDeleteFromIDProducao("ProducaoEnsaque", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, DeletarID, "IdProducao");
+            //    DataBase.SqlGlobalFuctions.AutoDeleteFromIDProducao("Bateladas", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, DeletarID, "IdProducao");
+            //    DataBase.SqlGlobalFuctions.AutoDeleteFromIDProducao("Producao", Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS, DeletarID, "Id");
+            //}
 
             //Limpa Historio de Alarmes
             DataBase.SqlGlobalFuctions.AutoDelete("EquipAlarmEvent", Utilidades.VariaveisGlobais.Connection_DB_Equip_GS, meses);
