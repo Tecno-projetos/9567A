@@ -157,6 +157,7 @@
     <Compile Include="Partidas\Principal\principalPartidaDireta.xaml.cs">
       <DependentUpon>principalPartidaDireta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RTU\IndicadorPesagem_3102C_S.cs" />
     <Compile Include="Teclados\keyboard.cs" />
     <Compile Include="Teclados\keypad.xaml.cs">
       <DependentUpon>keypad.xaml</DependentUpon>
@@ -397,7 +398,20 @@
   <ItemGroup>
     <Resource Include="Imagens\LayoutCorreto.PNG" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="FtdAdapter\FtdAdapter.csproj">
+      <Project>{16ffb4f2-5556-439e-8729-92fb3425ef1f}</Project>
+      <Name>FtdAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="Modbus.Extensions\Modbus.Extensions.csproj">
+      <Project>{667f4d2c-c9df-4cc4-a1a6-768f6e879ce5}</Project>
+      <Name>Modbus.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="Modbus\Modbus.csproj">
+      <Project>{ff96b252-2b24-44a1-a09c-6401b5d7ed23}</Project>
+      <Name>Modbus</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
