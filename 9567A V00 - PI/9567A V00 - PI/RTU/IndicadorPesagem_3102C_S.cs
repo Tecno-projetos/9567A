@@ -126,8 +126,6 @@ namespace _9567A_V00___PI.RTU
                 return false;
 
             }
-
-
         }
 
 
@@ -142,8 +140,6 @@ namespace _9567A_V00___PI.RTU
                 Utilidades.VariaveisGlobais.Buffer_PLC[bufferPlcEnsaque].Enable_Write = true;
             }
         }
-
-
 
         #region Leitura Modbus
 
