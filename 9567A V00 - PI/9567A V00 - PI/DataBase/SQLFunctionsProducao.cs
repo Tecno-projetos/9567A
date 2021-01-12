@@ -58,7 +58,7 @@ namespace _9567A_V00___PI.DataBase
                     {
                         string CommandString = "CREATE TABLE Producao (" +
                             "Id int not null," +      //PK
-                            "PesoTotalProducao real," +    //FK do Id da receita     
+                            "PesoTotalProducao real," +    
                             "PesoTotalProduzido real," +
                             "DataInicioProducao datetime," +
                             "DataFimProducao datetime," +
@@ -69,42 +69,8 @@ namespace _9567A_V00___PI.DataBase
                             "CodigoReceita bigint," +
                             "ObservacaoReceita nvarchar(300)," +
                             "TempoMisturaReceita bigint," +
-                            "IdReceita int," +
                             "CONSTRAINT FK_IdReceitaBase FOREIGN KEY (IdReceitaBase) REFERENCES Receitas(Id), " +
                             "PRIMARY KEY (Id));";
-
-                        dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
-                        Call.Open();
-
-                        dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
-                        Command.ExecuteNonQuery();
-
-                        Call.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-                    }
-                }
-            }
-
-        }
-
-        public static void Create_Table_Bateladas()
-        {
-            if (!ExistTable("Bateladas"))
-            {
-                if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-                {
-                    try
-                    {
-                        string CommandString = "CREATE TABLE ProducaoProdutos (" +
-                            "IdProducaoReceita int not null," +
-                            "IdProduto nvarchar int," +
-                            "NomeProduto nvarchar(100)," +
-                            "CodigoProduto bigint," +
-                            "ObservaocaoProduto nvarchar(300)," +
-                            "CONSTRAINT FK_IdProducaoReceita FOREIGN KEY (IdProducaoReceita) REFERENCES PremixProdutos(Codigo));";
 
                         dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
                         Call.Open();
@@ -151,55 +117,46 @@ namespace _9567A_V00___PI.DataBase
 
                     string query = "INSERT into Producao (" +
                         "Id, " +
-                        "IdReceitaBase, " +
-                        "QtdBateladas, " +
-                        "TempoPreMistura, " +
-                        "TempoPosMistura, " +
                         "PesoTotalProducao, " +
                         "PesoTotalProduzido, " +
-                        "VolumeTotalProducao, " +
-                        "VolumeTotalProduzido, " +
-                        "CodigoProdutoDosagemAutomaticaSilo1, " +
-                        "CodigoProdutoDosagemAutomaticaSilo2, " +
                         "DataInicioProducao, " +
                         "DataFimProducao, " +
-                        "IniciouProducao," +
-                        "FinalizouProducao) VALUES (" +
+                        "IniciouProducao, " +
+                        "FinalizouProducao, " +
+                        "IdReceita, " +
+                        "NomeReceita, " +
+                        "CodigoReceita, " +
+                        "ObservacaoReceita, " +
+                        "TempoMisturaReceita) VALUES (" +
                         "@Id, " +
-                        "@IdReceitaBase, " +
-                        "@QtdBateladas, " +
-                        "@TempoPreMistura, " +
-                        "@TempoPosMistura, " +
                         "@PesoTotalProducao, " +
                         "@PesoTotalProduzido, " +
-                        "@VolumeTotalProducao, " +
-                        "@VolumeTotalProduzido, " +
-                        "@CodigoProdutoDosagemAutomaticaSilo1, " +
-                        "@CodigoProdutoDosagemAutomaticaSilo2, " +
                         "@DataInicioProducao, " +
-                        "@DataFimProducao," +
-                        "@IniciouProducao," +
-                        "@FinalizouProducao)";
+                        "@DataFimProducao, " +
+                        "@IniciouProducao, " +
+                        "@FinalizouProducao, " +
+                        "@IdReceita, " +
+                        "@NomeReceita, " +
+                        "@CodigoReceita, " +
+                        "@ObservacaoReceita, " +
+                        "@TempoMisturaReceita)";
 
                     //Atualiza o Id da produção 
                     producao.id = idProd;
 
                     Command = SqlGlobalFuctions.ReturnCommand(query, Call);
                     Command.Parameters.AddWithValue("@Id", producao.id);
-                    Command.Parameters.AddWithValue("@IdReceitaBase", producao.IdReceitaBase);
-                    Command.Parameters.AddWithValue("@QtdBateladas", producao.quantidadeBateladas);
-                    Command.Parameters.AddWithValue("@TempoPreMistura", producao.tempoPreMistura);
-                    Command.Parameters.AddWithValue("@TempoPosMistura", producao.tempoPosMistura);
                     Command.Parameters.AddWithValue("@PesoTotalProducao", producao.pesoTotalProducao);
                     Command.Parameters.AddWithValue("@PesoTotalProduzido", producao.pesoTotalProduzido);
-                    Command.Parameters.AddWithValue("@VolumeTotalProducao", producao.volumeTotalProducao);
-                    Command.Parameters.AddWithValue("@VolumeTotalProduzido", producao.volumeTotalProduzido);
-                    Command.Parameters.AddWithValue("@CodigoProdutoDosagemAutomaticaSilo1", producao.CodigoProdutoDosagemAutomaticaSilo1);
-                    Command.Parameters.AddWithValue("@CodigoProdutoDosagemAutomaticaSilo2", producao.CodigoProdutoDosagemAutomaticaSilo2);
                     Command.Parameters.AddWithValue("@DataInicioProducao", producao.dateTimeInicioProducao);
                     Command.Parameters.AddWithValue("@DataFimProducao", producao.dateTimeFimProducao);
                     Command.Parameters.AddWithValue("@IniciouProducao", producao.IniciouProducao);
                     Command.Parameters.AddWithValue("@FinalizouProducao", producao.FinalizouProducao);
+                    Command.Parameters.AddWithValue("@IdReceita", producao.receita.id);
+                    Command.Parameters.AddWithValue("@NomeReceita", producao.receita.nomeReceita);
+                    Command.Parameters.AddWithValue("@CodigoReceita", producao.receita.Codigo);
+                    Command.Parameters.AddWithValue("@ObservacaoReceita", producao.receita.observacao);
+                    Command.Parameters.AddWithValue("@TempoMisturaReceita", producao.receita.tempoMistura);
                     Call.Open();
                     ret = Command.ExecuteNonQuery();
                     Call.Close();
@@ -219,94 +176,34 @@ namespace _9567A_V00___PI.DataBase
             }
         }
 
-        public static int IntoDate_Table_Bateladas(ref Utilidades.Producao producao)
-        {
-            int ret = -1;
+        //public static int AddProducao(Utilidades.Producao producao)
+        //{
+        //    Utilidades.messageBox inputDialog;
+        //    int ret = -1;
 
-            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-            {
-                try
-                {
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+        //    if (IntoDate_Table_Producao(ref producao) != -1)
+        //    {
+        //        if (IntoDate_Table_Bateladas(ref producao) != -1)
+        //        {
+        //            ret = 0;
+        //        }
+        //        else
+        //        {
+        //            inputDialog = new Utilidades.messageBox("Falha inserir DB", "Falha ao inserir dados na tabela de bateladas!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
-                    Call.Open();
+        //            inputDialog.ShowDialog();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        inputDialog = new Utilidades.messageBox("Falha inserir DB", "Falha ao inserir dados na tabela de produção!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
-                    foreach (var bateladas in producao.batelada)
-                    {
-                        foreach (var ProdBateladas in bateladas.produtos)
-                        {
-                            
+        //        inputDialog.ShowDialog();
+        //    }
 
-                            string query = "INSERT into Bateladas (" +
-                                "IdProducao, " +
-                                "CodigoProduto, " +
-                                "ValorDesejado, " +
-                                "ValorDosado, " +
-                                "NumeroBatelada) VALUES (" +
-                                "@IdProducao, " +
-                                "@CodigoProduto, " +
-                                "@ValorDesejado, " +
-                                "@ValorDosado, " +
-                                "@NumeroBatelada)";
-
-                            dynamic Command = SqlGlobalFuctions.ReturnCommand(query, Call);
-                            Command.Parameters.AddWithValue("@IdProducao", producao.id);
-                            Command.Parameters.AddWithValue("@CodigoProduto", ProdBateladas.codigo);
-                            Command.Parameters.AddWithValue("@ValorDesejado", ProdBateladas.pesoDesejado);
-                            Command.Parameters.AddWithValue("@ValorDosado", ProdBateladas.pesoDosado);
-                            Command.Parameters.AddWithValue("@NumeroBatelada", bateladas.numeroBatelada);
-
-                            ret = Command.ExecuteNonQuery();
-                            
-                            ret = 0;
-                        }
-                    }
-
-                    Call.Close();
-
-                }
-                catch (Exception ex)
-                {
-                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-                    ret = -1;
-                }
-
-                return ret;
-            }
-            else
-            {
-                return ret;
-            }
-        }
-
-        public static int AddProducao(Utilidades.Producao producao)
-        {
-            Utilidades.messageBox inputDialog;
-            int ret = -1;
-
-            if (IntoDate_Table_Producao(ref producao) != -1)
-            {
-                if (IntoDate_Table_Bateladas(ref producao) != -1)
-                {
-                    ret = 0;
-                }
-                else
-                {
-                    inputDialog = new Utilidades.messageBox("Falha inserir DB", "Falha ao inserir dados na tabela de bateladas!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
-
-                    inputDialog.ShowDialog();
-                }
-            }
-            else
-            {
-                inputDialog = new Utilidades.messageBox("Falha inserir DB", "Falha ao inserir dados na tabela de produção!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
-
-                inputDialog.ShowDialog();
-            }
-
-            return ret;
+        //    return ret;
             
-        }
+        //}
 
         public static DataTable getBateladaFromIdProducaoANDNumeroBatelada(int IdProducao, int NumeroBatelada)
         {

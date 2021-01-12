@@ -21,6 +21,11 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
     /// </summary>
     public partial class ProducaoTelaInicial : UserControl
     {
+
+        public event EventHandler EventoReceitaSelecionada;
+
+        Utilidades.messageBox inputDialog;
+
         public ProducaoTelaInicial()
         {
             InitializeComponent();
@@ -111,16 +116,8 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
                     var index = Utilidades.VariaveisGlobais.listReceitas.FindIndex(x => x.id == Convert.ToInt32(rowList.Row.ItemArray[0]));
 
-                    //Passa id da receita desejada para a produção receita
-                    Utilidades.VariaveisGlobais.ProducaoReceita.IdReceitaBase = Utilidades.VariaveisGlobais.listReceitas[index].id;
                     //Passa a Receita desejada para a produção Receita
                     Utilidades.VariaveisGlobais.ProducaoReceita.receita = Utilidades.VariaveisGlobais.listReceitas[index];
-
-                    //Passa TempoPreMistura da receita desejada para a produção receita
-                    Utilidades.VariaveisGlobais.ProducaoReceita.tempoPreMistura = Utilidades.VariaveisGlobais.ValoresEspecificacoesEquipamentos.TempoPreMistura;
-
-                    //Passa TempoPosMistura da receita desejada para a produção receita
-                    Utilidades.VariaveisGlobais.ProducaoReceita.tempoPosMistura = Utilidades.VariaveisGlobais.ValoresEspecificacoesEquipamentos.TempoPosMistura;
 
                     //Dispara evento para editar produtos.
                     if (this.EventoReceitaSelecionada != null)
@@ -132,6 +129,43 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                 inputDialog = new Utilidades.messageBox("Em produção", "Existe uma produção em andamento, aguarde a finalização da produção!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
                 inputDialog.ShowDialog();
+            }
+        }
+
+        private void DataGrid_Receita_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            DataGrid_Receita.Columns[0].Visibility = Visibility.Hidden;
+        }
+
+        private void DataGrid_Receita_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //Atualiza o Grid de equipamentos com os equipamentos que pertencem a receita selecionada.
+
+            if (DataGrid_Receita.SelectedIndex != -1)
+            {
+                var rowList = (DataGrid_Receita.ItemContainerGenerator.ContainerFromIndex(DataGrid_Receita.SelectedIndex) as DataGridRow).Item as DataRowView;
+
+                Utilidades.functions.atualizalistReceitas();
+
+                var index = Utilidades.VariaveisGlobais.listReceitas.FindIndex(x => x.id == Convert.ToInt32(rowList.Row.ItemArray[0]));
+
+                DataTable dt = new DataTable();
+
+                dt.Columns.Add("Produto");
+                dt.Columns.Add("Peso(kg)");
+                dt.Columns.Add("Tipo");
+                dt.Columns.Add("Modo Dosagem");
+
+                foreach (var item in Utilidades.VariaveisGlobais.listReceitas[index].listProdutos)
+                {
+                    DataRow dr = dt.NewRow();
+
+                    dr["Produto"] = item.produto.descricao;
+                    dr["Peso(kg)"] = item.pesoProdutoReceita;
+                    dt.Rows.Add(dr);
+                }
+
+                DataGrid_Produtos.Dispatcher.Invoke(delegate { DataGrid_Produtos.ItemsSource = dt.DefaultView; });
             }
         }
     }

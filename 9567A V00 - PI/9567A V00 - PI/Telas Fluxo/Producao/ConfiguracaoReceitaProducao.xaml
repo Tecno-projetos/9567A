@@ -4,9 +4,128 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:_9567A_V00___PI.Telas_Fluxo.Producao"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Utilidades="clr-namespace:_9567A_V00___PI.Utilidades"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="675" d:DesignWidth="824" Loaded="UserControl_Loaded">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="brushWatermarkForeground" Color="White" />
+        <Utilidades:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />
+
+        <SolidColorBrush x:Key="brushWatermarkBorder" Color="White" />
+
+        <Style x:Key="EntryFieldStyle" TargetType="{x:Type Grid}" >
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0" />
+        </Style>
+
+    </UserControl.Resources>
+    <Grid Background="#FF7F7F7F">
+        <Grid.Resources  >
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+
+                <SolidColorBrush x:Key="brushWatermarkBackground" Color="#FF505050" />
+                <SolidColorBrush x:Key="brushWatermarkForeground" Color="White" />
+                <Utilidades:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />
+
+                <SolidColorBrush x:Key="brushWatermarkBorder" Color="White" />
+
+                <Style x:Key="EntryFieldStyle" TargetType="{x:Type Grid}" >
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="20,0" />
+                </Style>
+
+            </ResourceDictionary>
+
+        </Grid.Resources>
+        <Label x:Name="lbTitle" Content="Configuração Receita Para Produção" HorizontalAlignment="Left" VerticalAlignment="Top" Width="825" Foreground="White" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,6,-1,0" Height="60" FontSize="30"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="0,76,-1,0" Stroke="White" VerticalAlignment="Top" Width="825"/>
+        <Label Width="355" VerticalAlignment="Top" Margin="52,103,0,0" Height="34" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="White" Content="Peso Total Desejado Receita(kg):"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="52,142,417,492" Height="41" Background="#FF3C3C3C">
+            <TextBlock VerticalAlignment="Bottom" Text="Exemplo: 10000" Margin="5,0,6,5" FontSize="14" Foreground="#FF919191">
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
+                        <Binding ElementName="txtPesoDesejado" Path="Text.IsEmpty"/>
+                        <Binding ElementName="txtPesoDesejado" Path="IsFocused"/>
+                    </MultiBinding>
+                </TextBlock.Visibility>
+            </TextBlock>
+            <TextBox x:Name="txtPesoDesejado" VerticalAlignment="Bottom" PreviewMouseLeftButtonUp="txtPesoDesejado_PreviewMouseLeftButtonUp" Margin="0,0,1,3" FontSize="14" Foreground="White" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Height="38" VerticalContentAlignment="Bottom"/>
+        </Grid>
+
+        <materialDesign:PackIcon Kind="Receipt" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="14,102,772,539" BorderBrush="#FF040404"/>
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="14,142,772,492" BorderBrush="#FF040404"/>
+        <Label Width="355" VerticalAlignment="Top" Margin="52,194,0,0" Height="34" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="White" Content="Quantidade de Receita:"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="52,233,417,401" Height="41" Background="#FF3C3C3C">
+            <TextBlock VerticalAlignment="Bottom" Text="Exemplo: 10" Margin="5,0,6,5" FontSize="14" Foreground="#FF919191">
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
+                        <Binding ElementName="txtQtdReceita" Path="Text.IsEmpty"/>
+                        <Binding ElementName="txtQtdReceita" Path="IsFocused"/>
+                    </MultiBinding>
+                </TextBlock.Visibility>
+            </TextBlock>
+            <TextBox x:Name="txtQtdReceita" VerticalAlignment="Bottom" Margin="0,0,1,3" FontSize="14" Foreground="White" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" IsReadOnly="True" IsEnabled="False" Height="38" VerticalContentAlignment="Bottom" PreviewMouseLeftButtonUp="txtQtdReceita_PreviewMouseLeftButtonUp"/>
+        </Grid>
+        <materialDesign:PackIcon Kind="Receipt" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="14,193,772,448" BorderBrush="#FF040404"/>
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="14,233,772,401" BorderBrush="#FF040404"/>
+        <Label Width="355" VerticalAlignment="Top" Margin="52,305,0,0" Height="34" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="White" Content="Peso Máximo Permitido (kg):"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="52,344,417,290" Height="41" Background="#FF8F2626">
+            <TextBlock VerticalAlignment="Bottom" Text="" Margin="5,0,6,5" FontSize="14" Foreground="#FF919191">
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
+                        <Binding ElementName="txtPesoMaximoPermitido" Path="Text.IsEmpty"/>
+                        <Binding ElementName="txtPesoMaximoPermitido" Path="IsFocused"/>
+                    </MultiBinding>
+                </TextBlock.Visibility>
+            </TextBlock>
+            <TextBox x:Name="txtPesoMaximoPermitido" VerticalAlignment="Bottom" PreviewMouseLeftButtonUp="openKeyboard" Margin="0,0,1,3" FontSize="14" Foreground="White" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" IsReadOnly="True" IsEnabled="False"/>
+        </Grid>
+        <materialDesign:PackIcon Kind="Receipt" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="14,304,772,337" BorderBrush="#FF040404"/>
+        <Button x:Name="btVoltar" Margin="52,598,592,37" Background="#FF505050" BorderBrush="Black" Height="Auto" Opacity="1" Click="btVoltar_Click" >
+            <Grid Width="150">
+                <TextBlock x:Name="lbTextButton6" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="52,1,13,-1" Width="85" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Voltar"/>
+            </Grid>
+        </Button>
+        <DataGrid x:Name="DataGrid_Produtos" Margin="432,131,13,0" CanUserAddRows="False"
+            HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Black" Foreground="Black"
+            HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlTextColor}}"
+            VerticalGridLinesBrush="{DynamicResource MaterialDesignDarkBackground}" BorderBrush="{x:Null}" BorderThickness="1"
+            CanUserDeleteRows ="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"   
+            ScrollViewer.VerticalScrollBarVisibility="Auto" Height="383" Cursor="Hand" IsReadOnly="True" AlternatingRowBackground="#FF7F7F7F" 
+            RowBackground="White" HorizontalScrollBarVisibility="Hidden" Background="White" FontSize="24" FontFamily="Segoe UI Emoji" GridLinesVisibility="All" 
+            SelectionMode="Single"  AutoGenerateColumns="True" RowHeight="40" >
+
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FF3C3C3C" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontSize" Value="25"/>
+                </Style>
+
+            </DataGrid.ColumnHeaderStyle>
+        </DataGrid>
+        <Label Content="Peso Produtos Receita:" Height="34" Margin="434,97,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="247" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Button x:Name="btContinuar" Margin="631,598,13,37" Background="#FF1EA200" BorderBrush="Black" Height="Auto" Opacity="1" Click="btContinuar_Click" >
+            <Grid Width="156">
+                <TextBlock x:Name="lbTextButton1" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="25,0,5,0" Width="126" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Iniciar Produção"/>
+            </Grid>
+        </Button>
     </Grid>
 </UserControl>
