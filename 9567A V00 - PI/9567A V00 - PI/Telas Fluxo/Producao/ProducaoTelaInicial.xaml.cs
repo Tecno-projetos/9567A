@@ -153,8 +153,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
                 dt.Columns.Add("Produto");
                 dt.Columns.Add("Peso(kg)");
-                dt.Columns.Add("Tipo");
-                dt.Columns.Add("Modo Dosagem");
+                dt.Columns.Add("Tolerância(%)");
 
                 foreach (var item in Utilidades.VariaveisGlobais.listReceitas[index].listProdutos)
                 {
@@ -162,6 +161,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
                     dr["Produto"] = item.produto.descricao;
                     dr["Peso(kg)"] = item.pesoProdutoReceita;
+                    dr["Tolerância(%)"] = item.tolerancia;
                     dt.Rows.Add(dr);
                 }
 

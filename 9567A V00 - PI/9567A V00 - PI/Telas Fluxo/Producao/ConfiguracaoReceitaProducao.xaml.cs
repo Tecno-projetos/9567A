@@ -55,94 +55,94 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
         private bool calculaApartirPesoTotalDesejado(bool AddBateladas)
         {
             bool ret = false;
-            int pesoDesejado = 0;
-            int pesoResto = 0;
-            int countBatelada = 0;
+            //int pesoDesejado = 0;
+            //int pesoResto = 0;
+            //int countBatelada = 0;
 
-            if (!String.IsNullOrEmpty(txtPesoDesejado.Text))
-            {
+            //if (!String.IsNullOrEmpty(txtPesoDesejado.Text))
+            //{
 
-                if (Int32.TryParse(txtPesoDesejado.Text, out pesoDesejado))
-                {
-                    //atualiza o peso total da produção
-                    Utilidades.VariaveisGlobais.ProducaoReceita.pesoTotalProducao = pesoDesejado;
+            //    if (Int32.TryParse(txtPesoDesejado.Text, out pesoDesejado))
+            //    {
+            //        //atualiza o peso total da produção
+            //        Utilidades.VariaveisGlobais.ProducaoReceita.pesoTotalProducao = pesoDesejado;
 
-                    //Calcula quantas bateladas inteiras terão utilizando o máximo permitido de peso
-                    bateladas = pesoDesejado / Convert.ToInt32(txtPesoMaximoPermitido.Text);
+            //        //Calcula quantas bateladas inteiras terão utilizando o máximo permitido de peso
+            //        bateladas = pesoDesejado / Convert.ToInt32(txtPesoMaximoPermitido.Text);
 
-                    //Calcula o peso da ultima batelada
-                    pesoResto = pesoDesejado % Convert.ToInt32(txtPesoMaximoPermitido.Text);
+            //        //Calcula o peso da ultima batelada
+            //        pesoResto = pesoDesejado % Convert.ToInt32(txtPesoMaximoPermitido.Text);
 
-                    if (AddBateladas)
-                    {
-                        Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Clear();
+            //        if (AddBateladas)
+            //        {
+            //            Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Clear();
 
-                        //cria um dummy da batelada para poder inserir cada peso desejado para cada batelada
-                        Utilidades.Batelada DummyBatelada = new Batelada();
+            //            //cria um dummy da batelada para poder inserir cada peso desejado para cada batelada
+            //            Utilidades.Batelada DummyBatelada = new Batelada();
 
-                        //passa por cada batelada e adiciona o peso das bateladas inteiras
-                        for (int i = 0; i < bateladas; i++)
-                        {
-                            countBatelada += 1;
+            //            //passa por cada batelada e adiciona o peso das bateladas inteiras
+            //            for (int i = 0; i < bateladas; i++)
+            //            {
+            //                countBatelada += 1;
 
-                            DummyBatelada = new Batelada();
+            //                DummyBatelada = new Batelada();
 
-                            DummyBatelada.pesoDesejado = Convert.ToInt32(txtPesoMaximoPermitido.Text);
-                            DummyBatelada.numeroBatelada = countBatelada;
-                            Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Add(DummyBatelada);
-                        }
+            //                DummyBatelada.pesoDesejado = Convert.ToInt32(txtPesoMaximoPermitido.Text);
+            //                DummyBatelada.numeroBatelada = countBatelada;
+            //                Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Add(DummyBatelada);
+            //            }
 
-                        //Verifica se tem peso resto para adicionar na ultima batelada o restante (isso ira acontecer quando ocorrer valores que não forem multiplo do valor máximo permitido)
-                        if (pesoResto > 0)
-                        {
-                            bateladas += 1;
-                            countBatelada += 1;
-                            DummyBatelada = new Batelada();
+            //            //Verifica se tem peso resto para adicionar na ultima batelada o restante (isso ira acontecer quando ocorrer valores que não forem multiplo do valor máximo permitido)
+            //            if (pesoResto > 0)
+            //            {
+            //                bateladas += 1;
+            //                countBatelada += 1;
+            //                DummyBatelada = new Batelada();
 
-                            DummyBatelada.pesoDesejado = pesoResto;
-                            DummyBatelada.numeroBatelada = countBatelada;
-                            Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Add(DummyBatelada);
-                        }
-                    }
-                    else
-                    {
-                        //Verifica se tem peso resto para adicionar na ultima batelada o restante (isso ira acontecer quando ocorrer valores que não forem multiplo do valor máximo permitido)
-                        if (pesoResto > 0)
-                        {
-                            bateladas += 1;
-                        }
-                    }
+            //                DummyBatelada.pesoDesejado = pesoResto;
+            //                DummyBatelada.numeroBatelada = countBatelada;
+            //                Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Add(DummyBatelada);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            //Verifica se tem peso resto para adicionar na ultima batelada o restante (isso ira acontecer quando ocorrer valores que não forem multiplo do valor máximo permitido)
+            //            if (pesoResto > 0)
+            //            {
+            //                bateladas += 1;
+            //            }
+            //        }
 
 
-                    //passa para a produção receita a quantidade de bateladas.
-                    Utilidades.VariaveisGlobais.ProducaoReceita.quantidadeBateladas = bateladas;
+            //        //passa para a produção receita a quantidade de bateladas.
+            //        Utilidades.VariaveisGlobais.ProducaoReceita.quantidadeBateladas = bateladas;
 
-                    ret = true;
-                }
-                else
-                {
-                    if (AddBateladas)
-                    {
-                        inputDialog = new Utilidades.messageBox("Valor não é inteiro", "Por favor verifique se o valor pertecem aos números inteiros", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+            //        ret = true;
+            //    }
+            //    else
+            //    {
+            //        if (AddBateladas)
+            //        {
+            //            inputDialog = new Utilidades.messageBox("Valor não é inteiro", "Por favor verifique se o valor pertecem aos números inteiros", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
-                        inputDialog.ShowDialog();
-                    }
+            //            inputDialog.ShowDialog();
+            //        }
 
-                }
+            //    }
 
-            }
-            else
-            {
-                if (AddBateladas)
-                {
-                    inputDialog = new Utilidades.messageBox("Campo Necessário", "Por favor verifique se o campo Peso Total Desejado esta vazio!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+            //}
+            //else
+            //{
+            //    if (AddBateladas)
+            //    {
+            //        inputDialog = new Utilidades.messageBox("Campo Necessário", "Por favor verifique se o campo Peso Total Desejado esta vazio!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
-                    inputDialog.ShowDialog();
-                }
+            //        inputDialog.ShowDialog();
+            //    }
 
-            }
+            //}
 
-            atualizaValoresPesoVolumeQtdBatelada();
+            //atualizaValoresPesoVolumeQtdBatelada();
 
             return ret;
         }

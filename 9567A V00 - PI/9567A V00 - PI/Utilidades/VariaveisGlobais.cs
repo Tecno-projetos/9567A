@@ -866,7 +866,7 @@ namespace _9567A_V00___PI.Utilidades
 
         //public static Telas_Fluxo.configuracoes configuracoes = new Telas_Fluxo.configuracoes();
 
-        //public static Telas_Fluxo.producao producao = new Telas_Fluxo.producao();
+        public static Telas_Fluxo.producao producao = new Telas_Fluxo.producao();
 
         //public static Telas_Fluxo.receitas receitas = new Telas_Fluxo.receitas();
 
@@ -974,6 +974,8 @@ namespace _9567A_V00___PI.Utilidades
 
             DB_Connected_GS = true;
 
+            //Inicializa Tabelas
+            DataBase.SqlFunctionsUsers.Initialize_ProgramDBCA();
 
         }
 
@@ -1303,10 +1305,10 @@ namespace _9567A_V00___PI.Utilidades
             {
                 dummyProduto = new Produto();
 
-                dummyProduto.id = (int)item.ItemArray[0];
-                dummyProduto.codigo = (int)item.ItemArray[1];
-                dummyProduto.descricao = (string)item.ItemArray[2];
-                dummyProduto.observacao = (string)item.ItemArray[5];
+                dummyProduto.id = Convert.ToInt32(item.ItemArray[0]);
+                dummyProduto.descricao = Convert.ToString(item.ItemArray[1]);
+                dummyProduto.codigo = Convert.ToInt32(item.ItemArray[2]);
+                dummyProduto.observacao = Convert.ToString(item.ItemArray[3]);
 
                 VariaveisGlobais.listProdutos.Add(dummyProduto);
             }
@@ -1329,11 +1331,11 @@ namespace _9567A_V00___PI.Utilidades
             {
                 dummyReceita = new Receita();
 
-                dummyReceita.id = (int)item.ItemArray[0];
-                dummyReceita.nomeReceita = (string)item.ItemArray[1];
-                dummyReceita.Codigo = (int)item.ItemArray[2];
-                dummyReceita.observacao = (string)item.ItemArray[3];
-                dummyReceita.tempoMistura = (int)item.ItemArray[4];
+                dummyReceita.id = Convert.ToInt32(item.ItemArray[0]);
+                dummyReceita.nomeReceita = Convert.ToString(item.ItemArray[1]);
+                dummyReceita.Codigo = Convert.ToInt32(item.ItemArray[2]);
+                dummyReceita.observacao = Convert.ToString(item.ItemArray[3]);
+                dummyReceita.tempoMistura = Convert.ToInt32(item.ItemArray[4]);
 
                 DataTable dtProdutosReceita = DataBase.SqlFunctionsReceitas.getProdutosReceita(dummyReceita.Codigo);
 
@@ -1341,15 +1343,10 @@ namespace _9567A_V00___PI.Utilidades
                 {
                     ProdutoReceita dummyProdutoReceita = new ProdutoReceita();
                     Produto dummyProduto = new Produto();
+                    dummyProduto = VariaveisGlobais.listProdutos[VariaveisGlobais.listProdutos.FindIndex(x => x.codigo == Convert.ToInt32(item1.ItemArray[1]))];
 
-                    dummyProduto.id = (int)item1.ItemArray[2];
-                    dummyProduto.descricao = (string)item1.ItemArray[3];
-                    dummyProduto.codigo = (int)item1.ItemArray[4];
-                    dummyProduto.observacao = (string)item1.ItemArray[5];
-
-                    dummyProdutoReceita.pesoProdutoReceita = (float)Math.Round((float)item1.ItemArray[6], 2);
-                    dummyProdutoReceita.pesoProdutoDesejado = (float)Math.Round((float)item1.ItemArray[7], 2);
-                    dummyProdutoReceita.pesoProdutoDosado = (float)Math.Round((float)item1.ItemArray[8], 2);
+                    dummyProdutoReceita.pesoProdutoReceita = Convert.ToSingle(Math.Round((float)item1.ItemArray[2], 2));
+                    dummyProdutoReceita.tolerancia = Convert.ToSingle(Math.Round((float)item1.ItemArray[3], 2));
 
                     ActualizeValuesProduto(ref dummyProduto); //pega os valores do produto e atualiza esse produto
 
@@ -1445,6 +1442,8 @@ namespace _9567A_V00___PI.Utilidades
         public float pesoProdutoDesejado = 0.0f; //Peso desejado na produção
 
         public float pesoProdutoDosado = 0.0f; //Peso dosado na produção
+
+        public float tolerancia = 0.0f; //Tolerância
     }
 
     public class Receita

@@ -230,46 +230,46 @@ namespace _9567A_V00___PI.DataBase
             return Data;
         }
 
-        public static void AtualizaProducaoEmExecucao()
-        {
-            DataTable Data = new DataTable();
+        //public static void AtualizaProducaoEmExecucao()
+        //{
+        //    DataTable Data = new DataTable();
 
-            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-            {
-                try
-                {
-                    string CommandString = "SELECT * FROM Producao WHERE IniciouProducao = 'True' AND FinalizouProducao = 'False'";
+        //    if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+        //    {
+        //        try
+        //        {
+        //            string CommandString = "SELECT * FROM Producao WHERE IniciouProducao = 'True' AND FinalizouProducao = 'False'";
 
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+        //            dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
 
-                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+        //            dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
 
-                    Adapter.Fill(Data);
-                }
-                catch (Exception ex)
-                {
-                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-                }
-            }
+        //            Adapter.Fill(Data);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+        //        }
+        //    }
 
-            if (!DBNull.Value.Equals(Data))
-            {
-                if (Data.Rows.Count >=1)
-                {
-                    functions.DataRow_To_Producao(Data.Rows[0], ref VariaveisGlobais.ProducaoReceita);
-                }
-                else
-                {
-                    VariaveisGlobais.ProducaoReceita = new Producao();
-                }
+        //    if (!DBNull.Value.Equals(Data))
+        //    {
+        //        if (Data.Rows.Count >=1)
+        //        {
+        //            functions.DataRow_To_Producao(Data.Rows[0], ref VariaveisGlobais.ProducaoReceita);
+        //        }
+        //        else
+        //        {
+        //            VariaveisGlobais.ProducaoReceita = new Producao();
+        //        }
 
-            }
-            else
-            {
-                VariaveisGlobais.ProducaoReceita = new Producao();
-            }
+        //    }
+        //    else
+        //    {
+        //        VariaveisGlobais.ProducaoReceita = new Producao();
+        //    }
                  
-        }
+        //}
 
         public static int Update_PesoDosado_ProdutoBatelada(int idProducao, int numeroBatelada, string codigoProduto, float valorDosado)
         {

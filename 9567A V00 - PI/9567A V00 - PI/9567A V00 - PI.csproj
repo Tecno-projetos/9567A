@@ -162,6 +162,12 @@
     <Compile Include="Teclados\keypad.xaml.cs">
       <DependentUpon>keypad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Telas Fluxo\configuracoes.xaml.cs">
+      <DependentUpon>configuracoes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Configuracoes\Especificacoes.xaml.cs">
+      <DependentUpon>Especificacoes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Telas Fluxo\Fluxo.xaml.cs">
       <DependentUpon>Fluxo.xaml</DependentUpon>
     </Compile>
@@ -284,6 +290,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Teclados\keypad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\configuracoes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Configuracoes\Especificacoes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

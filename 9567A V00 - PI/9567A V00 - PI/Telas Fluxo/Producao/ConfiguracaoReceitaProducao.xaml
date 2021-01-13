@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:_9567A_V00___PI.Telas_Fluxo.Producao"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Utilidades="clr-namespace:_9567A_V00___PI.Utilidades"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:Utilidades="clr-namespace:_9567A_V00___PI.Utilidades"
              mc:Ignorable="d" 
              d:DesignHeight="675" d:DesignWidth="824" Loaded="UserControl_Loaded">
 
@@ -86,7 +87,7 @@
                     </MultiBinding>
                 </TextBlock.Visibility>
             </TextBlock>
-            <TextBox x:Name="txtPesoMaximoPermitido" VerticalAlignment="Bottom" PreviewMouseLeftButtonUp="openKeyboard" Margin="0,0,1,3" FontSize="14" Foreground="White" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" IsReadOnly="True" IsEnabled="False"/>
+            <TextBox x:Name="txtPesoMaximoPermitido" VerticalAlignment="Bottom" Margin="0,0,1,3" FontSize="14" Foreground="White" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" IsReadOnly="True" IsEnabled="False"/>
         </Grid>
         <materialDesign:PackIcon Kind="Receipt" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="14,304,772,337" BorderBrush="#FF040404"/>
         <Button x:Name="btVoltar" Margin="52,598,592,37" Background="#FF505050" BorderBrush="Black" Height="Auto" Opacity="1" Click="btVoltar_Click" >

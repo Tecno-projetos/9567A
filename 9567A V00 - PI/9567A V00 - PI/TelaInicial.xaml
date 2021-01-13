@@ -74,7 +74,7 @@
                     <materialDesign:PackIcon x:Name="pckRelatorio" Kind="FileReport" VerticalAlignment="Center" Foreground="White" Margin="0,0,0,22" HorizontalAlignment="Left" Width="53" Height="48"/>
                 </Grid>
             </Button>
-            <Button x:Name="btProducao" Margin="284,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top">
+            <Button x:Name="btProducao" Margin="284,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top" Click="btProducao_Click">
                 <Grid Width="53" Height="70">
 
                     <Label Content="Produção" Margin="-14,48,-14,-5" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Width="81" FontSize="11"/>

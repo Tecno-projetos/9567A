@@ -71,7 +71,6 @@ namespace _9567A_V00___PI
             #endregion
 
 
-
             VariaveisGlobais.Fluxo.BMP1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 2, 0, "Misturador Motor 1", "BMP-1", "1", "12");
             VariaveisGlobais.Fluxo.BMP2_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 22, 0, "Misturador Motor 2", "BMP-2", "2", "13");
             VariaveisGlobais.Fluxo.TD1_Designer.loadEquip(Utilidades.typeEquip.INV, Utilidades.typeCommand.INV, 42, 0, "Rosca Ensaque", "TD-1", "3", "14");
@@ -193,7 +192,7 @@ namespace _9567A_V00___PI
             VariaveisGlobais.CommunicationPLC.writeBufferPLC();//Chama a escrita no PLC
         }
 
-
+        #region Clicks
 
         #region Login e Logout
 
@@ -289,7 +288,7 @@ namespace _9567A_V00___PI
 
                 //spInical.Children.Clear();
 
-        
+
 
             }
         }
@@ -320,6 +319,8 @@ namespace _9567A_V00___PI
         }
         #endregion
 
+        #region Clicks Menu
+
         private void btHome_Click(object sender, RoutedEventArgs e)
         {
             if (spInical != null)
@@ -331,9 +332,114 @@ namespace _9567A_V00___PI
             }
         }
 
-        private void btLogin_Click_1(object sender, RoutedEventArgs e)
+        private void btProducao_Click(object sender, RoutedEventArgs e)
         {
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
+            if (spInical != null)
+            {
+                spInical.Children.Clear();
+
+                spInical.Children.Add(Utilidades.VariaveisGlobais.producao);
+                AtualizaButton(pckProducao);
+
+            }
+
+            if (Utilidades.VariaveisGlobais.producao.spControleProducao.Children != null)
+            {
+                Utilidades.VariaveisGlobais.producao.spControleProducao.Children.Clear();
+            }
 
         }
+
+        #endregion
+
+        #endregion
+
+        #region Funções
+
+        public void AtualizaButton(MaterialDesignThemes.Wpf.PackIcon packIcon)
+        {
+            if (packIcon.Name == pckManutencao.Name)
+            {
+                pckManutencao.Foreground = VariaveisGlobais.Verde;
+                pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
+                pckHome.Foreground = VariaveisGlobais.Branco;
+                pckProducao.Foreground = VariaveisGlobais.Branco;
+                pckReceitas.Foreground = VariaveisGlobais.Branco;
+                pckRelatorio.Foreground = VariaveisGlobais.Branco;
+                pckUser.Foreground = VariaveisGlobais.Branco;
+            }
+            else if (packIcon.Name == pckConfiguracoes.Name)
+            {
+                pckManutencao.Foreground = VariaveisGlobais.Branco;
+                pckConfiguracoes.Foreground = VariaveisGlobais.Verde;
+                pckHome.Foreground = VariaveisGlobais.Branco;
+                pckProducao.Foreground = VariaveisGlobais.Branco;
+                pckReceitas.Foreground = VariaveisGlobais.Branco;
+                pckRelatorio.Foreground = VariaveisGlobais.Branco;
+                pckUser.Foreground = VariaveisGlobais.Branco;
+            }
+            else if (packIcon.Name == pckHome.Name)
+            {
+                pckManutencao.Foreground = VariaveisGlobais.Branco;
+                pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
+                pckHome.Foreground = VariaveisGlobais.Verde;
+                pckProducao.Foreground = VariaveisGlobais.Branco;
+                pckReceitas.Foreground = VariaveisGlobais.Branco;
+                pckRelatorio.Foreground = VariaveisGlobais.Branco;
+                pckUser.Foreground = VariaveisGlobais.Branco;
+            }
+            else if (packIcon.Name == pckProducao.Name)
+            {
+                pckManutencao.Foreground = VariaveisGlobais.Branco;
+                pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
+                pckHome.Foreground = VariaveisGlobais.Branco;
+                pckProducao.Foreground = VariaveisGlobais.Verde;
+                pckReceitas.Foreground = VariaveisGlobais.Branco;
+                pckRelatorio.Foreground = VariaveisGlobais.Branco;
+                pckUser.Foreground = VariaveisGlobais.Branco;
+            }
+            else if (packIcon.Name == pckReceitas.Name)
+            {
+                pckManutencao.Foreground = VariaveisGlobais.Branco;
+                pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
+                pckHome.Foreground = VariaveisGlobais.Branco;
+                pckProducao.Foreground = VariaveisGlobais.Branco;
+                pckReceitas.Foreground = VariaveisGlobais.Verde;
+                pckRelatorio.Foreground = VariaveisGlobais.Branco;
+                pckUser.Foreground = VariaveisGlobais.Branco;
+            }
+            else if (packIcon.Name == pckRelatorio.Name)
+            {
+                pckManutencao.Foreground = VariaveisGlobais.Branco;
+                pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
+                pckHome.Foreground = VariaveisGlobais.Branco;
+                pckProducao.Foreground = VariaveisGlobais.Branco;
+                pckReceitas.Foreground = VariaveisGlobais.Branco;
+                pckRelatorio.Foreground = VariaveisGlobais.Verde;
+                pckUser.Foreground = VariaveisGlobais.Branco;
+            }
+            else if (packIcon.Name == pckUser.Name)
+            {
+                pckManutencao.Foreground = VariaveisGlobais.Branco;
+                pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
+                pckHome.Foreground = VariaveisGlobais.Branco;
+                pckProducao.Foreground = VariaveisGlobais.Branco;
+                pckReceitas.Foreground = VariaveisGlobais.Branco;
+                pckRelatorio.Foreground = VariaveisGlobais.Branco;
+                pckUser.Foreground = VariaveisGlobais.Verde;
+            }
+        }
+
+
+        #endregion
     }
 }
