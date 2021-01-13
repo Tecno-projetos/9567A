@@ -1,4 +1,4 @@
-﻿//using _9567A_V00___PI.DataBase;
+﻿using _9567A_V00___PI.DataBase;
 using _9567A_V00___PI.Teclados;
 using System;
 using System.Collections.Generic;
@@ -906,15 +906,16 @@ namespace _9567A_V00___PI.Utilidades
 
         static bool DB_Connected;
         private static bool SQLCe;
-        private static string Connection_DB_Create = @"Server=172.16.1.88\AVELL_AUTOMASUL\automasul,1433;Integrated Security=false;User ID=sa;Password=33162600";
-        private static string Connection_DB_Users = @"Server=172.16.1.88\AVELL_AUTOMASUL\automasul,1433;Database=DB_Users_IHM;Integrated Security=false;User ID=sa;Password=33162600";
-        private static string Connection_DB_Equip = @"Server=172.16.1.88\AVELL_AUTOMASUL\automasul,1433;Database=DB_Equips_IHM;Integrated Security=false;User ID=sa;Password=33162600";
-        private static string Connection_DB_Producao = @"Server=172.16.1.88\AVELL_AUTOMASUL\automasul,1433;Database=DB_Producao_IHM;Integrated Security=false;User ID=sa;Password=33162600";
+        private static string Connection_DB_Create = @"Server=127.0.0.1\SQLEXPRESS2012,1433;Integrated Security=false;User ID=sa;Password=33162600";
+        private static string Connection_DB_Users = @"Server=127.0.0.1\SQLEXPRESS2012,1433;Database=DB_Users_IHM;Integrated Security=false;User ID=sa;Password=33162600";
+        private static string Connection_DB_Equip = @"Server=127.0.0.1\SQLEXPRESS2012,1433;Database=DB_Equips_IHM;Integrated Security=false;User ID=sa;Password=33162600";
+        private static string Connection_DB_Producao = @"Server=127.0.0.1\SQLEXPRESS2012,1433;Database=DB_Producao_IHM;Integrated Security=false;User ID=sa;Password=33162600";
 
+        private static string Connection_DB_Receitas = @"Server=127.0.0.1\SQLEXPRESS2012,1433;Database=DB_ReceitasPreMix;Integrated Security=false;User ID=sa;Password=33162600";
         public static string Connection_DB_Users_GS { get => Connection_DB_Users; set => Connection_DB_Users = value; }
         public static string Connection_DB_Equip_GS { get => Connection_DB_Equip; set => Connection_DB_Equip = value; }
         public static string Connection_DB_Producao_GS { get => Connection_DB_Producao; set => Connection_DB_Producao = value; }
-
+        public static string Connection_DB_Receitas_GS { get => Connection_DB_Receitas; set => Connection_DB_Receitas = value; }
         public static string Connection_DB_Create_GS { get => Connection_DB_Create; set => Connection_DB_Create = value; }
 
         public static bool SQLCe_GS { get => SQLCe; set => SQLCe = value; }
@@ -985,6 +986,8 @@ namespace _9567A_V00___PI.Utilidades
         public static Producao ProducaoReceita = new Producao();
 
         public static List<Producao> PesquisaProducao = new List<Producao>();
+
+        public static EspecificacoesEquipamentos ValoresEspecificacoesEquipamentos = new EspecificacoesEquipamentos();
 
         public static AuxiliaresProcesso auxiliaresProcesso = new AuxiliaresProcesso();
 
@@ -1148,17 +1151,8 @@ namespace _9567A_V00___PI.Utilidades
         }
         #endregion
 
-        public static int Id_Producao_No_Silo_Expedicao;
-
-        public static string NomeReceita_No_Silo_Expedicao = "";
-
         private static bool TickTack;
         public static bool TickTack_GS { get => TickTack; set => TickTack = value; }
-
-        private static bool IniciouCadastro;
-        public static bool IniciouCadastro_GS { get => IniciouCadastro; set => IniciouCadastro = value; }
-
-        public static bool Libera_Escrita_Slot = false;
 
     }
 
@@ -1293,19 +1287,151 @@ namespace _9567A_V00___PI.Utilidades
             public Int32 TempoMistura { get; set; } //Tempo mistura
 
         }
-  
+
+        /// <summary>
+        /// Atualiza a lista de produtos de acordo com o banco de dados
+        /// </summary>
+        public static void atualizalistProdutos()
+        {
+            VariaveisGlobais.listProdutos.Clear();
+
+            DataTable dt = DataBase.SqlFunctionsProdutos.getTableProdutos();
+
+            Produto dummyProduto;
+
+            foreach (DataRow item in dt.Rows)
+            {
+                dummyProduto = new Produto();
+
+                dummyProduto.id = (int)item.ItemArray[0];
+                dummyProduto.codigo = (int)item.ItemArray[1];
+                dummyProduto.descricao = (string)item.ItemArray[2];
+                dummyProduto.observacao = (string)item.ItemArray[5];
+
+                VariaveisGlobais.listProdutos.Add(dummyProduto);
+            }
+        }
+
+        /// <summary>
+        /// Atualiza a lista de receitas de acordo com o banco de dados
+        /// </summary>
+        public static void atualizalistReceitas()
+        {
+            VariaveisGlobais.listReceitas.Clear();
+
+            DataTable dtReceitas = DataBase.SqlFunctionsReceitas.getReceitas();
+
+            Receita dummyReceita;
+
+            atualizalistProdutos();
+
+            foreach (DataRow item in dtReceitas.Rows)
+            {
+                dummyReceita = new Receita();
+
+                dummyReceita.id = (int)item.ItemArray[0];
+                dummyReceita.nomeReceita = (string)item.ItemArray[1];
+                dummyReceita.Codigo = (int)item.ItemArray[2];
+                dummyReceita.observacao = (string)item.ItemArray[3];
+                dummyReceita.tempoMistura = (int)item.ItemArray[4];
+
+                DataTable dtProdutosReceita = DataBase.SqlFunctionsReceitas.getProdutosReceita(dummyReceita.Codigo);
+
+                foreach (DataRow item1 in dtProdutosReceita.Rows)
+                {
+                    ProdutoReceita dummyProdutoReceita = new ProdutoReceita();
+                    Produto dummyProduto = new Produto();
+
+                    dummyProduto.id = (int)item1.ItemArray[2];
+                    dummyProduto.descricao = (string)item1.ItemArray[3];
+                    dummyProduto.codigo = (int)item1.ItemArray[4];
+                    dummyProduto.observacao = (string)item1.ItemArray[5];
+
+                    dummyProdutoReceita.pesoProdutoReceita = (float)Math.Round((float)item1.ItemArray[6], 2);
+                    dummyProdutoReceita.pesoProdutoDesejado = (float)Math.Round((float)item1.ItemArray[7], 2);
+                    dummyProdutoReceita.pesoProdutoDosado = (float)Math.Round((float)item1.ItemArray[8], 2);
+
+                    ActualizeValuesProduto(ref dummyProduto); //pega os valores do produto e atualiza esse produto
+
+
+                    dummyProdutoReceita.produto = dummyProduto;
+                    dummyReceita.listProdutos.Add(dummyProdutoReceita);
+                }
+
+                VariaveisGlobais.listReceitas.Add(dummyReceita);
+            }
+
+        }
+
+        private static void ActualizeValuesProduto(ref Produto prod)
+        {
+            //Atualiza a lista de produtos a partir do banco de dados
+
+            int codigo = prod.codigo;
+
+            var index = VariaveisGlobais.listProdutos.FindIndex(x => x.codigo == codigo);
+
+            prod.id = VariaveisGlobais.listProdutos[index].id;
+            prod.codigo = VariaveisGlobais.listProdutos[index].codigo;
+            prod.descricao = VariaveisGlobais.listProdutos[index].descricao;
+            prod.observacao = VariaveisGlobais.listProdutos[index].observacao;
+
+        }
+
+    }
+
+    public class EspecificacoesEquipamentos
+    {
+
+        public float PesoMaximoPermitido { get; set; } //Peso máximo permitido na balança
+
+        public Int32 TempoLimpezaDosagem { get; set; }
+
+        public Int32 TempoLimpezaMistura { get; set; }
+
+        public Int32 TempoLimpezaSiloPulmao { get; set; }
+
+        public bool ValoresPreenchidos()
+        {
+            if (PesoMaximoPermitido != 0)
+            {
+                if (TempoLimpezaDosagem != 0)
+                {
+                    if (TempoLimpezaMistura != 0)
+                    {
+                        if (TempoLimpezaSiloPulmao != 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 
     public class Produto
     {
         public int id { get; set; }
-        public string codigo { get; set; } 
 
         public string descricao { get; set; }
-
-        public float densidade { get; set; }
-
-        public string tipoProduto { get; set; }
+        public int codigo { get; set; }
 
         public string observacao { get; set; }
     }
@@ -1314,9 +1440,11 @@ namespace _9567A_V00___PI.Utilidades
     {
         public Produto produto { get; set; }
 
-        public float pesoPorProduto = 0.0f;
+        public float pesoProdutoReceita = 0.0f; //Peso na receita base
 
-        public string tipoDosagemMateriaPrima = ""; //"Automático" ou "Manual" - Na matéria prima pode ser dosado o produto manualmente ou automaticamente
+        public float pesoProdutoDesejado = 0.0f; //Peso desejado na produção
+
+        public float pesoProdutoDosado = 0.0f; //Peso dosado na produção
     }
 
     public class Receita
@@ -1325,128 +1453,34 @@ namespace _9567A_V00___PI.Utilidades
 
         public string nomeReceita = "";
 
-        public float pesoBase { get; set; }
+        public int Codigo = -1;
+
+        public string observacao = "";
+
+        public int tempoMistura = -1;
 
         public List<ProdutoReceita> listProdutos = new List<ProdutoReceita>();
 
-        public string observacao = "";
     }
 
-    public class ProdutoBatelada : Produto
-    {
-        /// <summary>
-        /// Atualizado na tela VerificacaoBateladas
-        /// </summary>
-        public int idProducao { get; set; }
-
-        /// <summary>
-        /// Atualizado na tela VerificacaoBateladas
-        /// </summary>
-        public float pesoDesejado { get; set; }
-
-        public float pesoDosado { get; set; }
-
-        public string statusItem { get; set; }
-
-    }
-
-    public class Batelada
-    {
-
-        public List<ProdutoBatelada> produtos = new List<ProdutoBatelada>();
-
-        public int numeroBatelada { get; set; }
-
-        public float pesoDesejado { get; set; }
-
-        public float pesoDosado { get; set; }
-
-        public float volumeDesejado { get; set; }
-    }
 
     public class Producao
     {
         public int id {get; set;} // Id da produção
 
-        /// <summary>
-        /// Atualizado na tela ProduçãoTelaInicial
-        /// </summary>
-        public int IdReceitaBase { get; set; } // Id da receita base
+        public float pesoTotalProducao { get; set; } //Peso total da produção
 
-        /// <summary>
-        /// Atualizado na tela ProduçãoTelaInicial
-        /// </summary>
-        public Receita receita { get; set; } //Receita Base
-
-        /// <summary>
-        /// Atualizado na tela ConfiguracaoReceitaProducao
-        /// </summary>
-        public int quantidadeBateladas { get; set; } //Quantidade de bateladas
-
-        /// <summary>
-        /// Atualizado na tela ConfiguracaoReceitaProducao
-        /// </summary>
-        public List<Batelada> batelada = new List<Batelada>(); //Lista das bateladas
-
-        /// <summary>
-        /// Atualizado na tela ProduçãoTelaInicial
-        /// </summary>
-        public Int32 tempoPreMistura { get; set; } //Tempo de pré mistura
-
-        /// <summary>
-        /// Atualizado na tela ProduçãoTelaInicial
-        /// </summary>
-        public Int32 tempoPosMistura { get; set; } //Tempo de pos mistura
-
-        /// <summary>
-        /// Atualizado na tela ConfiguracaoReceitaProducao
-        /// </summary>
-        public float pesoTotalProducao { get; set; } //Peso total da produção - 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float volumeTotalProducao { get; set; }//Volume total da produção
-
-        /// <summary>
-        /// Atualizado na tela ConfiguracaoReceitaProducao
-        /// </summary>
-        public string CodigoProdutoDosagemAutomaticaSilo1 = ""; //Codigo do produto que sera dosado automaticamente no silo 1.
-
-        /// <summary>
-        /// Atualizado na tela ConfiguracaoReceitaProducao
-        /// </summary>
-        public string CodigoProdutoDosagemAutomaticaSilo2 = ""; //Codigo do produto que sera dosado automaticamente no silo 2.
-
-        /// <summary>
-        /// Atualizado na tela VerificacaoBateladas
-        /// </summary>
-        public DateTime dateTimeInicioProducao = new DateTime(); //Data Inicio produção
-
-        /// <summary>
-        /// Atualizado na tela VerificacaoBateladas
-        /// </summary>
-        public DateTime dateTimeFimProducao = new DateTime(); //Data fim da produção
-
-        /// <summary>
-        /// Atualizado na tela VerificacaoBateladas
-        /// </summary>
-        public bool IniciouProducao { get; set; } //Iniciou Produção
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool FinalizouProducao { get; set; } //Finalizou Produção
-
-        /// <summary>
-        /// 
-        /// </summary>
         public float pesoTotalProduzido { get; set; } //Peso total produzido
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public float volumeTotalProduzido { get; set; }//Volume total produzido
+        public DateTime dateTimeInicioProducao = new DateTime(); //Data Inicio produção
+
+        public DateTime dateTimeFimProducao = new DateTime(); //Data fim da produção
+
+        public bool IniciouProducao { get; set; } //Iniciou Produção
+
+        public bool FinalizouProducao { get; set; } //Finalizou Produção
+
+        public Receita receita { get; set; } //Receita Base
 
     }
 

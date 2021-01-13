@@ -95,6 +95,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataBase\SqlFunctionsEquips.cs" />
+    <Compile Include="DataBase\SQLFunctionsProducao.cs" />
+    <Compile Include="DataBase\SqlFunctionsProdutos.cs" />
+    <Compile Include="DataBase\SqlFunctionsReceitas.cs" />
     <Compile Include="DataBase\SqlFunctionsUsers.cs" />
     <Compile Include="DataBase\SqlGlobalFuctions.cs" />
     <Compile Include="Desenho\Motor.xaml.cs">
@@ -161,6 +164,15 @@
     </Compile>
     <Compile Include="Telas Fluxo\Fluxo.xaml.cs">
       <DependentUpon>Fluxo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\producao.xaml.cs">
+      <DependentUpon>producao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Producao\ConfiguracaoReceitaProducao.xaml.cs">
+      <DependentUpon>ConfiguracaoReceitaProducao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Producao\ProducaoTelaInicial.xaml.cs">
+      <DependentUpon>ProducaoTelaInicial.xaml</DependentUpon>
     </Compile>
     <Compile Include="TelasAuxiliares\Buffer_Diag.xaml.cs">
       <DependentUpon>Buffer_Diag.xaml</DependentUpon>
@@ -276,6 +288,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Telas Fluxo\Fluxo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\producao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Producao\ConfiguracaoReceitaProducao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Producao\ProducaoTelaInicial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
