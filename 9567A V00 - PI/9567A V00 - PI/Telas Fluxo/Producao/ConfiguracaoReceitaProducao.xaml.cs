@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _9567A_V00___PI.Utilidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
     /// </summary>
     public partial class ConfiguracaoReceitaProducao : UserControl
     {
+        private messageBox inputDialog;
+        public event EventHandler IniciouProducao;
 
         public event EventHandler TelaAnterior;
         public ConfiguracaoReceitaProducao()
@@ -29,7 +32,27 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
         private void btContinuar_Click(object sender, RoutedEventArgs e)
         {
+            inputDialog = new Utilidades.messageBox("Confirmação", "Você tem certeza que deseja iniciar a produção?", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
+            inputDialog.ShowDialog();
+
+            if (inputDialog.DialogResult == true)
+            {
+                //Preenche data inicial e data final
+                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count -1].dateTimeInicioProducao = DateTime.Now;
+                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = DateTime.Now;
+
+                //Preenche que iniciou a produção
+                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = true;
+
+                DataBase.SQLFunctionsProducao.AddProducao(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+
+                //Verifica qual Produção esta em execução e carrega a produção
+                DataBase.SQLFunctionsProducao.AtualizaProducaoEmExecucao();
+
+                if (this.IniciouProducao != null)
+                    this.IniciouProducao(this, e);
+            }
         }
 
         private void txtPesoDesejado_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

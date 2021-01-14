@@ -1,4 +1,5 @@
 ﻿using _9567A_V00___PI.DataBase;
+using _9567A_V00___PI.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -70,6 +71,43 @@ namespace _9567A_V00___PI.DataBase
                             "ObservacaoReceita nvarchar(300)," +
                             "TempoMisturaReceita bigint," +
                             "CONSTRAINT FK_IdReceitaBase FOREIGN KEY (IdReceitaBase) REFERENCES Receitas(Id), " +
+                            "PRIMARY KEY (Id));";
+
+                        dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
+                        Call.Open();
+
+                        dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
+                        Command.ExecuteNonQuery();
+
+                        Call.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                    }
+                }
+            }
+
+        }
+
+        public static void Create_Table_ProducaoProdutos()
+        {
+            if (!ExistTable("ProducaoProdutos"))
+            {
+                if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+                {
+                    try
+                    {
+                        string CommandString = "CREATE TABLE ProducaoProdutos (" +
+                            "IdProducaoReceita int not null," +      //PK
+                            "IdProduto int," +
+                            "NomeProduto nvarchar(100)," +
+                            "Codigo int," +
+                            "PesoProdutoReceita real," +
+                            "PesoProdutoDesejado real," +
+                            "PesoProdutoDosado real," +
+                            "Tolerancia real," +
+                            "CONSTRAINT FK_IdProducaoReceita FOREIGN KEY (IdProducaoReceita) REFERENCES Producao(Id), " +
                             "PRIMARY KEY (Id));";
 
                         dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
@@ -176,34 +214,112 @@ namespace _9567A_V00___PI.DataBase
             }
         }
 
-        //public static int AddProducao(Utilidades.Producao producao)
-        //{
-        //    Utilidades.messageBox inputDialog;
-        //    int ret = -1;
+        public static int IntoDate_Table_ProducaoProdutos(Utilidades.Producao producao)
+        {
+            int ret = -1;
 
-        //    if (IntoDate_Table_Producao(ref producao) != -1)
-        //    {
-        //        if (IntoDate_Table_Bateladas(ref producao) != -1)
-        //        {
-        //            ret = 0;
-        //        }
-        //        else
-        //        {
-        //            inputDialog = new Utilidades.messageBox("Falha inserir DB", "Falha ao inserir dados na tabela de bateladas!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+            {
+                foreach (var item in producao.receita.listProdutos)
+                {
+                    try
+                    {
+                        int idProd = -1;
+                        string CommandString = "SELECT MAX(Id) AS maxid FROM ProducaoProdutos";
+                        dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
 
-        //            inputDialog.ShowDialog();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        inputDialog = new Utilidades.messageBox("Falha inserir DB", "Falha ao inserir dados na tabela de produção!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+                        dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                        DataTable Data = new DataTable();
+                        Adapter.Fill(Data);
 
-        //        inputDialog.ShowDialog();
-        //    }
+                        //last id is null?
+                        if (DBNull.Value.Equals(Data.Rows[0][0]))
+                            idProd = 1;
+                        else
+                            idProd = Convert.ToInt32(Data.Rows[0][0]) + 1;
 
-        //    return ret;
-            
-        //}
+                        dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
+
+                        Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+
+                        string query = "INSERT into Producao (" +
+                            "IdProducaoReceita, " +
+                            "IdProduto, " +
+                            "NomeProduto, " +
+                            "Codigo, " +
+                            "PesoProdutoReceita, " +
+                            "PesoProdutoDesejado, " +
+                            "PesoProdutoDosado, " +
+                            "Tolerancia) VALUES (" +
+                            "@IdProducaoReceita, " +
+                            "@IdProduto, " +
+                            "@NomeProduto, " +
+                            "@Codigo, " +
+                            "@PesoProdutoReceita, " +
+                            "@PesoProdutoDesejado, " +
+                            "@PesoProdutoDosado, " +
+                            "@Tolerancia)";
+
+                        Command = SqlGlobalFuctions.ReturnCommand(query, Call);
+                        Command.Parameters.AddWithValue("@IdProducaoReceita", producao.id);
+                        Command.Parameters.AddWithValue("@IdProduto", item.produto.id);
+                        Command.Parameters.AddWithValue("@NomeProduto", item.produto.descricao);
+                        Command.Parameters.AddWithValue("@Codigo", item.produto.codigo);
+                        Command.Parameters.AddWithValue("@PesoProdutoReceita", item.pesoProdutoReceita);
+                        Command.Parameters.AddWithValue("@PesoProdutoDesejado", item.pesoProdutoDesejado);
+                        Command.Parameters.AddWithValue("@PesoProdutoDosado", item.pesoProdutoDosado);
+                        Command.Parameters.AddWithValue("@Tolerancia", item.tolerancia);
+
+                        Call.Open();
+                        ret = Command.ExecuteNonQuery();
+                        Call.Close();
+                        ret = 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                        ret = -1;
+                        break;
+                    }
+                }
+
+
+                return ret;
+            }
+            else
+            {
+                return ret;
+            }
+        }
+
+        public static int AddProducao(Utilidades.Producao producao)
+        {
+            Utilidades.messageBox inputDialog;
+            int ret = -1;
+
+            if (IntoDate_Table_Producao(ref producao) != -1)
+            {
+                if (IntoDate_Table_ProducaoProdutos(producao) != -1)
+                {
+                    ret = 0;
+                }
+                else
+                {
+                    inputDialog = new Utilidades.messageBox("Falha inserir DB", "Falha ao inserir dados na tabela de produtos!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                    inputDialog.ShowDialog();
+                }
+            }
+            else
+            {
+                inputDialog = new Utilidades.messageBox("Falha inserir DB", "Falha ao inserir dados na tabela de produção!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+            }
+
+            return ret;
+
+        }
 
         public static DataTable getBateladaFromIdProducaoANDNumeroBatelada(int IdProducao, int NumeroBatelada)
         {
@@ -230,46 +346,46 @@ namespace _9567A_V00___PI.DataBase
             return Data;
         }
 
-        //public static void AtualizaProducaoEmExecucao()
-        //{
-        //    DataTable Data = new DataTable();
+        public static void AtualizaProducaoEmExecucao()
+        {
+            DataTable Data = new DataTable();
 
-        //    if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-        //    {
-        //        try
-        //        {
-        //            string CommandString = "SELECT * FROM Producao WHERE IniciouProducao = 'True' AND FinalizouProducao = 'False'";
+            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+            {
+                try
+                {
+                    string CommandString = "SELECT * FROM Producao WHERE IniciouProducao = 'True' AND FinalizouProducao = 'False'";
 
-        //            dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
 
-        //            dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
 
-        //            Adapter.Fill(Data);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-        //        }
-        //    }
+                    Adapter.Fill(Data);
+                }
+                catch (Exception ex)
+                {
+                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                }
+            }
 
-        //    if (!DBNull.Value.Equals(Data))
-        //    {
-        //        if (Data.Rows.Count >=1)
-        //        {
-        //            functions.DataRow_To_Producao(Data.Rows[0], ref VariaveisGlobais.ProducaoReceita);
-        //        }
-        //        else
-        //        {
-        //            VariaveisGlobais.ProducaoReceita = new Producao();
-        //        }
+            //if (!DBNull.Value.Equals(Data))
+            //{
+            //    if (Data.Rows.Count >= 1)
+            //    {
+            //        functions.DataRow_To_Producao(Data.Rows[0], ref VariaveisGlobais.ProducaoReceita);
+            //    }
+            //    else
+            //    {
+            //        VariaveisGlobais.ProducaoReceita = new Producao();
+            //    }
 
-        //    }
-        //    else
-        //    {
-        //        VariaveisGlobais.ProducaoReceita = new Producao();
-        //    }
-                 
-        //}
+            //}
+            //else
+            //{
+            //    VariaveisGlobais.ProducaoReceita = new Producao();
+            //}
+
+        }
 
         public static int Update_PesoDosado_ProdutoBatelada(int idProducao, int numeroBatelada, string codigoProduto, float valorDosado)
         {

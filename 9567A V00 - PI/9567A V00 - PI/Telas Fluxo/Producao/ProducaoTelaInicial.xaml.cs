@@ -103,12 +103,12 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
         private void btSelecionaRota_Click(object sender, RoutedEventArgs e)
         {
-            if (!Utilidades.VariaveisGlobais.ProducaoReceita.IniciouProducao)
+            if (Utilidades.VariaveisGlobais.OrdensProducao.Count < 3)
             {
                 if (DataGrid_Receita.SelectedIndex != -1)
                 {
 
-                    Utilidades.VariaveisGlobais.ProducaoReceita = new Utilidades.Producao();
+                    Utilidades.VariaveisGlobais.OrdensProducao.Add(new Utilidades.Producao());
 
                     var rowList = (DataGrid_Receita.ItemContainerGenerator.ContainerFromIndex(DataGrid_Receita.SelectedIndex) as DataGridRow).Item as DataRowView;
 
@@ -117,7 +117,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                     var index = Utilidades.VariaveisGlobais.listReceitas.FindIndex(x => x.id == Convert.ToInt32(rowList.Row.ItemArray[0]));
 
                     //Passa a Receita desejada para a produção Receita
-                    Utilidades.VariaveisGlobais.ProducaoReceita.receita = Utilidades.VariaveisGlobais.listReceitas[index];
+                    Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count -1].receita = Utilidades.VariaveisGlobais.listReceitas[index];
 
                     //Dispara evento para editar produtos.
                     if (this.EventoReceitaSelecionada != null)
@@ -126,7 +126,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
             }
             else
             {
-                inputDialog = new Utilidades.messageBox("Em produção", "Existe uma produção em andamento, aguarde a finalização da produção!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+                inputDialog = new Utilidades.messageBox("Em produção", "Existem 3 produções em andamento, aguarde a finalização de uma produção!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
                 inputDialog.ShowDialog();
             }
