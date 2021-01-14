@@ -84,6 +84,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Manutenção
 
                 Conectou = true;
             }
+            
             catch (Exception)
             {
                 Conectou = false;
