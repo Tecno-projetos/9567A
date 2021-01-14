@@ -1,6 +1,7 @@
 ﻿using _9567A_V00___PI.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -133,9 +134,9 @@ namespace _9567A_V00___PI
             timer50ms.Tick += timer_Tick;
             timer50ms.Start();
             ////====================================================
-            //timer1s.Interval = TimeSpan.FromSeconds(1);
-            //timer1s.Tick += timer1s_Tick;
-            //timer1s.Start();
+            timer1s.Interval = TimeSpan.FromSeconds(1);
+            timer1s.Tick += timer1s_Tick;
+            timer1s.Start();
             ////====================================================
             //timer4h.Interval = TimeSpan.FromHours(4);
             //timer4h.Tick += timer4h_Tick;
@@ -148,14 +149,65 @@ namespace _9567A_V00___PI
             #endregion
 
             VariaveisGlobais.windowFirstLoading.Close();
+            Utilidades.VariaveisGlobais.Window_Diagnostic.Closing += Window_Diagnostic_Closing;
+
 
             spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
-        
-        
+
+
+            //Verifica se possui um alarme ativo.
+            AlarmInSup.Visibility = Visibility.Hidden;
+
+
         }
+
+        private void Window_Diagnostic_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Utilidades.VariaveisGlobais.Window_Diagnostic.Hide();
+        }
+
+        private void timer1s_Tick(object sender, EventArgs e)
+        {
+            //Chama a atulização da Manutenção
+            VariaveisGlobais.manutencao.atualizaManutencao();
+
+            try
+            {
+                DataTable dt = new DataTable();
+
+                dt = DataBase.SqlFunctionsEquips.GetGridAlarm_Table_EquipAlarmEvent();
+
+                if (dt.Rows != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        AlarmInSup.Visibility = Visibility.Visible;
+                        VariaveisGlobais.manutencao.AlarmInsup_GS = Visibility.Visible;
+                    }
+                    else
+                    {
+                        AlarmInSup.Visibility = Visibility.Hidden;
+                        VariaveisGlobais.manutencao.AlarmInsup_GS = Visibility.Hidden;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+
 
         private void timer_Tick(object sender, EventArgs e)
         {
+
+            lbAno.Content = DateTime.Now.Year;
+            lbDiaMes.Content = DateTime.Now.Day + "/" + DateTime.Now.Month;
+            lbHorario.Content = DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second;
+
 
             VariaveisGlobais.CommunicationPLC.readBuffersPLC(); //Chama a leitura no PLC
 
@@ -422,7 +474,7 @@ namespace _9567A_V00___PI
                 pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
                 pckHome.Foreground = VariaveisGlobais.Branco;
                 pckProducao.Foreground = VariaveisGlobais.Branco;
-                pckReceitas.Foreground = VariaveisGlobais.Branco;
+              
                 pckRelatorio.Foreground = VariaveisGlobais.Branco;
                 pckUser.Foreground = VariaveisGlobais.Branco;
             }
@@ -432,7 +484,7 @@ namespace _9567A_V00___PI
                 pckConfiguracoes.Foreground = VariaveisGlobais.Verde;
                 pckHome.Foreground = VariaveisGlobais.Branco;
                 pckProducao.Foreground = VariaveisGlobais.Branco;
-                pckReceitas.Foreground = VariaveisGlobais.Branco;
+               
                 pckRelatorio.Foreground = VariaveisGlobais.Branco;
                 pckUser.Foreground = VariaveisGlobais.Branco;
             }
@@ -442,7 +494,7 @@ namespace _9567A_V00___PI
                 pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
                 pckHome.Foreground = VariaveisGlobais.Verde;
                 pckProducao.Foreground = VariaveisGlobais.Branco;
-                pckReceitas.Foreground = VariaveisGlobais.Branco;
+               
                 pckRelatorio.Foreground = VariaveisGlobais.Branco;
                 pckUser.Foreground = VariaveisGlobais.Branco;
             }
@@ -452,17 +504,7 @@ namespace _9567A_V00___PI
                 pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
                 pckHome.Foreground = VariaveisGlobais.Branco;
                 pckProducao.Foreground = VariaveisGlobais.Verde;
-                pckReceitas.Foreground = VariaveisGlobais.Branco;
-                pckRelatorio.Foreground = VariaveisGlobais.Branco;
-                pckUser.Foreground = VariaveisGlobais.Branco;
-            }
-            else if (packIcon.Name == pckReceitas.Name)
-            {
-                pckManutencao.Foreground = VariaveisGlobais.Branco;
-                pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
-                pckHome.Foreground = VariaveisGlobais.Branco;
-                pckProducao.Foreground = VariaveisGlobais.Branco;
-                pckReceitas.Foreground = VariaveisGlobais.Verde;
+               
                 pckRelatorio.Foreground = VariaveisGlobais.Branco;
                 pckUser.Foreground = VariaveisGlobais.Branco;
             }
@@ -472,7 +514,7 @@ namespace _9567A_V00___PI
                 pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
                 pckHome.Foreground = VariaveisGlobais.Branco;
                 pckProducao.Foreground = VariaveisGlobais.Branco;
-                pckReceitas.Foreground = VariaveisGlobais.Branco;
+                
                 pckRelatorio.Foreground = VariaveisGlobais.Verde;
                 pckUser.Foreground = VariaveisGlobais.Branco;
             }
@@ -482,7 +524,7 @@ namespace _9567A_V00___PI
                 pckConfiguracoes.Foreground = VariaveisGlobais.Branco;
                 pckHome.Foreground = VariaveisGlobais.Branco;
                 pckProducao.Foreground = VariaveisGlobais.Branco;
-                pckReceitas.Foreground = VariaveisGlobais.Branco;
+                
                 pckRelatorio.Foreground = VariaveisGlobais.Branco;
                 pckUser.Foreground = VariaveisGlobais.Verde;
             }
@@ -490,5 +532,49 @@ namespace _9567A_V00___PI
 
 
         #endregion
+
+        private void btRelatorio_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
+            if (spInical != null)
+            {
+                spInical.Children.Clear();
+
+                spInical.Children.Add(Utilidades.VariaveisGlobais.relatorios);
+
+                AtualizaButton(pckRelatorio);
+
+            }
+        }
+
+        private void btManutencao_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
+            if (spInical != null)
+            {
+                spInical.Children.Clear();
+
+                spInical.Children.Add(Utilidades.VariaveisGlobais.manutencao);
+
+                AtualizaButton(pckManutencao);
+
+            }
+        }
     }
 }

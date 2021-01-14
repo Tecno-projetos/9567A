@@ -33,19 +33,19 @@
                     <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                     <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
                     <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                
-                
-                    
-                
-                
+
+
+
+
+
                 </ResourceDictionary.MergedDictionaries>
 
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
             </ResourceDictionary>
 
         </Grid.Resources>
@@ -65,7 +65,7 @@
                     <materialDesign:PackIcon x:Name="pckHome" Kind="HomeOutline" VerticalAlignment="Center" Foreground="White" Margin="0,0,0,22" HorizontalAlignment="Left" Width="53" Height="48"/>
                 </Grid>
             </Button>
-            <Button x:Name="btRelatorio" Margin="539,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top">
+            <Button x:Name="btRelatorio" Margin="455,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top" Click="btRelatorio_Click">
                 <Grid Width="53" Height="70">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -81,7 +81,7 @@
                     <materialDesign:PackIcon x:Name="pckProducao" Kind="PlayBox" VerticalAlignment="Center" Foreground="White" Margin="0,0,0,22" HorizontalAlignment="Left" Width="53" Height="48"/>
                 </Grid>
             </Button>
-            <Button x:Name="btConfiguracoes" Margin="454,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top" Click="btConfiguracoes_Click">
+            <Button x:Name="btConfiguracoes" Margin="370,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top" Click="btConfiguracoes_Click">
                 <Grid Width="53" Height="70">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -111,16 +111,7 @@
                     <materialDesign:PackIcon x:Name="iconLogin" Kind="Login" VerticalAlignment="Top" Foreground="White" Margin="-10,-2,-11,-5" HorizontalAlignment="Left" Width="38" Height="32"/>
                 </Grid>
             </Button>
-            <Button x:Name="btReceitas" Margin="369,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top">
-                <Grid Width="53" Height="70">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Receitas" Margin="-14,40,-14,-12" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="White" Width="81" Height="27" FontSize="11"/>
-                    <materialDesign:PackIcon x:Name="pckReceitas" Kind="Receipt" VerticalAlignment="Center" Foreground="White" Margin="0,0,0,22" HorizontalAlignment="Left" Width="53" Height="48"/>
-                </Grid>
-            </Button>
-            <Button x:Name="btManutencao" Margin="624,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top">
+            <Button x:Name="btManutencao" Margin="540,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top" Click="btManutencao_Click">
                 <Grid Width="53" Height="70">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -148,7 +139,8 @@
 
 
         </Grid>
-        <StackPanel x:Name="spInical" HorizontalAlignment="Left" Height="673" VerticalAlignment="Top" Width="1021"/>
+        <StackPanel x:Name="spInical" HorizontalAlignment="Left" Height="673" VerticalAlignment="Top" Width="1021" Margin="-1,0,0,0"/>
+        <materialDesign:PackIcon x:Name="AlarmInSup" Kind="Warning" VerticalAlignment="Top" Foreground="#FFF3FF00" Margin="537,658,0,0" HorizontalAlignment="Left" Width="46" Height="47"/>
 
 
 

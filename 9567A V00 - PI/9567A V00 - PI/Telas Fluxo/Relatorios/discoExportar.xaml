@@ -1,0 +1,103 @@
+﻿<Window x:Class="_9567A_V00___PI.Telas_Fluxo.Relatorios.discoExportar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:local="clr-namespace:_9567A_V00___PI.Telas_Fluxo.Relatorios"
+        mc:Ignorable="d"
+        Title="Exportar" Height="471" Width="233" ResizeMode="NoResize" Icon="/9567A V00 - PI;component/Imagens/Automasul.ico" WindowStartupLocation="CenterScreen" Topmost="True">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="brushWatermarkBackground" Color="White" />
+            <SolidColorBrush x:Key="brushWatermarkForeground" Color="LightSteelBlue" />
+            <SolidColorBrush x:Key="brushWatermarkBorder" Color="Black" />
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <Grid Background="#FF787878">
+        <ListBox x:Name="listbox" Margin="2,10,0,0" BorderBrush="{x:Null}" 
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+            ScrollViewer.VerticalScrollBarVisibility="Visible" 
+            SelectionChanged="listbox_SelectionChanged" 
+            Background="{x:Null}" HorizontalAlignment="Left" Width="225" Height="330" VerticalAlignment="Top"/>
+
+        <Button x:Name="btFechar"  Margin="4,382,0,0" 
+                IsCancel="True"
+                Background="Red" BorderBrush="Black" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="213">
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+
+                    </ResourceDictionary.MergedDictionaries>
+                    <SolidColorBrush x:Key="brushWatermarkBackground" Color="White" />
+                    <SolidColorBrush x:Key="brushWatermarkForeground" Color="LightSteelBlue" />
+                    <SolidColorBrush x:Key="brushWatermarkBorder" Color="Black" />
+
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+                    <Style x:Key="EntryFieldStyle" TargetType="{x:Type Grid}" >
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Margin" Value="20,0" />
+                    </Style>
+                </ResourceDictionary>
+
+            </Button.Resources>
+
+            <Grid Width="150">
+                <materialDesign:PackIcon Kind="Close" VerticalAlignment="Center" Foreground="White" Height="30" Margin="-22,0,0,-8" Width="42"/>
+                <TextBlock HorizontalAlignment="Center" Text="Fechar" FontFamily="Champagne &amp; Limousines" Foreground="White" FontSize="18" Margin="49,1,49,-1"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btExportar" Margin="4,345,0,0" Background="#FF505050" BorderBrush="Black" Click="btExportar_Click" HorizontalAlignment="Left" Width="213" VerticalAlignment="Top">
+
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+
+                    </ResourceDictionary.MergedDictionaries>
+                    <SolidColorBrush x:Key="brushWatermarkBackground" Color="White" />
+                    <SolidColorBrush x:Key="brushWatermarkForeground" Color="LightSteelBlue" />
+                    <SolidColorBrush x:Key="brushWatermarkBorder" Color="Black" />
+
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+                    <Style x:Key="EntryFieldStyle" TargetType="{x:Type Grid}" >
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Margin" Value="20,0" />
+                    </Style>
+                </ResourceDictionary>
+
+            </Button.Resources>
+
+            <Grid Width="184" Height="28">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="89*"/>
+                    <ColumnDefinition Width="95*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Kind="FileExportOutline" VerticalAlignment="Center" Foreground="White" Margin="0,-1,0,2" Height="27" Width="31"/>
+                <TextBlock TextAlignment="Center" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="42,4,30,7" Width="112" FontSize="18" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Exportar" Grid.ColumnSpan="2"/>
+            </Grid>
+        </Button>
+
+    </Grid>
+</Window>

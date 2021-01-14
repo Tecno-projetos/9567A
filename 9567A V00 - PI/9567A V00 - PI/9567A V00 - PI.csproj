@@ -57,7 +57,14 @@
   <PropertyGroup>
     <ApplicationIcon>Imagens\Automasul.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.7.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.7\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -171,6 +178,18 @@
     <Compile Include="Telas Fluxo\Fluxo.xaml.cs">
       <DependentUpon>Fluxo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Telas Fluxo\manutencao.xaml.cs">
+      <DependentUpon>manutencao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Manutenção\alarmes.xaml.cs">
+      <DependentUpon>alarmes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Manutenção\conexoes.xaml.cs">
+      <DependentUpon>conexoes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Manutenção\informacoesSistema.xaml.cs">
+      <DependentUpon>informacoesSistema.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Telas Fluxo\producao.xaml.cs">
       <DependentUpon>producao.xaml</DependentUpon>
     </Compile>
@@ -182,6 +201,20 @@
     </Compile>
     <Compile Include="Telas Fluxo\Producao\ProducaoTelaInicial.xaml.cs">
       <DependentUpon>ProducaoTelaInicial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\relatorios.xaml.cs">
+      <DependentUpon>relatorios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Relatorios\dataExportacao.xaml.cs">
+      <DependentUpon>dataExportacao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Relatorios\discoExportar.xaml.cs">
+      <DependentUpon>discoExportar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas Fluxo\Relatorios\ExportacaoRelatorios.cs" />
+    <Compile Include="Telas Fluxo\Relatorios\PickersViewModel.cs" />
+    <Compile Include="Telas Fluxo\Relatorios\relatorioProducao.xaml.cs">
+      <DependentUpon>relatorioProducao.xaml</DependentUpon>
     </Compile>
     <Compile Include="TelasAuxiliares\Buffer_Diag.xaml.cs">
       <DependentUpon>Buffer_Diag.xaml</DependentUpon>
@@ -308,6 +341,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Telas Fluxo\manutencao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Manutenção\alarmes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Manutenção\conexoes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Manutenção\informacoesSistema.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Telas Fluxo\producao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -321,6 +370,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Telas Fluxo\Producao\ProducaoTelaInicial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\relatorios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Relatorios\dataExportacao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Relatorios\discoExportar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Relatorios\relatorioProducao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
