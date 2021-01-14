@@ -710,7 +710,8 @@ namespace _9567A_V00___PI.Utilidades
             //Inicializa Tabelas
             DataBase.SqlFunctionsUsers.Initialize_ProgramDBCA();
             DataBase.SqlFunctionsEquips.ExistTable();
-
+            DataBase.SQLFunctionsProducao.Create_Table_Producao();
+            DataBase.SQLFunctionsProducao.Create_Table_ProducaoProdutos();
         }
 
         public static List<Produto> listProdutos = new List<Produto>();

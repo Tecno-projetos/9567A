@@ -70,7 +70,6 @@ namespace _9567A_V00___PI.DataBase
                             "CodigoReceita bigint," +
                             "ObservacaoReceita nvarchar(300)," +
                             "TempoMisturaReceita bigint," +
-                            "CONSTRAINT FK_IdReceitaBase FOREIGN KEY (IdReceitaBase) REFERENCES Receitas(Id), " +
                             "PRIMARY KEY (Id));";
 
                         dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
@@ -108,8 +107,7 @@ namespace _9567A_V00___PI.DataBase
                             "PesoProdutoDesejado real," +
                             "PesoProdutoDosado real," +
                             "Tolerancia real," +
-                            "CONSTRAINT FK_IdProducaoReceita FOREIGN KEY (IdProducaoReceita) REFERENCES Producao(Id), " +
-                            "PRIMARY KEY (Id));";
+                            "CONSTRAINT FK_IdProducaoReceita FOREIGN KEY (IdProducaoReceita) REFERENCES Producao(Id));";
 
                         dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
                         Call.Open();
@@ -138,9 +136,9 @@ namespace _9567A_V00___PI.DataBase
                 {
                     int idProd = -1;
                     string CommandString = "SELECT MAX(Id) AS maxid FROM Producao";
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
-                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
                     DataTable Data = new DataTable();
                     Adapter.Fill(Data);
 
@@ -152,7 +150,7 @@ namespace _9567A_V00___PI.DataBase
 
                     dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
 
-                    Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
                     string query = "INSERT into Producao (" +
                         "Id, " +
@@ -227,9 +225,9 @@ namespace _9567A_V00___PI.DataBase
                     {
                         int idProd = -1;
                         string CommandString = "SELECT MAX(Id) AS maxid FROM ProducaoProdutos";
-                        dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                        dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
-                        dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                        dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
                         DataTable Data = new DataTable();
                         Adapter.Fill(Data);
 
@@ -241,7 +239,7 @@ namespace _9567A_V00___PI.DataBase
 
                         dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
 
-                        Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                        Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
                         string query = "INSERT into ProducaoProdutos (" +
                             "IdProducaoReceita, " +
@@ -335,9 +333,9 @@ namespace _9567A_V00___PI.DataBase
                 {
                     string CommandString = "SELECT * FROM Producao WHERE IniciouProducao = 'True' AND FinalizouProducao = 'False'";
 
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
-                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
                     Adapter.Fill(Data);
                 }
@@ -392,9 +390,9 @@ namespace _9567A_V00___PI.DataBase
                 {
                     string CommandString = "SELECT * FROM ProducaoProdutos Where IdProducaoReceita = '" + ID_Producao + "'";
 
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
-                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
                     Adapter.Fill(Data);
 

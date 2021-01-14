@@ -41,6 +41,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                 //Preenche data inicial e data final
                 Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count -1].dateTimeInicioProducao = DateTime.Now;
                 Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = DateTime.Now;
+                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].pesoTotalProducao = Convert.ToSingle(txtPesoDesejado.Text);
 
                 //Preenche que iniciou a produção
                 Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = true;
