@@ -368,22 +368,22 @@ namespace _9567A_V00___PI.DataBase
                 }
             }
 
-            if (!DBNull.Value.Equals(Data))
-            {
-                if (Data.Rows.Count >= 1)
-                {
-                    functions.DataRow_To_Producao(Data.Rows[0], ref VariaveisGlobais.ProducaoReceita);
-                }
-                else
-                {
-                    VariaveisGlobais.ProducaoReceita = new Producao();
-                }
+            //if (!DBNull.Value.Equals(Data))
+            //{
+            //    if (Data.Rows.Count >= 1)
+            //    {
+            //        functions.DataRow_To_Producao(Data.Rows[0], ref VariaveisGlobais.ProducaoReceita);
+            //    }
+            //    else
+            //    {
+            //        VariaveisGlobais.ProducaoReceita = new Producao();
+            //    }
 
-            }
-            else
-            {
-                VariaveisGlobais.ProducaoReceita = new Producao();
-            }
+            //}
+            //else
+            //{
+            //    VariaveisGlobais.ProducaoReceita = new Producao();
+            //}
 
         }
 

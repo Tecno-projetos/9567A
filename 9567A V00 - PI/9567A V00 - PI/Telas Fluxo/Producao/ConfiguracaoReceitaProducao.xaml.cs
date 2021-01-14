@@ -22,6 +22,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
     public partial class ConfiguracaoReceitaProducao : UserControl
     {
         private messageBox inputDialog;
+        public event EventHandler IniciouProducao;
 
         public event EventHandler TelaAnterior;
         public ConfiguracaoReceitaProducao()
@@ -38,13 +39,13 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
             if (inputDialog.DialogResult == true)
             {
                 //Preenche data inicial e data final
-                Utilidades.VariaveisGlobais.ProducaoReceita.dateTimeInicioProducao = DateTime.Now;
-                Utilidades.VariaveisGlobais.ProducaoReceita.dateTimeFimProducao = DateTime.Now;
+                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count -1].dateTimeInicioProducao = DateTime.Now;
+                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = DateTime.Now;
 
                 //Preenche que iniciou a produção
-                Utilidades.VariaveisGlobais.ProducaoReceita.IniciouProducao = true;
+                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = true;
 
-                DataBase.SQLFunctionsProducao.AddProducao(Utilidades.VariaveisGlobais.ProducaoReceita);
+                DataBase.SQLFunctionsProducao.AddProducao(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
 
                 //Verifica qual Produção esta em execução e carrega a produção
                 DataBase.SQLFunctionsProducao.AtualizaProducaoEmExecucao();
