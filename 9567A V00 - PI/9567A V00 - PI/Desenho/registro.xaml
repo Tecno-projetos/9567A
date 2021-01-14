@@ -15,7 +15,7 @@
         </Storyboard>
         <Storyboard x:Key="Registro_Fecha"/>
     </UserControl.Resources>
-    <Grid Margin="-0.333,-0.333,0,0" Cursor="">
+    <Grid Margin="-0.333,-0.333,0,0" Cursor="Hand">
 
         <Rectangle Fill="Black" HorizontalAlignment="Left" Margin="11.25,6,0,0" Stroke="Black" StrokeThickness="0" Width="6" Height="20" VerticalAlignment="Top" Cursor=""/>
         <Rectangle x:Name="R2" Fill="White" Height="15" Margin="4.25,8,0,0" Stroke="Black" VerticalAlignment="Top" StrokeThickness="0" HorizontalAlignment="Left" Width="21"/>
