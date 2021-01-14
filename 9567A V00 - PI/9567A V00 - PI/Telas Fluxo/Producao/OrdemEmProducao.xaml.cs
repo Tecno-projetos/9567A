@@ -90,5 +90,10 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
         {
 
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
