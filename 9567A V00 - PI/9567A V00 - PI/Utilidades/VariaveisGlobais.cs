@@ -716,9 +716,7 @@ namespace _9567A_V00___PI.Utilidades
 
         public static Receita ReceitaCadastro = new Receita();
 
-        public static Producao ProducaoReceita = new Producao();
-
-        public static List<Producao> PesquisaProducao = new List<Producao>();
+        public static List<Producao> OrdensProducao = new List<Producao>();
 
         public static ControleProducao controleProducao = new ControleProducao();
 
