@@ -103,6 +103,7 @@ namespace _9567A_V00___PI.DataBase
                             "IdProduto int," +
                             "NomeProduto nvarchar(100)," +
                             "Codigo int," +
+                            "Observacao nvarchar(200)," +
                             "PesoProdutoReceita real," +
                             "PesoProdutoDesejado real," +
                             "PesoProdutoDosado real," +
@@ -242,11 +243,12 @@ namespace _9567A_V00___PI.DataBase
 
                         Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
 
-                        string query = "INSERT into Producao (" +
+                        string query = "INSERT into ProducaoProdutos (" +
                             "IdProducaoReceita, " +
                             "IdProduto, " +
                             "NomeProduto, " +
                             "Codigo, " +
+                            "Observacao," +
                             "PesoProdutoReceita, " +
                             "PesoProdutoDesejado, " +
                             "PesoProdutoDosado, " +
@@ -255,6 +257,7 @@ namespace _9567A_V00___PI.DataBase
                             "@IdProduto, " +
                             "@NomeProduto, " +
                             "@Codigo, " +
+                            "@Observacao, " +
                             "@PesoProdutoReceita, " +
                             "@PesoProdutoDesejado, " +
                             "@PesoProdutoDosado, " +
@@ -265,6 +268,7 @@ namespace _9567A_V00___PI.DataBase
                         Command.Parameters.AddWithValue("@IdProduto", item.produto.id);
                         Command.Parameters.AddWithValue("@NomeProduto", item.produto.descricao);
                         Command.Parameters.AddWithValue("@Codigo", item.produto.codigo);
+                        Command.Parameters.AddWithValue("@Codigo", item.produto.observacao);
                         Command.Parameters.AddWithValue("@PesoProdutoReceita", item.pesoProdutoReceita);
                         Command.Parameters.AddWithValue("@PesoProdutoDesejado", item.pesoProdutoDesejado);
                         Command.Parameters.AddWithValue("@PesoProdutoDosado", item.pesoProdutoDosado);
@@ -321,32 +325,7 @@ namespace _9567A_V00___PI.DataBase
 
         }
 
-        public static DataTable getBateladaFromIdProducaoANDNumeroBatelada(int IdProducao, int NumeroBatelada)
-        {
-            DataTable Data = new DataTable();
-
-            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-            {
-                try
-                {
-                    string CommandString = "SELECT * FROM Bateladas WHERE IdProducao = '"+IdProducao+"' AND NumeroBatelada = '"+ NumeroBatelada+"'";
-
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
-
-                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
-
-                    Adapter.Fill(Data);
-                }
-                catch (Exception ex)
-                {
-                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-                }
-            }
-
-            return Data;
-        }
-
-        public static void AtualizaProducaoEmExecucao()
+        public static void AtualizaOrdemProducaoEmExecucao()
         {
             DataTable Data = new DataTable();
 
@@ -368,97 +347,42 @@ namespace _9567A_V00___PI.DataBase
                 }
             }
 
-            //if (!DBNull.Value.Equals(Data))
-            //{
-            //    if (Data.Rows.Count >= 1)
-            //    {
-            //        functions.DataRow_To_Producao(Data.Rows[0], ref VariaveisGlobais.ProducaoReceita);
-            //    }
-            //    else
-            //    {
-            //        VariaveisGlobais.ProducaoReceita = new Producao();
-            //    }
+            //Passo 0:
+            //Remove todas as ordens da lista
+            VariaveisGlobais.OrdensProducao.Clear();
 
-            //}
-            //else
-            //{
-            //    VariaveisGlobais.ProducaoReceita = new Producao();
-            //}
+            //Passo 1:
+            //Carrega todas as Ordens que iniciou a produção e não finalizou
+            if (!DBNull.Value.Equals(Data))
+            {
+                if (Data.Rows.Count >= 1)
+                {
+                    foreach (DataRow row in Data.Rows)
+                    {
+                        VariaveisGlobais.OrdensProducao.Add(new Utilidades.Producao()); //Cria uma nova produção
 
+                        functions.DataRow_To_Producao(row);
+                    }            
+                }
+            }
+
+            //Passo 2:
+            //Carrega todas as Ordens em execução no PLC
+
+            //Passo 3:
+            //Confere se o que tem no BD e PLC estão iguais
+
+            //Passo 4:
+            //Verifica se esta ordenado as ordens no PLC e BD, se não estiver irá realizar a ordenção do SUP de acordo com o PLC
+
+            //Passo 5:
+            //Caso não tenha a Ordem no PLC e tenha no BD, irá encerrar a Ordem no SUP
+
+            //Passo 6:
+            //Caso não tenha a Orden no BD e tenha no PLC, irá somente avisar, e aguardar o PLC encerrar a ordem
         }
 
-        public static int Update_PesoDosado_ProdutoBatelada(int idProducao, int numeroBatelada, string codigoProduto, float valorDosado)
-        {
-            int ret = -1;
-            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-            {
-                try
-                {
-                    string valDosado = valorDosado.ToString(CultureInfo.GetCultureInfo("en-US"));
-
-                    string CommandString = "UPDATE Bateladas SET ValorDosado = '" + valDosado + "' WHERE IdProducao = " + idProducao + " AND " +
-                        "CodigoProduto = "+codigoProduto+" AND " +
-                        "NumeroBatelada = "+numeroBatelada+";";
-
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
-                    dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
-
-                    Call.Open();
-                    ret = Command.ExecuteNonQuery();
-                    Call.Close();
-                    return ret;
-                }
-                catch (Exception ex)
-                {
-                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-                    ret = -1;
-                    return ret;
-                }
-            }
-            else
-            {
-                return ret;
-            }
-
-        }
-
-        public static int Update_Finaliza_Producao(float pesoTotalProduzido, float volumeTotalProduzido)
-        {
-            int ret = -1;
-            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-            {
-                try
-                {
-                    string pesoTotalProd = pesoTotalProduzido.ToString(CultureInfo.GetCultureInfo("en-US"));
-                    dynamic DTnow = new DateTime();
-                    DTnow = DateTime.Now;
-
-                    DTnow = DTnow.ToString("yyyyMMdd") + " " + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
-
-                    string CommandString = "UPDATE Producao SET FinalizouProducao = 'true', DataFimProducao = '"+ DTnow + "', PesoTotalProduzido = '"+ pesoTotalProd + "', VolumeTotalProduzido = '"+ volumeTotalProduzido + "' WHERE FinalizouProducao = 'false';";
-
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
-                    dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
-
-                    Call.Open();
-                    ret = Command.ExecuteNonQuery();
-                    Call.Close();
-                    return ret;
-                }
-                catch (Exception ex)
-                {
-                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-                    ret = -1;
-                    return ret;
-                }
-            }
-            else
-            {
-                return ret;
-            }
-        }
-
-        public static Int32 getCoutReceitaBase(int IdReceitaBase)
+        public static DataTable getProducaoProdutosFromIdProducao(int ID_Producao)
         {
             DataTable Data = new DataTable();
 
@@ -466,64 +390,7 @@ namespace _9567A_V00___PI.DataBase
             {
                 try
                 {
-                    string CommandString = "SELECT COUNT(*) FROM Producao WHERE IdReceitaBase = '" + IdReceitaBase + "'";
-
-
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
-
-                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
-
-                    Adapter.Fill(Data);
-                }
-                catch (Exception ex)
-                {
-                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-                }
-            }
-
-            return Convert.ToInt32(Data.Rows[0][0]);
-        }
-
-        public static int getLast_ID_Producao()
-        {
-            DataTable Data = new DataTable();
-
-            int id = -1;
-
-            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-            {
-                try
-                {
-                    string CommandString = "SELECT MAX(Id) AS maxid FROM Producao";
-
-                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
-
-                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
-
-                    Adapter.Fill(Data);
-
-                    //last id is null?
-                    if (!(DBNull.Value.Equals(Data.Rows[0][0])))
-                        id = Convert.ToInt32(Data.Rows[0][0]);
-                }
-                catch (Exception ex)
-                {
-                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
-                }
-            }
-
-            return id;
-        }
-
-        public static int getID_Receita_Base_From_Id_Producao(int ID_Producao)
-        {
-            DataTable Data = new DataTable();
-
-            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
-            {
-                try
-                {
-                    string CommandString = "SELECT IdReceitaBase FROM Producao Where Id = '" + ID_Producao + "'";
+                    string CommandString = "SELECT * FROM ProducaoProdutos Where IdProducaoReceita = '" + ID_Producao + "'";
 
                     dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
 
@@ -538,7 +405,7 @@ namespace _9567A_V00___PI.DataBase
                 }
             }
 
-            return Convert.ToInt32(Data.Rows[0][0]);
+            return Data;
         }
 
     }

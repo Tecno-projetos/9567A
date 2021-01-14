@@ -1139,6 +1139,62 @@ namespace _9567A_V00___PI.Utilidades
 
         }
 
+        public static void DataRow_To_Producao(DataRow dr)
+        {
+            //Atualiza primeiro os valores que existem informações no DataRow
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count-1].id = Convert.ToInt32(dr.ItemArray[0]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].pesoTotalProducao = Convert.ToInt32(dr.ItemArray[1]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].pesoTotalProduzido = Convert.ToInt32(dr.ItemArray[2]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].dateTimeInicioProducao = Convert.ToDateTime(dr.ItemArray[3]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = Convert.ToDateTime(dr.ItemArray[4]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = Convert.ToBoolean(dr.ItemArray[5]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].FinalizouProducao = Convert.ToBoolean(dr.ItemArray[6]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.id = Convert.ToInt32(dr.ItemArray[7]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.nomeReceita = Convert.ToString(dr.ItemArray[8]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.Codigo = Convert.ToInt32(dr.ItemArray[9]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.observacao = Convert.ToString(dr.ItemArray[10]);
+            VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.tempoMistura = Convert.ToInt32(dr.ItemArray[11]);
+
+            //Após atualizar as info que existem, a partir delas devemos atualizar o seguinte item
+            //Passo 1 = Produtos que contêm na receita.
+
+            foreach (DataRow row in SQLFunctionsProducao.getProducaoProdutosFromIdProducao(VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].id).Rows)
+            {
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Add(new ProdutoReceita());
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count -1
+                ].produto.id = Convert.ToInt32(row.ItemArray[1]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].produto.descricao = Convert.ToString(row.ItemArray[2]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].produto.codigo = Convert.ToInt32(row.ItemArray[3]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].produto.observacao = Convert.ToString(row.ItemArray[4]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].pesoProdutoReceita = Convert.ToSingle(row.ItemArray[5]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].pesoProdutoDesejado = Convert.ToSingle(row.ItemArray[6]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].pesoProdutoDosado = Convert.ToSingle(row.ItemArray[7]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].tolerancia = Convert.ToSingle(row.ItemArray[8]);
+            }
+        }
     }
 
     public class Produto

@@ -48,7 +48,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                 DataBase.SQLFunctionsProducao.AddProducao(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
 
                 //Verifica qual Produção esta em execução e carrega a produção
-                DataBase.SQLFunctionsProducao.AtualizaProducaoEmExecucao();
+                DataBase.SQLFunctionsProducao.AtualizaOrdemProducaoEmExecucao();
 
                 if (this.IniciouProducao != null)
                     this.IniciouProducao(this, e);
