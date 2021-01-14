@@ -18,6 +18,9 @@ namespace _9567A_V00___PI.Utilidades
     {
         public static TelasAuxiliares.FirstLoading windowFirstLoading = new TelasAuxiliares.FirstLoading();
 
+        public static RTU.IndicadorPesagem_3102C_S balancaPrincipal = new RTU.IndicadorPesagem_3102C_S(9600, 8, System.IO.Ports.Parity.None, System.IO.Ports.StopBits.One, "COM2", 2);
+
+
         #region Structs
 
         public struct diagnosticoProfinet
@@ -686,7 +689,6 @@ namespace _9567A_V00___PI.Utilidades
 
         public static void createFolder(string folder) 
         {
-          
             //Se o diretório não existir...
 
             if (!Directory.Exists(folder))
@@ -694,7 +696,6 @@ namespace _9567A_V00___PI.Utilidades
                 //Criamos um com o nome folder
                 Directory.CreateDirectory(folder);
             }
-
         }
 
         public static void Load_Connection()

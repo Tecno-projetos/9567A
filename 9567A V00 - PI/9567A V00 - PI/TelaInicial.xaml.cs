@@ -39,6 +39,9 @@ namespace _9567A_V00___PI
 
         Utilidades.messageBox inputDialog;
 
+        RTU.IndicadorPesagem_3102C_S inidicadorPesagem;
+
+
         public TelaInicial()
         {
             InitializeComponent();
@@ -70,7 +73,6 @@ namespace _9567A_V00___PI
             VariaveisGlobais.Load_Connection();
 
             #endregion
-
 
             VariaveisGlobais.Fluxo.BMP1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 2, 0, "Misturador Motor 1", "BMP-1", "1", "12");
             VariaveisGlobais.Fluxo.BMP2_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 22, 0, "Misturador Motor 2", "BMP-2", "2", "13");
@@ -228,6 +230,13 @@ namespace _9567A_V00___PI
 
             if (Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[0].Buffer, 0) == 1000)
             {
+
+                //Atualiza Balança
+                //VariaveisGlobais.balancaPrincipal.LeituraModbus();
+
+                ////Escreve o peso lido da balança
+                ////Lembrando que -1 simboliza erro na leitura.
+                //VariaveisGlobais.balancaPrincipal.EscritaCLP(0, 2);
 
                 ////Atualiza Niveis Silos
                 //Utilidades.VariaveisGlobais.niveis = Move_Bits.Dword_TO_NIveis(Comunicacao.Sharp7.S7.GetDWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[3].Buffer, 0), Utilidades.VariaveisGlobais.niveis);
