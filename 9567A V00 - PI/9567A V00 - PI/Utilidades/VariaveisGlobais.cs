@@ -634,6 +634,8 @@ namespace _9567A_V00___PI.Utilidades
         #endregion
 
         #region Connection DB and Type DB (SQLExpress or SqlCe)
+        //Configurar banco de dados para acesso remoto
+        //http://www.systematiza.com.br/site/?page_id=837
 
         static bool DB_Connected;
         private static bool SQLCe;
@@ -642,7 +644,7 @@ namespace _9567A_V00___PI.Utilidades
         private static string Connection_DB_Equip = @"Server=172.16.1.66\SQLEXPRESS,1433;Database=DB_Equips_IHM;Integrated Security=false;User ID=sa;Password=33162600";
         private static string Connection_DB_Producao = @"Server=172.16.1.66\SQLEXPRESS,1433;Database=DB_Producao_IHM;Integrated Security=false;User ID=sa;Password=33162600";
 
-        private static string Connection_DB_Receitas = @"Server=172.16.1.113\MAYCONLUTZ\SQLEXPRESS2012,1433;Database=DB_ReceitasPreMix;Integrated Security=false;User ID=sa;Password=33162600";
+        private static string Connection_DB_Receitas = @"Server=172.16.1.66\SQLEXPRESS,1433;Database=DB_ReceitasPreMix;Integrated Security=false;User ID=sa;Password=33162600";
         public static string Connection_DB_Users_GS { get => Connection_DB_Users; set => Connection_DB_Users = value; }
         public static string Connection_DB_Equip_GS { get => Connection_DB_Equip; set => Connection_DB_Equip = value; }
         public static string Connection_DB_Producao_GS { get => Connection_DB_Producao; set => Connection_DB_Producao = value; }
@@ -707,6 +709,7 @@ namespace _9567A_V00___PI.Utilidades
 
             //Inicializa Tabelas
             DataBase.SqlFunctionsUsers.Initialize_ProgramDBCA();
+            DataBase.SqlFunctionsEquips.ExistTable();
 
         }
 

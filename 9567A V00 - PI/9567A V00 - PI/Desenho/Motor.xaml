@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:_9567A_V00___PI.Desenho"
              mc:Ignorable="d" Height="40" Width="56.333">
-    <Grid>
+    <Grid Cursor="Hand">
         <Rectangle x:Name="parte7" Fill="#FF7F7F7F" HorizontalAlignment="Left" Height="15" Margin="20,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="11" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>

@@ -142,9 +142,9 @@ namespace _9567A_V00___PI
             //timer4h.Tick += timer4h_Tick;
             //timer4h.Start();
             ////====================================================
-            //Clock_TickTack.Interval = TimeSpan.FromSeconds(1);
-            //Clock_TickTack.Tick += timerTickTack;
-            //Clock_TickTack.Start();
+            Clock_TickTack.Interval = TimeSpan.FromSeconds(1);
+            Clock_TickTack.Tick += timerTickTack;
+            Clock_TickTack.Start();
 
             #endregion
 
@@ -166,6 +166,19 @@ namespace _9567A_V00___PI
             e.Cancel = true;
             Utilidades.VariaveisGlobais.Window_Diagnostic.Hide();
         }
+
+        private void timerTickTack(object sender, EventArgs e)
+        {
+            if (Utilidades.VariaveisGlobais.TickTack_GS)
+            {
+                Utilidades.VariaveisGlobais.TickTack_GS = false;
+            }
+            else
+            {
+                Utilidades.VariaveisGlobais.TickTack_GS = true;
+            }
+        }
+
 
         private void timer1s_Tick(object sender, EventArgs e)
         {
