@@ -56,35 +56,35 @@
         </Grid.Resources>
         <Label x:Name="lbTitle" Content="Especificações Equipamentos" HorizontalAlignment="Left" VerticalAlignment="Top" Width="825" Foreground="White" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,6,-1,0" Height="60" FontSize="30"/>
         <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="0,76,-1,0" Stroke="White" VerticalAlignment="Top" Width="825"/>
-        <Label Content="Peso Máximo Permitido (kg);" Height="34" Margin="242,103,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="355" Foreground="White" FontWeight="Bold" FontSize="16"/>
-        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,142,227,492" Height="41" Background="#FF3C3C3C" >
-            <TextBlock Margin="5,0,6,5" Text="Exemplo: 300,0" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
+        <Label Content="Tempo Limpeza Dosagem (s):" Height="34" Margin="242,108,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="371" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,147,227,487" Height="41" Background="#FF3C3C3C" >
+            <TextBlock Margin="5,0,6,5" Text="Exemplo: 10" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
                 <TextBlock.Visibility>
                     <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
-                        <Binding ElementName="txtPesoMaximo" Path="Text.IsEmpty" />
-                        <Binding ElementName="txtPesoMaximo" Path="IsFocused" />
+                        <Binding ElementName="txtTempoLimpezaDosagem" Path="Text.IsEmpty" />
+                        <Binding ElementName="txtTempoLimpezaDosagem" Path="IsFocused" />
                     </MultiBinding>
                 </TextBlock.Visibility>
             </TextBlock>
-            <TextBox x:Name="txtPesoMaximo" PreviewMouseLeftButtonUp="floatingPreviewMouseLeftButtonUp" GotFocus="TB_GotFocus" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
+            <TextBox x:Name="txtTempoLimpezaDosagem" GotFocus="TB_GotFocus" PreviewMouseLeftButtonUp="IntergerPreviewMouseLeftButtonUp" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
         </Grid>
-        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,142,582,492" BorderBrush="#FF040404"/>
-        <Label Content="Tempo Limpeza Dosagem (ms):" Height="34" Margin="242,193,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="371" Foreground="White" FontWeight="Bold" FontSize="16"/>
-        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,232,227,402" Height="41" Background="#FF3C3C3C" >
-            <TextBlock Margin="5,0,6,5" Text="Exemplo: 1000" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,147,582,487" BorderBrush="#FF040404"/>
+        <Label Content="Tempo Limpeza Mistura (s):" Height="34" Margin="242,198,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="371" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,237,227,397" Height="41" Background="#FF3C3C3C" >
+            <TextBlock Margin="5,0,6,5" Text="Exemplo: 10" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
                 <TextBlock.Visibility>
                     <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
-                        <Binding ElementName="txtTempoDosagem" Path="Text.IsEmpty" />
-                        <Binding ElementName="txtTempoDosagem" Path="IsFocused" />
+                        <Binding ElementName="txtTempoLimpezaMistura" Path="Text.IsEmpty" />
+                        <Binding ElementName="txtTempoLimpezaMistura" Path="IsFocused" />
                     </MultiBinding>
                 </TextBlock.Visibility>
             </TextBlock>
-            <TextBox x:Name="txtTempoDosagem" GotFocus="TB_GotFocus" PreviewMouseLeftButtonUp="IntergerPreviewMouseLeftButtonUp" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
+            <TextBox x:Name="txtTempoLimpezaMistura" GotFocus="TB_GotFocus" PreviewMouseLeftButtonUp="IntergerPreviewMouseLeftButtonUp" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
         </Grid>
-        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,232,582,402" BorderBrush="#FF040404"/>
-        <Label Content="Tempo Limpeza Mistura (ms):" Height="34" Margin="242,283,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="371" Foreground="White" FontWeight="Bold" FontSize="16"/>
-        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,322,227,312" Height="41" Background="#FF3C3C3C" >
-            <TextBlock Margin="5,0,6,5" Text="Exemplo: 1000" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,237,582,397" BorderBrush="#FF040404"/>
+        <Label Content="Tempo Mistura (s):" Height="34" Margin="242,288,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="371" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,327,227,307" Height="41" Background="#FF3C3C3C" >
+            <TextBlock Margin="5,0,6,5" Text="Exemplo: 10" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
                 <TextBlock.Visibility>
                     <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
                         <Binding ElementName="txtTempoMistura" Path="Text.IsEmpty" />
@@ -92,28 +92,42 @@
                     </MultiBinding>
                 </TextBlock.Visibility>
             </TextBlock>
-            <TextBox x:Name="txtTempoMistura" GotFocus="TB_GotFocus" PreviewMouseLeftButtonUp="IntergerPreviewMouseLeftButtonUp" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
+            <TextBox x:Name="txtTempoMistura"  GotFocus="TB_GotFocus" PreviewMouseLeftButtonUp="IntergerPreviewMouseLeftButtonUp" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
         </Grid>
-        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,322,582,312" BorderBrush="#FF040404"/>
-        <Label Content="Tempo Limpeza Silo Pulmão (ms):" Height="34" Margin="242,373,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="371" Foreground="White" FontWeight="Bold" FontSize="16"/>
-        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,412,227,222" Height="41" Background="#FF3C3C3C" >
-            <TextBlock Margin="5,0,6,5" Text="Exemplo: 1000" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
-                <TextBlock.Visibility>
-                    <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
-                        <Binding ElementName="txtTempoPulmao" Path="Text.IsEmpty" />
-                        <Binding ElementName="txtTempoPulmao" Path="IsFocused" />
-                    </MultiBinding>
-                </TextBlock.Visibility>
-            </TextBlock>
-            <TextBox x:Name="txtTempoPulmao"  GotFocus="TB_GotFocus" PreviewMouseLeftButtonUp="IntergerPreviewMouseLeftButtonUp" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
-        </Grid>
-        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,412,582,222" BorderBrush="#FF040404"/>
-        <Button x:Name="btSalvarInformacoes" Margin="242,608,227,26" Background="#FF505050" BorderBrush="Black" Height="Auto" Opacity="1" Click="btSalvarInformacoes_Click" >
+
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,327,582,307" BorderBrush="#FF040404"/>
+        <Button x:Name="btSalvarInformacoes" Margin="242,598,227,36" Background="#FF505050" BorderBrush="Black" Height="Auto" Opacity="1" Click="btSalvarInformacoes_Click" >
             <Grid Width="150">
                 <materialDesign:PackIcon x:Name="packiconCadastrarEditar" Kind="ContentSave" VerticalAlignment="Center" Foreground="White" Margin="-15,-6,0,-7" Height="30" Width="30"/>
                 <TextBlock x:Name="lbTextButton" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="31,1,-9,-1" Width="128" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Salvar Informações"/>
             </Grid>
         </Button>
+        <Label Content="Tempo Estabilização (s):" Height="34" Margin="242,378,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="371" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,417,227,217" Height="41" Background="#FF3C3C3C" >
+            <TextBlock Margin="5,0,6,5" Text="Exemplo: 10" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
+                        <Binding ElementName="txtTempoEstabilizacao" Path="Text.IsEmpty" />
+                        <Binding ElementName="txtTempoEstabilizacao" Path="IsFocused" />
+                    </MultiBinding>
+                </TextBlock.Visibility>
+            </TextBlock>
+            <TextBox x:Name="txtTempoEstabilizacao"  GotFocus="TB_GotFocus" PreviewMouseLeftButtonUp="IntergerPreviewMouseLeftButtonUp" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
+        </Grid>
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,417,582,217" BorderBrush="#FF040404"/>
+        <Label Content="Tempo Pulmão Vazio (s):" Height="34" Margin="242,468,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="371" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="242,507,227,127" Height="41" Background="#FF3C3C3C" >
+            <TextBlock Margin="5,0,6,5" Text="Exemplo: 10" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
+                        <Binding ElementName="txtTempoPulmaoVazio" Path="Text.IsEmpty" />
+                        <Binding ElementName="txtTempoPulmaoVazio" Path="IsFocused" />
+                    </MultiBinding>
+                </TextBlock.Visibility>
+            </TextBlock>
+            <TextBox x:Name="txtTempoPulmaoVazio"  GotFocus="TB_GotFocus" PreviewMouseLeftButtonUp="IntergerPreviewMouseLeftButtonUp" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" Height="38" VerticalContentAlignment="Bottom" />
+        </Grid>
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="204,507,582,127" BorderBrush="#FF040404"/>
 
 
     </Grid>

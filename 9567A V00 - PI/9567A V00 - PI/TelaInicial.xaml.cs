@@ -90,12 +90,12 @@ namespace _9567A_V00___PI
             Utilidades.VariaveisGlobais.Buffer_PLC[0].Enable_Read = true;
             Utilidades.VariaveisGlobais.Buffer_PLC[0].Enable_Write = false;
 
-            //Utilidades.VariaveisGlobais.Buffer_PLC[1].Name = "DB Produção Automática";
-            //Utilidades.VariaveisGlobais.Buffer_PLC[1].DBNumber = 15;
-            //Utilidades.VariaveisGlobais.Buffer_PLC[1].Start = 0;
-            //Utilidades.VariaveisGlobais.Buffer_PLC[1].Size = 282;
-            //Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = true;
-            //Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = false;
+            Utilidades.VariaveisGlobais.Buffer_PLC[1].Name = "DB Produção Automática";
+            Utilidades.VariaveisGlobais.Buffer_PLC[1].DBNumber = 18;
+            Utilidades.VariaveisGlobais.Buffer_PLC[1].Start = 0;
+            Utilidades.VariaveisGlobais.Buffer_PLC[1].Size = 62;
+            Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = true;
+            Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = false;
 
             //Utilidades.VariaveisGlobais.Buffer_PLC[2].Name = "DB Produção Ensaque";
             //Utilidades.VariaveisGlobais.Buffer_PLC[2].DBNumber = 25;
@@ -161,10 +161,7 @@ namespace _9567A_V00___PI
 
             //Verifica se esta lendo valor válido do CLP
 
-
-            int Connection = Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[0].Buffer, 0);
-
-            if (Connection == 1000)
+            if (Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[0].Buffer, 0) == 1000)
             {
 
                 ////Atualiza Niveis Silos
@@ -185,8 +182,37 @@ namespace _9567A_V00___PI
                 VariaveisGlobais.Fluxo.RP1_Designer.actualize_Equip = true;
                 VariaveisGlobais.Fluxo.RP2_Designer.actualize_Equip = true;
                 VariaveisGlobais.Fluxo.RP3_Designer.actualize_Equip = true;
+            }
+
+            if (Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 0) == 1000)
+            {
+                if (Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read)
+                {
+                    VariaveisGlobais.controleProducao.Producao0 = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 2);
+                    VariaveisGlobais.controleProducao.Producao1 = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 6);
+                    VariaveisGlobais.controleProducao.Producao2 = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 10);
+                    VariaveisGlobais.controleProducao.Producao3 = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 14);
 
 
+                    VariaveisGlobais.controleProducao = Move_Bits.WordToControleProducao(Comunicacao.Sharp7.S7.GetWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 18), VariaveisGlobais.controleProducao);
+
+                    VariaveisGlobais.controleProducao.StatusDosagem = Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 20);
+                    VariaveisGlobais.controleProducao.StatusMistura = Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 22);
+                    VariaveisGlobais.controleProducao.StatusExpedicao = Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 24);
+
+                    VariaveisGlobais.controleProducao.PesoDosar = Comunicacao.Sharp7.S7.GetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 26);
+                    VariaveisGlobais.controleProducao.PesoTolerancia = Comunicacao.Sharp7.S7.GetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 30);
+
+                    VariaveisGlobais.controleProducao.TempoMistura = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 34);
+                    VariaveisGlobais.controleProducao.TempoEstabilizacao = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 38);
+                    VariaveisGlobais.controleProducao.TempoPulmaoVazio = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 42);
+
+                    VariaveisGlobais.controleProducao.Peso_Total_Produzindo = Comunicacao.Sharp7.S7.GetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 46);
+                    VariaveisGlobais.controleProducao.Peso_Parcial_Produzindo = Comunicacao.Sharp7.S7.GetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 50);
+
+                    VariaveisGlobais.controleProducao.TempoLimpezaDosagem = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 54);
+                    VariaveisGlobais.controleProducao.TempoLimpezaMisturador = Comunicacao.Sharp7.S7.GetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 58);
+                }
             }
 
             VariaveisGlobais.CommunicationPLC.writeBufferPLC();//Chama a escrita no PLC
@@ -357,6 +383,29 @@ namespace _9567A_V00___PI
                 Utilidades.VariaveisGlobais.producao.spControleProducao.Children.Clear();
             }
 
+        }
+
+        private void btConfiguracoes_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
+
+            if (spInical != null)
+            {
+                spInical.Children.Clear();
+
+                spInical.Children.Add(Utilidades.VariaveisGlobais.configuracoes);
+
+                AtualizaButton(pckConfiguracoes);
+
+            }
         }
 
         #endregion

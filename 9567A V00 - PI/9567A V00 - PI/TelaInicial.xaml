@@ -81,7 +81,7 @@
                     <materialDesign:PackIcon x:Name="pckProducao" Kind="PlayBox" VerticalAlignment="Center" Foreground="White" Margin="0,0,0,22" HorizontalAlignment="Left" Width="53" Height="48"/>
                 </Grid>
             </Button>
-            <Button x:Name="btConfiguracoes" Margin="454,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top">
+            <Button x:Name="btConfiguracoes" Margin="454,4,0,0" Background="#FF505050" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="85" Height="84" VerticalAlignment="Top" Click="btConfiguracoes_Click">
                 <Grid Width="53" Height="70">
                     <Grid.RowDefinitions>
                         <RowDefinition/>

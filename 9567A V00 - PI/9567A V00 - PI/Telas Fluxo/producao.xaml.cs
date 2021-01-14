@@ -36,7 +36,7 @@ namespace _9567A_V00___PI.Telas_Fluxo
         private void btTelaInicialRacao_Click(object sender, RoutedEventArgs e)
         {
 
-            if (Utilidades.VariaveisGlobais.ValoresEspecificacoesEquipamentos.ValoresPreenchidos())
+            if (Utilidades.VariaveisGlobais.ValoresPreenchidos())
             {
                 if (spControleProducao != null)
                 {
@@ -49,14 +49,6 @@ namespace _9567A_V00___PI.Telas_Fluxo
             {
                 //falta preencher algum valor
                 inputDialog = new Utilidades.messageBox("Falta informções", "Verifique se os valores na tela de configuração das especificações estão preenchidos!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
-
-                if (spControleProducao != null)
-                {
-                    spControleProducao.Children.Clear();
-                }
-                spControleProducao.Children.Add(TelaInicialProducao);
-
-                inputDialog.ShowDialog();
             }
 
         }

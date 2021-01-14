@@ -177,6 +177,9 @@
     <Compile Include="Telas Fluxo\Producao\ConfiguracaoReceitaProducao.xaml.cs">
       <DependentUpon>ConfiguracaoReceitaProducao.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Telas Fluxo\Producao\OrdemEmProducao.xaml.cs">
+      <DependentUpon>OrdemEmProducao.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Telas Fluxo\Producao\ProducaoTelaInicial.xaml.cs">
       <DependentUpon>ProducaoTelaInicial.xaml</DependentUpon>
     </Compile>
@@ -310,6 +313,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Telas Fluxo\Producao\ConfiguracaoReceitaProducao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Producao\OrdemEmProducao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

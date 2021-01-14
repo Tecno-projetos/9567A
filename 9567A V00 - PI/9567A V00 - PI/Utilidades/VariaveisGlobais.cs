@@ -20,134 +20,6 @@ namespace _9567A_V00___PI.Utilidades
 
         #region Structs
 
-        public struct Niveis
-        {
-            public bool Superior_Silo_1;
-            public bool Superior_Silo_2;
-            public bool Superior_Silo_Exp;
-            public bool Inferior_Silo_1;
-            public bool Inferior_Silo_2;
-            public bool Inferior_Silo_Exp;
-            public bool Inferior_Pre_Misturador;
-            public bool Inferior_Pos_Misturador;
-            public bool Reserva_2;
-            public bool Reserva_3;
-            public bool Reserva_4;
-            public bool Reserva_5;
-            public bool Reserva_6;
-            public bool Reserva_7;
-            public bool Reserva_8;
-            public bool Reserva_9;
-            public bool Reserva_10;
-            public bool Reserva_11;
-            public bool Reserva_12;
-            public bool Reserva_13;
-            public bool Reserva_14;
-            public bool Reserva_15;
-            public bool Reserva_16;
-            public bool Reserva_17;
-            public bool Reserva_18;
-            public bool Reserva_19;
-            public bool Reserva_20;
-            public bool Reserva_21;
-            public bool Reserva_22;
-            public bool Reserva_23;
-            public bool Reserva_24;
-            public bool Reserva_25;
-        }
-
-        public struct PID 
-        {
-            public float SetPoint;
-            public float Ki;
-            public float kp;
-            public float kd;
-
-            public float limiteMaximo;
-            public float limiteMinimo;
-
-            //Palavra de Comando
-            public bool Habilita_PID;
-            public bool Reserva;
-            public bool Reserva_1;
-            public bool Reserva_2;
-            public bool Reserva_3;
-            public bool Reserva_4;
-            public bool Reserva_5;
-            public bool Reserva_6;
- 
-        }
-
-        public struct AuxiliaresProcesso
-        {
-            //Region estrutura de máquinas
-            public float Volume_Maximo_Silo1_2;                       //Maximo silo produto acabado
-            public float Volume_Maximo_Balanca;                       //Maximo silo 1 materia prima.
-            public float Volume_Maximo_Pre_Misturador;                //Maximo silo 2 materia prima.
-            public float Volume_Maximo_Pos_Misturador;                //Maximo silo 2 materia prima.
-            public float Peso_Maximo_Silo1_2;                         //Maximo pré misturador.
-            public float Peso_Maximo_Balanca;                         //Maximo pré misturador.
-            public float Peso_Maximo_Pre_Misturador;                  //Maximo pré misturador.
-            public float Peso_Maximo_Pos_Misturador;                  //Maximo pré misturador.
-
-            public int TempoPosMisturador;                  //Maximo pré misturador.
-            public int TempoPreMisturador;                  //Maximo pré misturador.
-
-            //Region estrutura dos registros 1 e  2 
-            //Registro 1
-            public float Abertura_Máxima_Silo1;                      //Maximo abertura sulo 1                                                             
-            public float Inicio_Reducao_Silo1;                      //Inicio redução registro silo 1
-            public float Fechamento_Antecipado_Silo1;               //Fechamento antecipado silo 1
-
-            //Registro 2
-            public float Abertura_Máxima_Silo2;                      //Maximo abertura sulo 2                                                             
-            public float Inicio_Reducao_Silo2;                      //Inicio redução registro silo 2
-            public float Fechamento_Antecipado_Silo2;               //Fechamento antecipado silo 2
-
-
-            //Region Geral
-            //Palavra de controle
-                 
-            public bool Set_Automatico_Equipamentos;                      
-            public bool Habilita_Finalizar_Dosagem_E_Iniciar_Transporte;
-            public bool Seta_Finalizar_Dosagem_E_Inicia_Transporte;
-            public bool Reserva_3;
-            public bool Reserva_4;
-            public bool Reserva_5;
-            public bool Reserva_6;
-            public bool Reserva_7;
-            public bool Reserva_8;
-            public bool Reserva_9;
-            public bool Reserva_10;
-            public bool Reserva_11;
-            public bool Reserva_12;
-            public bool Reserva_13;
-            public bool Reserva_14;
-            public bool Reserva_15;
-            public bool Reserva_16;
-            public bool Reserva_17;
-            public bool Reserva_18;
-            public bool Reserva_19;
-            public bool Reserva_20;
-            public bool Reserva_21;
-            public bool Reserva_22;
-            public bool Reserva_23;
-            public bool Reserva_24;
-            public bool Reserva_25;
-            public bool Reserva_26;
-            public bool Reserva_27;
-            public bool Reserva_28;
-            public bool Reserva_29;
-            public bool Reserva_30;
-            public bool Reserva_31;
-
-            public float ToleranciaMinimaDosagemBalança;      //Peso em percentual de 0 a 10 %
-            public float reserva_Real_2;                      //Maximo abertura sulo 2    
-
-
-
-        }
-
         public struct diagnosticoProfinet
         {
             public bool Good;
@@ -167,54 +39,6 @@ namespace _9567A_V00___PI.Utilidades
             public bool Reserved6;
             public bool Reserved7;
 
-        }
-
-        public struct controleEnsaque
-        {
-            public bool IniciaEnsaque;                       //Inicia o ensaque
-            public bool TerminaEnsaque;                      //Termina o ensaque
-            public bool Saco_Atual_Finalizado;               //Ensaque Concluido
-            public bool Saco_Atual_Dosando;                  //Ensaque Concluido
-            public bool Supervisorio_Salvou_Saco_Atual;      //Supervisório salvou os dados do saco no banco de dados
-            public bool HabilitaFinalizarEnsaque;            //Habilita finalizar ensaque
-            public bool Habilita_Iniciar_Ensaque;
-            public bool Reserva_4;
-            public bool Reserva_5;
-            public bool Reserva_6;
-            public bool Reserva_7;
-            public bool Reserva_8;
-            public bool Reserva_9;
-            public bool Reserva_10;
-            public bool Reserva_11;
-            public bool Reserva_12;
-            public bool Reserva_13;
-            public bool Reserva_14;
-            public bool Reserva_15;
-            public bool Reserva_16;
-            public bool Reserva_17;
-            public bool Reserva_18;
-            public bool Reserva_19;
-            public bool Reserva_20;
-            public bool Reserva_21;
-            public bool Reserva_22;
-            public bool Reserva_23;
-            public bool Reserva_24;
-            public bool Reserva_25;
-            public bool Reserva_26;
-            public bool Reserva_27;
-            public bool Reserva_28;
-
-            public float pesoDesejado;                   //Peso desejado por Saco
-            public float pesoSacoAtual;                  //Peso ensacado no saco 
-
-
-        }
-
-        public struct Ensaque 
-        {
-            public controleEnsaque controleEnsaque;
-            public int IdProducao;
-        
         }
 
         public struct IndicadorPesagem
@@ -238,106 +62,22 @@ namespace _9567A_V00___PI.Utilidades
 
         }
 
-        public struct Complemento
+        public struct ControleProducao
         {
-            public short Quantidade_Itens;                          //Qtd itens dosagem Manual
-            public short Item_Atual;                                //Item atual
-            public float Quantidade_Dosada_Item_Atual;              //Qtd dosada item Atual
-            public float Quantidade_Total_Desejada;                 //Qtd total desejada
-            public bool Habilitado_Inicio_Dosagem;                  //Habilita Iniciar a dosagem
-            public bool Botao_Inicio_Fim_Dosagem_IHM;               //BT Inicia ou finaliza Dosagem
-            public bool Item_Atual_Iniciado_Dosagem;                //Iniciado Dosagem item atual
-            public bool Item_Atual_Finalizado_Dosagem;              //Finalizado Dosagem item atual
-            public bool Finalizado_Dosagem_Complementos;            //Finalizado a dosagem de todos complementos
-            public bool Supervisao_Salvou_Dados_Dosado_Item_Atual;  //Supervisao salvou os dados de dosagem do item atual
-            public bool Reserva_1;                                  //Reserva
-            public bool Reserva_2;                                  //Reserva
-        }
+            public int Producao0;  //DOSAGEM
+            public int Producao1;  //MISTURA
+            public int Producao2;  //EXPEDIÇÃO
+            public int Producao3;  //FINALIZOU
 
-        public struct SlotBatelada
-        {
-            public int Tempo_Pre_Mistura;                    //Tempo de pré Mistura
-            public int Tempo_Pos_Mistura;                    //Tempo de pós Mistura
-            public float Peso_Total_Batelada_Desejado;       //Peso total desejado da batelada
-            public float Dosagem_Materia_Prima_Silo_1;       //Dosagem Materia Prima no Silo 1
-            public float Dosagem_Materia_Prima_Silo_2;       //Dosagem Materia Prima no Silo 2
-            public float Dosado_Materia_Prima_Silo_1;        //Dosado Materia Prima no Silo 1
-            public float Dosado_Materia_Prima_Silo_2;        //Dosado Materia Prima no Silo 2
-
-            public Complemento Complemento_Pre;              //Complemento ou Matéria Prima dosada manualmente na Balança
-            public Complemento Complemento_Pos;              //Complemento ou Matéria Prima dosada manualmente na Pós Mistura
-
-            public int TempoAtualDesdeIniciado;              //Tempo total desde iniciado a produção da batelada
-            public int TempoAtualPasso;                      //Tempo atual de cada passo, como tempo em dosagem manual, tempo em pré mistura...
-
-            public int TempoRestantePreMistura;              //Tempo restante da pré mistura
-            public int TempoRestantePosMistura;              //Tempo restante da pos mistura
-            public short Quantidade_Total_Produtos;          //Quantidade Total de produtos na batelada
-            public short Produto_Atual_Em_Producao;          //Qual produto da lista de produtos esta em produção 
-            public short Status_Produto_Atual_Em_Producao;   //Status do produto atual que esta em produção
-
-            public short Status_Batelada;                      //Status Batelada 
-            public short NumeroBatelada;                       //O numero da batelada em execução no Slot Solicitado
-
-            // 0 - Sem batelada
-            // 1 - Dosagem Matéria Prima Manual
-            // 2 - Dosagem Matéria Prima Automática
-            // 3 - Transporte Para Pré Mistura
-            // 4 - Pré Mistura
-            // 5 - Moagem e Transporte Pós Mistura
-            // 6 - Pós Mistura
-            // 7 - Transporte Para Produto Acabado
 
             //Palavra de commando
-            public bool Solicita_Nova_Batelada;                                   //Slot Disponível para iniciar nova Batelada
-            public bool Iniciou_Producao_No_Processo;                             //Iniciou batelada
-            public bool Finalizou_Producao_No_Processo;                           //Finalizou batelada
-            public bool Producao_Carregou_Dados_Iniciais_Batelada_No_Processo;    //Carregou os dados iniciais no processo para iniciar a dosagem manual e a dosagem automática.
-            public bool Liberado_Nova_Batelada;                                   //Slot Disponível para iniciar nova Batelada
-            public bool Supervisao_Carregou_Dados_Batelada;                       //Quando o Supervisorio carregou os dados da nova batelada
-            public bool Finalizou_Dosagem_Automatica_Silo_1;                      //Quando o CLP finalizou de dosar automaticamente o silo 1
-            public bool Finalizou_Dosagem_Automatica_Silo_2;                      //Quando o CLP finalizou de dosar automaticamente o silo 2
-            public bool Supervisorio_Salvou_Dados_Silo_1;                         //Quando Supervisorio salvou os dados do silo 1
-            public bool Supervisorio_Salvou_Dados_Silo_2;                         //Quando Supervisorio salvou os dados do silo 2
-            public bool Dosar_Primeiro_Silo_2;
-            public bool Reserva_8;
-            public bool Reserva_9;
-            public bool Reserva_10;
-            public bool Reserva_11;
-            public bool Reserva_12;
-            public bool Reserva_13;
-            public bool Reserva_14;
-            public bool Reserva_15;
-            public bool Reserva_16;
-            public bool Reserva_17;
-            public bool Reserva_18;
-            public bool Reserva_19;
-            public bool Reserva_20;
-            public bool Reserva_21;
-            public bool Reserva_22;
-            public bool Reserva_23;
-            public bool Reserva_24;
-            public bool Reserva_25;
-            public bool Reserva_26;
-            public bool Reserva_27;
-            public bool Reserva_28;
-
-
-        }
-
-        public struct ControleExecucaoProducao
-        {
-            public SlotBatelada Slot_1;
-            public SlotBatelada Slot_2;
-            public SlotBatelada Slot_3;
-
-            public short Bateladas_Iniciadas;
-            public short Bateladas_Finalizadas;
-
-            //Palavra de commando
-            public bool Iniciar_Producao;                    //Inica Produção
-            public bool Habilitado_Iniciar_Nova_Producao;
-            public bool RetiraProducao;
+            public bool Dosando;                    
+            public bool Estabilizado;
+            public bool Manual_Automatico;
+            public bool Reserva;
+            public bool Solicita_Descarga;
+            public bool Troca_Produto;
+            public bool Reserva_1;
             public bool Reserva_2;
             public bool Reserva_3;
             public bool Reserva_4;
@@ -347,28 +87,19 @@ namespace _9567A_V00___PI.Utilidades
             public bool Reserva_8;
             public bool Reserva_9;
             public bool Reserva_10;
-            public bool Reserva_11;
-            public bool Reserva_12;
-            public bool Reserva_13;
-            public bool Reserva_14;
-            public bool Reserva_15;
-            public bool Reserva_16;
-            public bool Reserva_17;
-            public bool Reserva_18;
-            public bool Reserva_19;
-            public bool Reserva_20;
-            public bool Reserva_21;
-            public bool Reserva_22;
-            public bool Reserva_23;
-            public bool Reserva_24;
-            public bool Reserva_25;
-            public bool Reserva_26;
-            public bool Reserva_27;
-            public bool Reserva_28;
-            public bool Reserva_29;
-            public bool Reserva_30;
 
-            
+            public short StatusDosagem;
+            public short StatusMistura;
+            public short StatusExpedicao;
+            public float PesoDosar;
+            public float PesoTolerancia;
+            public int TempoMistura;
+            public int TempoEstabilizacao;
+            public int TempoPulmaoVazio;
+            public float Peso_Total_Produzindo;
+            public float Peso_Parcial_Produzindo;
+            public int TempoLimpezaDosagem;
+            public int TempoLimpezaMisturador;
         }
 
         public struct type_SS
@@ -864,7 +595,7 @@ namespace _9567A_V00___PI.Utilidades
 
         //public static Telas_Fluxo.manutencao manutencao = new Telas_Fluxo.manutencao();
 
-        //public static Telas_Fluxo.configuracoes configuracoes = new Telas_Fluxo.configuracoes();
+        public static Telas_Fluxo.configuracoes configuracoes = new Telas_Fluxo.configuracoes();
 
         public static Telas_Fluxo.producao producao = new Telas_Fluxo.producao();
 
@@ -881,10 +612,10 @@ namespace _9567A_V00___PI.Utilidades
         //Cria comunicação com CLP
         public static Comunicacao.CallCommunicationPLC CommunicationPLC = new Comunicacao.CallCommunicationPLC(0, 10);
 
-        private static string IP_Plc = "172.16.1.112";
+        private static string IP_Plc = "192.168.1.100";
 
         private static int Rack_PLC = 0;
-        private static int Slot_PLC = 1;
+        private static int Slot_PLC = 2;
 
         public static string IP_Plc_GS { get => IP_Plc; set => IP_Plc = value; }
         public static int Rack_PLC_GS { get => Rack_PLC; set => Rack_PLC = value; }
@@ -989,15 +720,9 @@ namespace _9567A_V00___PI.Utilidades
 
         public static List<Producao> PesquisaProducao = new List<Producao>();
 
-        public static EspecificacoesEquipamentos ValoresEspecificacoesEquipamentos = new EspecificacoesEquipamentos();
-
-        public static AuxiliaresProcesso auxiliaresProcesso = new AuxiliaresProcesso();
+        public static ControleProducao controleProducao = new ControleProducao();
 
         public static IndicadorPesagem indicadorPesagem = new IndicadorPesagem();
-
-        public static PID controlePID = new PID();
-
-        public static Niveis niveis = new Niveis();
 
         #region Contole teclado
 
@@ -1155,6 +880,47 @@ namespace _9567A_V00___PI.Utilidades
 
         private static bool TickTack;
         public static bool TickTack_GS { get => TickTack; set => TickTack = value; }
+
+        public static bool ValoresPreenchidos()
+        {
+            if (controleProducao.TempoLimpezaDosagem != 0)
+            {
+                if (controleProducao.TempoLimpezaMisturador != 0)
+                {
+                    if (controleProducao.TempoEstabilizacao != 0)
+                    {
+                        if (controleProducao.TempoMistura != 0)
+                        {
+                            if (controleProducao.TempoPulmaoVazio != 0)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
     }
 
@@ -1377,52 +1143,6 @@ namespace _9567A_V00___PI.Utilidades
 
     }
 
-    public class EspecificacoesEquipamentos
-    {
-
-        public float PesoMaximoPermitido { get; set; } //Peso máximo permitido na balança
-
-        public Int32 TempoLimpezaDosagem { get; set; }
-
-        public Int32 TempoLimpezaMistura { get; set; }
-
-        public Int32 TempoLimpezaSiloPulmao { get; set; }
-
-        public bool ValoresPreenchidos()
-        {
-            if (PesoMaximoPermitido != 0)
-            {
-                if (TempoLimpezaDosagem != 0)
-                {
-                    if (TempoLimpezaMistura != 0)
-                    {
-                        if (TempoLimpezaSiloPulmao != 0)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-    }
-
     public class Produto
     {
         public int id { get; set; }
@@ -1461,7 +1181,6 @@ namespace _9567A_V00___PI.Utilidades
         public List<ProdutoReceita> listProdutos = new List<ProdutoReceita>();
 
     }
-
 
     public class Producao
     {

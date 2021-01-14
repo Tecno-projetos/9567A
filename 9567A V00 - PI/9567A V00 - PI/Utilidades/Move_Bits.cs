@@ -868,295 +868,58 @@ namespace _9567A_V00___PI.Utilidades
             return Command.DWord;
         }
 
-        //Command Complemento
-        //=====================================================================================================================================
-        public static VariaveisGlobais.Complemento ByteToComplementoBatelada(byte _byte, VariaveisGlobais.Complemento complemento)
-        {
-            bool[] bits = new bool[8];
-
-            Conversions.Byte_To_Bit(_byte, ref bits);
-
-            complemento.Habilitado_Inicio_Dosagem = bits[0];
-            complemento.Botao_Inicio_Fim_Dosagem_IHM = bits[1];
-            complemento.Item_Atual_Iniciado_Dosagem = bits[2];
-            complemento.Item_Atual_Finalizado_Dosagem = bits[3];
-            complemento.Finalizado_Dosagem_Complementos = bits[4];
-            complemento.Supervisao_Salvou_Dados_Dosado_Item_Atual = bits[5];
-            complemento.Reserva_1 = bits[6];
-            complemento.Reserva_2 = bits[7];
-
-            return complemento;
-        }
-
-
-        public static byte ComplementoToByteBatelada(VariaveisGlobais.Complemento complemento)
-        {
-            bool[] bits = new bool[8];
-
-            bits[0] = complemento.Habilitado_Inicio_Dosagem;
-            bits[1] = complemento.Botao_Inicio_Fim_Dosagem_IHM;
-            bits[2] = complemento.Item_Atual_Iniciado_Dosagem;
-            bits[3] = complemento.Item_Atual_Finalizado_Dosagem;
-            bits[4] = complemento.Finalizado_Dosagem_Complementos;
-            bits[5] = complemento.Supervisao_Salvou_Dados_Dosado_Item_Atual;
-            bits[6] = complemento.Reserva_1;
-            bits[7] = complemento.Reserva_2;
-
-            return Conversions.Bit_To_Byte(ref bits);
-        }
-
-
-        //Command Slot Produção
-        //=====================================================================================================================================
-        public static VariaveisGlobais.SlotBatelada DwordToSlotBatelada(UInt32 DWord, VariaveisGlobais.SlotBatelada slot)
-        {
-            bool[] bits = new bool[32];
-
-            Conversions.Dword_To_Bit(DWord, ref bits, true);
-
-            slot.Solicita_Nova_Batelada = bits[0];
-            slot.Iniciou_Producao_No_Processo = bits[1];
-            slot.Finalizou_Producao_No_Processo = bits[2];
-            slot.Producao_Carregou_Dados_Iniciais_Batelada_No_Processo = bits[3];
-            slot.Liberado_Nova_Batelada = bits[4];
-            slot.Supervisao_Carregou_Dados_Batelada = bits[5];
-            slot.Finalizou_Dosagem_Automatica_Silo_1 = bits[6];
-            slot.Finalizou_Dosagem_Automatica_Silo_2 = bits[7];
-            slot.Supervisorio_Salvou_Dados_Silo_1 = bits[8];
-            slot.Supervisorio_Salvou_Dados_Silo_2 = bits[9];
-            slot.Dosar_Primeiro_Silo_2 = bits[10];
-            slot.Reserva_8 = bits[11];
-            slot.Reserva_9 = bits[12];
-            slot.Reserva_10 = bits[13];
-            slot.Reserva_11 = bits[14];
-            slot.Reserva_12 = bits[15];
-            slot.Reserva_13 = bits[16];
-            slot.Reserva_14 = bits[17];
-            slot.Reserva_15 = bits[18];
-            slot.Reserva_16 = bits[19];
-            slot.Reserva_17 = bits[20];
-            slot.Reserva_18 = bits[21];
-            slot.Reserva_19 = bits[22];
-            slot.Reserva_20 = bits[23];
-            slot.Reserva_21 = bits[24];
-            slot.Reserva_22 = bits[25];
-            slot.Reserva_23 = bits[26];
-            slot.Reserva_24 = bits[27];
-            slot.Reserva_25 = bits[28];
-            slot.Reserva_26 = bits[29];
-            slot.Reserva_27 = bits[30];
-            slot.Reserva_28 = bits[31];
-
-            return slot;
-        }
-
-        public static UInt32 SlotToDwordBatelada(VariaveisGlobais.SlotBatelada slot)
-        {
-            bool[] bits = new bool[32];
-
-            bits[0] = slot.Solicita_Nova_Batelada;
-            bits[1] = slot.Iniciou_Producao_No_Processo;
-            bits[2] = slot.Finalizou_Producao_No_Processo;
-            bits[3] = slot.Producao_Carregou_Dados_Iniciais_Batelada_No_Processo;
-            bits[4] = slot.Liberado_Nova_Batelada;
-            bits[5] = slot.Supervisao_Carregou_Dados_Batelada;
-            bits[6] = slot.Finalizou_Dosagem_Automatica_Silo_1;
-            bits[7] = slot.Finalizou_Dosagem_Automatica_Silo_2;
-            bits[8] = slot.Supervisorio_Salvou_Dados_Silo_1;
-            bits[9] = slot.Supervisorio_Salvou_Dados_Silo_2;
-            bits[10] = slot.Dosar_Primeiro_Silo_2;
-            bits[11] = slot.Reserva_8;
-            bits[12] = slot.Reserva_9;
-            bits[13] = slot.Reserva_10;
-            bits[14] = slot.Reserva_11;
-            bits[15] = slot.Reserva_12;
-            bits[16] = slot.Reserva_13;
-            bits[17] = slot.Reserva_14;
-            bits[18] = slot.Reserva_15;
-            bits[19] = slot.Reserva_16;
-            bits[20] = slot.Reserva_17;
-            bits[21] = slot.Reserva_18;
-            bits[22] = slot.Reserva_19;
-            bits[23] = slot.Reserva_20;
-            bits[24] = slot.Reserva_21;
-            bits[25] = slot.Reserva_22;
-            bits[26] = slot.Reserva_23;
-            bits[27] = slot.Reserva_24;
-            bits[28] = slot.Reserva_25;
-            bits[29] = slot.Reserva_26;
-            bits[30] = slot.Reserva_27;
-            bits[31] = slot.Reserva_28;
-
-            return Conversions.Bit_To_Dword(ref bits, true);
-        }
 
 
         //Commando Producao
         //=====================================================================================================================================
-        public static VariaveisGlobais.ControleExecucaoProducao DwordToControleExecucaoProducao(UInt32 DWord, VariaveisGlobais.ControleExecucaoProducao execucaoProducao)
+        public static VariaveisGlobais.ControleProducao WordToControleProducao(UInt16 Word, VariaveisGlobais.ControleProducao execucaoProducao)
         {
-            bool[] bits = new bool[32];
+            bool[] bits = new bool[16];
 
-            Conversions.Dword_To_Bit(DWord, ref bits, true);
+            Conversions.Word_To_Bit(Word, ref bits, true);
 
-            execucaoProducao.Iniciar_Producao = bits[0];
-            execucaoProducao.Habilitado_Iniciar_Nova_Producao = bits[1];
-            execucaoProducao.RetiraProducao = bits[2];
-            execucaoProducao.Reserva_2 = bits[3];
-            execucaoProducao.Reserva_3 = bits[4];
-            execucaoProducao.Reserva_4 = bits[5];
-            execucaoProducao.Reserva_5 = bits[6];
-            execucaoProducao.Reserva_6 = bits[7];
-            execucaoProducao.Reserva_7 = bits[8];
-            execucaoProducao.Reserva_8 = bits[9];
-            execucaoProducao.Reserva_9 = bits[10];
-            execucaoProducao.Reserva_10 = bits[11];
-            execucaoProducao.Reserva_11 = bits[12];
-            execucaoProducao.Reserva_12 = bits[13];
-            execucaoProducao.Reserva_13 = bits[14];
-            execucaoProducao.Reserva_14 = bits[15];
-            execucaoProducao.Reserva_15 = bits[16];
-            execucaoProducao.Reserva_16 = bits[17];
-            execucaoProducao.Reserva_17 = bits[18];
-            execucaoProducao.Reserva_18 = bits[19];
-            execucaoProducao.Reserva_19 = bits[20];
-            execucaoProducao.Reserva_20 = bits[21];
-            execucaoProducao.Reserva_21 = bits[22];
-            execucaoProducao.Reserva_22 = bits[23];
-            execucaoProducao.Reserva_23 = bits[24];
-            execucaoProducao.Reserva_24 = bits[25];
-            execucaoProducao.Reserva_25 = bits[26];
-            execucaoProducao.Reserva_26 = bits[27];
-            execucaoProducao.Reserva_27 = bits[28];
-            execucaoProducao.Reserva_28 = bits[29];
-            execucaoProducao.Reserva_29 = bits[30];
-            execucaoProducao.Reserva_30 = bits[31];
+            execucaoProducao.Dosando = bits[0];
+            execucaoProducao.Estabilizado = bits[1];
+            execucaoProducao.Manual_Automatico = bits[2];
+            execucaoProducao.Reserva = bits[3];
+            execucaoProducao.Solicita_Descarga = bits[4];
+            execucaoProducao.Troca_Produto = bits[5];
+            execucaoProducao.Reserva_1 = bits[6];
+            execucaoProducao.Reserva_2 = bits[7];
+            execucaoProducao.Reserva_3 = bits[8];
+            execucaoProducao.Reserva_4 = bits[9];
+            execucaoProducao.Reserva_5 = bits[10];
+            execucaoProducao.Reserva_6 = bits[11];
+            execucaoProducao.Reserva_7 = bits[12];
+            execucaoProducao.Reserva_8 = bits[13];
+            execucaoProducao.Reserva_9 = bits[14];
+            execucaoProducao.Reserva_10 = bits[15];
 
             return execucaoProducao;
         }
 
-        public static UInt32 ControleExecucaoProducaoToDword(VariaveisGlobais.ControleExecucaoProducao execucaoProducao)
+        public static UInt16 ControleProducaoToWord(VariaveisGlobais.ControleProducao execucaoProducao)
         {
-            bool[] bits = new bool[32];
+            bool[] bits = new bool[16];
 
-            bits[0] = execucaoProducao.Iniciar_Producao;
-            bits[1] = execucaoProducao.Habilitado_Iniciar_Nova_Producao;
-            bits[2] = execucaoProducao.RetiraProducao;
-            bits[3] = execucaoProducao.Reserva_2;
-            bits[4] = execucaoProducao.Reserva_3;
-            bits[5] = execucaoProducao.Reserva_4;
-            bits[6] = execucaoProducao.Reserva_5;
-            bits[7] = execucaoProducao.Reserva_6;
-            bits[8] = execucaoProducao.Reserva_7;
-            bits[9] = execucaoProducao.Reserva_8;
-            bits[10] = execucaoProducao.Reserva_9;
-            bits[11] = execucaoProducao.Reserva_10;
-            bits[12] = execucaoProducao.Reserva_11;
-            bits[13] = execucaoProducao.Reserva_12;
-            bits[14] = execucaoProducao.Reserva_13;
-            bits[15] = execucaoProducao.Reserva_14;
-            bits[16] = execucaoProducao.Reserva_15;
-            bits[17] = execucaoProducao.Reserva_16;
-            bits[18] = execucaoProducao.Reserva_17;
-            bits[19] = execucaoProducao.Reserva_18;
-            bits[20] = execucaoProducao.Reserva_19;
-            bits[21] = execucaoProducao.Reserva_20;
-            bits[22] = execucaoProducao.Reserva_21;
-            bits[23] = execucaoProducao.Reserva_22;
-            bits[24] = execucaoProducao.Reserva_23;
-            bits[25] = execucaoProducao.Reserva_24;
-            bits[26] = execucaoProducao.Reserva_25;
-            bits[27] = execucaoProducao.Reserva_26;
-            bits[28] = execucaoProducao.Reserva_27;
-            bits[29] = execucaoProducao.Reserva_28;
-            bits[30] = execucaoProducao.Reserva_29;
-            bits[31] = execucaoProducao.Reserva_30;
+            bits[0] = execucaoProducao.Dosando;
+            bits[1] = execucaoProducao.Estabilizado;
+            bits[2] = execucaoProducao.Manual_Automatico;
+            bits[3] = execucaoProducao.Reserva;
+            bits[4] = execucaoProducao.Solicita_Descarga;
+            bits[5] = execucaoProducao.Troca_Produto;
+            bits[6] = execucaoProducao.Reserva_1;
+            bits[7] = execucaoProducao.Reserva_2;
+            bits[8] = execucaoProducao.Reserva_3;
+            bits[9] = execucaoProducao.Reserva_4;
+            bits[10] = execucaoProducao.Reserva_5;
+            bits[11] = execucaoProducao.Reserva_6;
+            bits[12] = execucaoProducao.Reserva_7;
+            bits[13] = execucaoProducao.Reserva_8;
+            bits[14] = execucaoProducao.Reserva_9;
+            bits[15] = execucaoProducao.Reserva_10;
 
-            return Conversions.Bit_To_Dword(ref bits, true);
-        }
-
-        //Command Ensaque
-        //=====================================================================================================================================
-        public static VariaveisGlobais.controleEnsaque DwordTocontroleEnsaque(UInt32 DWord, VariaveisGlobais.controleEnsaque controleEnsaque)
-        {
-            bool[] bits = new bool[32];
-
-            Conversions.Dword_To_Bit(DWord, ref bits, true);
-
-            controleEnsaque.IniciaEnsaque = bits[0];
-            controleEnsaque.TerminaEnsaque = bits[1];
-            controleEnsaque.Saco_Atual_Finalizado = bits[2];
-            controleEnsaque.Saco_Atual_Dosando = bits[3];
-            controleEnsaque.Supervisorio_Salvou_Saco_Atual = bits[4];
-            controleEnsaque.HabilitaFinalizarEnsaque = bits[5];
-            controleEnsaque.Habilita_Iniciar_Ensaque = bits[6];
-            controleEnsaque.Reserva_4 = bits[7];
-            controleEnsaque.Reserva_5 = bits[8];
-            controleEnsaque.Reserva_6 = bits[9];
-            controleEnsaque.Reserva_7 = bits[10];
-            controleEnsaque.Reserva_8 = bits[11];
-            controleEnsaque.Reserva_9 = bits[12];
-            controleEnsaque.Reserva_10 = bits[13];
-            controleEnsaque.Reserva_11 = bits[14];
-            controleEnsaque.Reserva_12 = bits[15];
-            controleEnsaque.Reserva_13 = bits[16];
-            controleEnsaque.Reserva_14 = bits[17];
-            controleEnsaque.Reserva_15 = bits[18];
-            controleEnsaque.Reserva_16 = bits[19];
-            controleEnsaque.Reserva_17 = bits[20];
-            controleEnsaque.Reserva_18 = bits[21];
-            controleEnsaque.Reserva_19 = bits[22];
-            controleEnsaque.Reserva_20 = bits[23];
-            controleEnsaque.Reserva_21 = bits[24];
-            controleEnsaque.Reserva_22 = bits[25];
-            controleEnsaque.Reserva_23 = bits[26];
-            controleEnsaque.Reserva_24 = bits[27];
-            controleEnsaque.Reserva_25 = bits[28];
-            controleEnsaque.Reserva_26 = bits[29];
-            controleEnsaque.Reserva_27 = bits[30];
-            controleEnsaque.Reserva_28 = bits[31];
-
-            return controleEnsaque;
-        }
-
-        public static UInt32 EnsaqueToDwordControleEnsaque(VariaveisGlobais.controleEnsaque controleEnsaque)
-        {
-            bool[] bits = new bool[32];
-
-            bits[0] = controleEnsaque.IniciaEnsaque;
-            bits[1] = controleEnsaque.TerminaEnsaque;
-            bits[2] = controleEnsaque.Saco_Atual_Finalizado;
-            bits[3] = controleEnsaque.Saco_Atual_Dosando;
-            bits[4] = controleEnsaque.Supervisorio_Salvou_Saco_Atual;
-            bits[5] = controleEnsaque.HabilitaFinalizarEnsaque;
-            bits[6] = controleEnsaque.Habilita_Iniciar_Ensaque;
-            bits[7] = controleEnsaque.Reserva_4;
-            bits[8] = controleEnsaque.Reserva_5;
-            bits[9] = controleEnsaque.Reserva_6;
-            bits[10] = controleEnsaque.Reserva_7;
-            bits[11] = controleEnsaque.Reserva_8;
-            bits[12] = controleEnsaque.Reserva_9;
-            bits[13] = controleEnsaque.Reserva_10;
-            bits[14] = controleEnsaque.Reserva_11;
-            bits[15] = controleEnsaque.Reserva_12;
-            bits[16] = controleEnsaque.Reserva_13;
-            bits[17] = controleEnsaque.Reserva_14;
-            bits[18] = controleEnsaque.Reserva_15;
-            bits[19] = controleEnsaque.Reserva_16;
-            bits[20] = controleEnsaque.Reserva_17;
-            bits[21] = controleEnsaque.Reserva_18;
-            bits[22] = controleEnsaque.Reserva_19;
-            bits[23] = controleEnsaque.Reserva_20;
-            bits[24] = controleEnsaque.Reserva_21;
-            bits[25] = controleEnsaque.Reserva_22;
-            bits[26] = controleEnsaque.Reserva_23;
-            bits[27] = controleEnsaque.Reserva_24;
-            bits[28] = controleEnsaque.Reserva_25;
-            bits[29] = controleEnsaque.Reserva_26;
-            bits[30] = controleEnsaque.Reserva_27;
-            bits[31] = controleEnsaque.Reserva_28;
-
-            return Conversions.Bit_To_Dword(ref bits, true);
+            return Conversions.Bit_To_Word(ref bits, true);
         }
 
         //Command Indicador de Pesagem
@@ -1249,175 +1012,6 @@ namespace _9567A_V00___PI.Utilidades
 
             return Conversions.Bit_To_Word(ref bits, true);
         }
-
-
-        //Command Auxiliares Processo
-        //=====================================================================================================================================
-        public static VariaveisGlobais.AuxiliaresProcesso DwordTocontroleAuxiliaresProcesso(UInt32 DWord, VariaveisGlobais.AuxiliaresProcesso auxiliaresProcesso )
-        {
-            bool[] bits = new bool[32];
-
-            Conversions.Dword_To_Bit(DWord, ref bits, true);
-
-            auxiliaresProcesso.Set_Automatico_Equipamentos = bits[0];
-            auxiliaresProcesso.Habilita_Finalizar_Dosagem_E_Iniciar_Transporte = bits[1];
-            auxiliaresProcesso.Seta_Finalizar_Dosagem_E_Inicia_Transporte = bits[2];
-            auxiliaresProcesso.Reserva_3 = bits[3];
-            auxiliaresProcesso.Reserva_4 = bits[4];
-            auxiliaresProcesso.Reserva_5 = bits[5];
-            auxiliaresProcesso.Reserva_6 = bits[6];
-            auxiliaresProcesso.Reserva_7 = bits[7];
-            auxiliaresProcesso.Reserva_8 = bits[8];
-            auxiliaresProcesso.Reserva_9 = bits[9];
-            auxiliaresProcesso.Reserva_10 = bits[10];
-            auxiliaresProcesso.Reserva_11 = bits[11];
-            auxiliaresProcesso.Reserva_12 = bits[12];
-            auxiliaresProcesso.Reserva_13 = bits[13];
-            auxiliaresProcesso.Reserva_14 = bits[14];
-            auxiliaresProcesso.Reserva_15 = bits[15];
-            auxiliaresProcesso.Reserva_16 = bits[16];
-            auxiliaresProcesso.Reserva_17 = bits[17];
-            auxiliaresProcesso.Reserva_18 = bits[18];
-            auxiliaresProcesso.Reserva_19 = bits[19];
-            auxiliaresProcesso.Reserva_20 = bits[20];
-            auxiliaresProcesso.Reserva_21 = bits[21];
-            auxiliaresProcesso.Reserva_22 = bits[22];
-            auxiliaresProcesso.Reserva_23 = bits[23];
-            auxiliaresProcesso.Reserva_24 = bits[24];
-            auxiliaresProcesso.Reserva_25 = bits[25];
-            auxiliaresProcesso.Reserva_26 = bits[26];
-            auxiliaresProcesso.Reserva_27 = bits[27];
-            auxiliaresProcesso.Reserva_28 = bits[28];
-            auxiliaresProcesso.Reserva_29 = bits[29];
-            auxiliaresProcesso.Reserva_30 = bits[30];
-            auxiliaresProcesso.Reserva_31 = bits[31];
-
-            return auxiliaresProcesso;
-        }
-
-        public static UInt32 AuxiliaresProcessoToDword(VariaveisGlobais.AuxiliaresProcesso auxiliaresProcesso)
-        {
-            bool[] bits = new bool[32];
-
-            bits[0] = auxiliaresProcesso.Set_Automatico_Equipamentos;
-            bits[1] = auxiliaresProcesso.Habilita_Finalizar_Dosagem_E_Iniciar_Transporte;
-            bits[2] = auxiliaresProcesso.Seta_Finalizar_Dosagem_E_Inicia_Transporte;
-            bits[3] = auxiliaresProcesso.Reserva_3;
-            bits[4] = auxiliaresProcesso.Reserva_4;
-            bits[5] = auxiliaresProcesso.Reserva_5;
-            bits[6] = auxiliaresProcesso.Reserva_6;
-            bits[7] = auxiliaresProcesso.Reserva_7;
-            bits[8] = auxiliaresProcesso.Reserva_8;
-            bits[9] = auxiliaresProcesso.Reserva_9;
-            bits[10] = auxiliaresProcesso.Reserva_10;
-            bits[11] = auxiliaresProcesso.Reserva_11;
-            bits[12] = auxiliaresProcesso.Reserva_12;
-            bits[13] = auxiliaresProcesso.Reserva_13;
-            bits[14] = auxiliaresProcesso.Reserva_14;
-            bits[15] = auxiliaresProcesso.Reserva_15;
-            bits[16] = auxiliaresProcesso.Reserva_16;
-            bits[17] = auxiliaresProcesso.Reserva_17;
-            bits[18] = auxiliaresProcesso.Reserva_18;
-            bits[19] = auxiliaresProcesso.Reserva_19;
-            bits[20] = auxiliaresProcesso.Reserva_20;
-            bits[21] = auxiliaresProcesso.Reserva_21;
-            bits[22] = auxiliaresProcesso.Reserva_22;
-            bits[23] = auxiliaresProcesso.Reserva_23;
-            bits[24] = auxiliaresProcesso.Reserva_24;
-            bits[25] = auxiliaresProcesso.Reserva_25;
-            bits[26] = auxiliaresProcesso.Reserva_26;
-            bits[27] = auxiliaresProcesso.Reserva_27;
-            bits[28] = auxiliaresProcesso.Reserva_28;
-            bits[29] = auxiliaresProcesso.Reserva_29;
-            bits[30] = auxiliaresProcesso.Reserva_30;
-            bits[31] = auxiliaresProcesso.Reserva_31;
-
-            return Conversions.Bit_To_Dword(ref bits, true);
-        }
-
-
-        //Command PID
-        //=====================================================================================================================================
-
-        public static VariaveisGlobais.PID ByteToPID(byte _byte, VariaveisGlobais.PID PID)
-        {
-            bool[] bits = new bool[8];
-
-            Conversions.Byte_To_Bit(_byte, ref bits);
-
-            PID.Habilita_PID = bits[0];
-            PID.Reserva = bits[1];
-            PID.Reserva_1 = bits[2];
-            PID.Reserva_2 = bits[3];
-            PID.Reserva_3 = bits[4];
-            PID.Reserva_4 = bits[5];
-            PID.Reserva_5 = bits[6];
-            PID.Reserva_6 = bits[7];
-
-            return PID;
-        }
-
-        public static byte PIDToByte(VariaveisGlobais.PID PID)
-        {
-            bool[] bits = new bool[8];
-
-            bits[0] = PID.Habilita_PID;
-            bits[1] = PID.Reserva;
-            bits[2] = PID.Reserva_1;
-            bits[3] = PID.Reserva_2;
-            bits[4] = PID.Reserva_3;
-            bits[5] = PID.Reserva_4;
-            bits[6] = PID.Reserva_5;
-            bits[7] = PID.Reserva_6;
-
-            return Conversions.Bit_To_Byte(ref bits);
-        }
-
-
-        //Command Niveis
-        //=====================================================================================================================================
-        public static Utilidades.VariaveisGlobais.Niveis Dword_TO_NIveis(UInt32 DWord, Utilidades.VariaveisGlobais.Niveis Command)
-        {
-            bool[] bits = new bool[32];
-
-            Conversions.Dword_To_Bit(DWord, ref bits, true);
-
-            Command.Superior_Silo_1 = bits[0];
-            Command.Superior_Silo_2 = bits[1];
-            Command.Superior_Silo_Exp = bits[2];
-            Command.Inferior_Silo_1 = bits[3];
-            Command.Inferior_Silo_2 = bits[4];
-            Command.Inferior_Silo_Exp = bits[5];
-            Command.Inferior_Pre_Misturador = bits[6];
-            Command.Inferior_Pos_Misturador = bits[7];
-            Command.Reserva_2 = bits[8];
-            Command.Reserva_3 = bits[9];
-            Command.Reserva_4 = bits[10];
-            Command.Reserva_5 = bits[11];
-            Command.Reserva_6 = bits[12];
-            Command.Reserva_7 = bits[13];
-            Command.Reserva_8 = bits[14];
-            Command.Reserva_9 = bits[15];
-            Command.Reserva_10 = bits[16];
-            Command.Reserva_11 = bits[17];
-            Command.Reserva_12 = bits[18];
-            Command.Reserva_13 = bits[19];
-            Command.Reserva_14 = bits[20];
-            Command.Reserva_15 = bits[21];
-            Command.Reserva_16= bits[22];
-            Command.Reserva_17 = bits[23];
-            Command.Reserva_18 = bits[24];
-            Command.Reserva_19= bits[25];
-            Command.Reserva_20 = bits[26];
-            Command.Reserva_21 = bits[27];
-            Command.Reserva_22 = bits[28];
-            Command.Reserva_23 = bits[29];
-            Command.Reserva_24 = bits[30];
-            Command.Reserva_25 = bits[31];
-
-            return Command;
-        }
-
 
 
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _9567A_V00___PI.Utilidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace _9567A_V00___PI.Telas_Fluxo.Configuracoes
     /// </summary>
     public partial class Especificacoes : UserControl
     {
+        private messageBox inputDialog;
+
         public Especificacoes()
         {
             InitializeComponent();
@@ -27,7 +30,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Configuracoes
 
         private void btSalvarInformacoes_Click(object sender, RoutedEventArgs e)
         {
-            EscritaInformacoes(-1);
+            EscritaInformacoes(1);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -66,69 +69,39 @@ namespace _9567A_V00___PI.Telas_Fluxo.Configuracoes
 
         private void LeituraInformacoes()
         {
-            //readVariablesBuffer_AuxiliaresProcesso(4);
+            readVariablesBuffer_AuxiliaresProcesso(1);
 
-            //txtVolumeSilo1_2.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Silo1_2);
+            txtTempoLimpezaDosagem.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoLimpezaDosagem);
 
-            //txtVolumeBalanca.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Balanca);
+            txtTempoLimpezaMistura.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoLimpezaMisturador);
 
-            //txtVolumePreMisturador.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Pre_Misturador);
+            txtTempoMistura.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoMistura);
 
-            //txtVolumePosMisturador.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Pos_Misturador);
+            txtTempoEstabilizacao.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoEstabilizacao);
 
-            //txtPesoBalanca.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Balanca);
-
-            //txtPesoPreMisturador.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Pre_Misturador);
-
-            //txtPesoPosMisturador.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Pos_Misturador);
-
-            //txtTempoPreMistura.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.TempoPreMisturador);
-
-            //txtTempoPosMistura.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.TempoPosMisturador);
-
-            //txtTolerancia.Text = Convert.ToString(Utilidades.VariaveisGlobais.auxiliaresProcesso.ToleranciaMinimaDosagemBalança);
-
-            //if (Utilidades.VariaveisGlobais.ProducaoReceita.IniciouProducao)
-            //{
-            //    txtTempoPosMistura.IsEnabled = false;
-            //    txtTempoPreMistura.IsEnabled = false;
-            //}
-            //else
-            //{
-            //    txtTempoPosMistura.IsEnabled = true;
-            //    txtTempoPreMistura.IsEnabled = true;
-            //}
+            txtTempoPulmaoVazio.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoPulmaoVazio);
         }
 
         private void EscritaInformacoes(int bufferPlc_Auxiliares)
         {
-            //VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Enable_Read = false;
+            VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Enable_Read = false;
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Silo1_2 = Convert.ToSingle(txtVolumeSilo1_2.Text);
+            VariaveisGlobais.controleProducao.TempoLimpezaDosagem = Convert.ToInt32(txtTempoLimpezaDosagem.Text);
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Balanca = Convert.ToSingle(txtVolumeBalanca.Text);
+            VariaveisGlobais.controleProducao.TempoLimpezaMisturador = Convert.ToInt32(txtTempoLimpezaMistura.Text);
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Pre_Misturador = Convert.ToSingle(txtVolumePreMisturador.Text);
+            VariaveisGlobais.controleProducao.TempoMistura = Convert.ToInt32(txtTempoMistura.Text);
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Pos_Misturador = Convert.ToSingle(txtVolumePosMisturador.Text);
+            VariaveisGlobais.controleProducao.TempoEstabilizacao = Convert.ToInt32(txtTempoEstabilizacao.Text);
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Balanca = Convert.ToSingle(txtPesoBalanca.Text);
+            VariaveisGlobais.controleProducao.TempoPulmaoVazio = Convert.ToInt32(txtTempoPulmaoVazio.Text);
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Pre_Misturador = Convert.ToSingle(txtPesoPreMisturador.Text);
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Pos_Misturador = Convert.ToSingle(txtPesoPosMisturador.Text);
+            writeVariables_AuxiliaresProcesso(1);
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.TempoPreMisturador = Convert.ToInt32(txtTempoPreMistura.Text);
+            inputDialog = new Utilidades.messageBox("Salvar", "Informações salvas com Sucesso!", MaterialDesignThemes.Wpf.PackIconKind.Plus, "OK", "Fechar");
 
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.TempoPosMisturador = Convert.ToInt32(txtTempoPosMistura.Text);
-
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.ToleranciaMinimaDosagemBalança = Convert.ToInt32(txtTolerancia.Text);
-
-            //writeVariables_AuxiliaresProcesso(4);
-
-            //inputDialog = new Utilidades.messageBox("Salvar", "Informações salvas com Sucesso!", MaterialDesignThemes.Wpf.PackIconKind.Plus, "OK", "Fechar");
-
-            //inputDialog.ShowDialog();
+            inputDialog.ShowDialog();
         }
 
 
@@ -138,38 +111,24 @@ namespace _9567A_V00___PI.Telas_Fluxo.Configuracoes
         {
 
             //Controle Máquinas
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 0, Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Silo1_2);
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 4, Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Balanca);
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 8, Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Pre_Misturador);
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 12, Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Pos_Misturador);
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 16, Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Silo1_2);
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 20, Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Balanca);
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 24, Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Pre_Misturador);
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 28, Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Pos_Misturador);
-            //Comunicacao.Sharp7.S7.SetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 68, Utilidades.VariaveisGlobais.auxiliaresProcesso.TempoPreMisturador);
-            //Comunicacao.Sharp7.S7.SetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 72, Utilidades.VariaveisGlobais.auxiliaresProcesso.TempoPosMisturador);
+            Comunicacao.Sharp7.S7.SetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 54, VariaveisGlobais.controleProducao.TempoLimpezaDosagem);
+            Comunicacao.Sharp7.S7.SetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 58, VariaveisGlobais.controleProducao.TempoLimpezaMisturador);
+            Comunicacao.Sharp7.S7.SetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 34, VariaveisGlobais.controleProducao.TempoMistura);
+            Comunicacao.Sharp7.S7.SetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 38, VariaveisGlobais.controleProducao.TempoEstabilizacao);
+            Comunicacao.Sharp7.S7.SetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 42, VariaveisGlobais.controleProducao.TempoPulmaoVazio);
 
-            //Comunicacao.Sharp7.S7.SetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 60, Utilidades.VariaveisGlobais.auxiliaresProcesso.ToleranciaMinimaDosagemBalança);
-
-            //VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Enable_Write = true;
+            VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Enable_Write = true;
 
         }
 
         public void readVariablesBuffer_AuxiliaresProcesso(int bufferPlc_Auxiliares)
         {
             //Controle Máquinas
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.VolumeMaximoPermitidoSilo1_2 = Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Silo1_2 = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 0);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.VolumeMaximoPermitidoBalanca = Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Balanca = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 4);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.VolumeMaximoPermitidoPreMisturador = Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Pre_Misturador = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 8);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.VolumeMaximoPermitidoPosMisturador = Utilidades.VariaveisGlobais.auxiliaresProcesso.Volume_Maximo_Pos_Misturador = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 12);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.PesoMaximoPermitidoSilo1_2 = Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Silo1_2 = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 16);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.PesoMaximoPermitidoBalanca = Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Balanca = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 20);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.PesoMaximoPermitidoPreMisturador = Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Pre_Misturador = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 24);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.PesoMaximoPermitidoPosMisturador = Utilidades.VariaveisGlobais.auxiliaresProcesso.Peso_Maximo_Pos_Misturador = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 28);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.TempoPreMistura = Utilidades.VariaveisGlobais.auxiliaresProcesso.TempoPreMisturador = Comunicacao.Sharp7.S7.GetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 68);
-            //VariaveisGlobais.ValoresEspecificacoesEquipamentos.TempoPosMistura = Utilidades.VariaveisGlobais.auxiliaresProcesso.TempoPosMisturador = Comunicacao.Sharp7.S7.GetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 72);
-
-            //Utilidades.VariaveisGlobais.auxiliaresProcesso.ToleranciaMinimaDosagemBalança = Comunicacao.Sharp7.S7.GetRealAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 60);
+            VariaveisGlobais.controleProducao.TempoLimpezaDosagem = Comunicacao.Sharp7.S7.GetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 54);
+            VariaveisGlobais.controleProducao.TempoLimpezaMisturador = Comunicacao.Sharp7.S7.GetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 58);
+            VariaveisGlobais.controleProducao.TempoMistura = Comunicacao.Sharp7.S7.GetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 34);
+            VariaveisGlobais.controleProducao.TempoEstabilizacao = Comunicacao.Sharp7.S7.GetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 38);
+            VariaveisGlobais.controleProducao.TempoPulmaoVazio = Comunicacao.Sharp7.S7.GetDIntAt(VariaveisGlobais.Buffer_PLC[bufferPlc_Auxiliares].Buffer, 42);
         }
 
 
