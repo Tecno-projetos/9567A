@@ -46,7 +46,7 @@ namespace _9567A_V00___PI.Partidas.Controle
                 Command.Standard.Falha_Sem_Posicao
                 )
             {
-                btManual.Dispatcher.Invoke(delegate { btManual.IsEnabled = false; });
+                btManual.Dispatcher.Invoke(delegate { btManual.IsEnabled = true; });
                 btLibera.Dispatcher.Invoke(delegate { btLibera.IsEnabled = false; });
 
                 btLigar.Dispatcher.Invoke(delegate { btLigar.IsEnabled = false; });

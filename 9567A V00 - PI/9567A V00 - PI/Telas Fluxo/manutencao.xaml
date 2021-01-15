@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="675" d:DesignWidth="1024" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
     <Grid Background="#FF7F7F7F">
-        <Grid HorizontalAlignment="Left" Height="675" VerticalAlignment="Top" Width="200" Background="#FF3C3C3C" Margin="0,-1,0,0"/>
+        <Grid HorizontalAlignment="Left" Height="675" VerticalAlignment="Top" Width="200" Background="#FF3C3C3C"/>
         <StackPanel x:Name="spManutencao" HorizontalAlignment="Left" Height="675" Margin="200,-1,0,0" VerticalAlignment="Top" Width="824"/>
         <Button x:Name="btInformacoesSistema" Margin="10,341,834,284" Background="#FF505050" BorderBrush="Black" Height="50" Click="btInformacoesSistema_Click">
             <Grid Width="170" Height="40">
@@ -16,7 +16,7 @@
                 <TextBlock  Text="Sistema" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="32,4,0,2" Width="138" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </Button>
-        <materialDesign:PackIcon Kind="HammerScrewdriver" VerticalAlignment="Center" Foreground="White" Height="95" Margin="0,-6,0,586" Width="200"/>
+        <materialDesign:PackIcon Kind="HammerScrewdriver" VerticalAlignment="Center" Foreground="White" Height="95" Margin="0,-2,0,582" Width="200"/>
         <Label Content="Configurações" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Foreground="White" FontSize="16" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,74,0,0"/>
         <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="10,106,0,0" Stroke="White" VerticalAlignment="Top" Width="180"/>
         <Button x:Name="btConexoes" Margin="10,175,834,450" Background="#FF505050" BorderBrush="Black" Height="50" Click="btConexoes_Click">

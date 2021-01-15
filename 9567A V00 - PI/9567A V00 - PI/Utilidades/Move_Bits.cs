@@ -868,7 +868,89 @@ namespace _9567A_V00___PI.Utilidades
             return Command.DWord;
         }
 
+        //Command Auxiliares Processo
+        //=====================================================================================================================================
+        public static VariaveisGlobais.AuxiliaresBooleanas DwordTocontroleAuxiliaresBooleanas(UInt32 DWord, VariaveisGlobais.AuxiliaresBooleanas auxiliaresBooleanas)
+        {
+            bool[] bits = new bool[32];
 
+            Conversions.Dword_To_Bit(DWord, ref bits, true);
+
+           auxiliaresBooleanas.Emergencia = bits[0];
+           auxiliaresBooleanas.Automatico_Equips = bits[1];
+           auxiliaresBooleanas.NivelSilo = bits[2];
+           auxiliaresBooleanas.Reserva_3 = bits[3];
+           auxiliaresBooleanas.Reserva_4 = bits[4];
+           auxiliaresBooleanas.Reserva_5 = bits[5];
+           auxiliaresBooleanas.Reserva_6 = bits[6];
+           auxiliaresBooleanas.Reserva_7 = bits[7];
+           auxiliaresBooleanas.Reserva_8 = bits[8];
+           auxiliaresBooleanas.Reserva_9 = bits[9];
+           auxiliaresBooleanas.Reserva_10 = bits[10];
+           auxiliaresBooleanas.Reserva_11 = bits[11];
+           auxiliaresBooleanas.Reserva_12 = bits[12];
+           auxiliaresBooleanas.Reserva_13 = bits[13];
+           auxiliaresBooleanas.Reserva_14 = bits[14];
+           auxiliaresBooleanas.Reserva_15 = bits[15];
+           auxiliaresBooleanas.Reserva_16 = bits[16];
+           auxiliaresBooleanas.Reserva_17 = bits[17];
+           auxiliaresBooleanas.Reserva_18 = bits[18];
+           auxiliaresBooleanas.Reserva_19 = bits[19];
+           auxiliaresBooleanas.Reserva_20 = bits[20];
+           auxiliaresBooleanas.Reserva_21 = bits[21];
+           auxiliaresBooleanas.Reserva_22 = bits[22];
+           auxiliaresBooleanas.Reserva_23 = bits[23];
+           auxiliaresBooleanas.Reserva_24 = bits[24];
+           auxiliaresBooleanas.Reserva_25 = bits[25];
+           auxiliaresBooleanas.Reserva_26 = bits[26];
+           auxiliaresBooleanas.Reserva_27 = bits[27];
+           auxiliaresBooleanas.Reserva_28 = bits[28];
+           auxiliaresBooleanas.Reserva_29 = bits[29];
+           auxiliaresBooleanas.Reserva_30 = bits[30];
+            auxiliaresBooleanas.Reserva_31 = bits[31];
+
+            return auxiliaresBooleanas;
+        }
+
+        public static UInt32 AuxiliaresBooleanasToDword(VariaveisGlobais.AuxiliaresBooleanas auxiliaresBooleanas)
+        {
+            bool[] bits = new bool[32];
+
+            bits[0] = auxiliaresBooleanas.Emergencia;
+            bits[1] = auxiliaresBooleanas.Automatico_Equips;
+            bits[2] = auxiliaresBooleanas.NivelSilo;
+            bits[3] = auxiliaresBooleanas.Reserva_3;
+            bits[4] = auxiliaresBooleanas.Reserva_4;
+            bits[5] = auxiliaresBooleanas.Reserva_5;
+            bits[6] = auxiliaresBooleanas.Reserva_6;
+            bits[7] = auxiliaresBooleanas.Reserva_7;
+            bits[8] = auxiliaresBooleanas.Reserva_8;
+            bits[9] = auxiliaresBooleanas.Reserva_9;
+            bits[10] = auxiliaresBooleanas.Reserva_10;
+            bits[11] = auxiliaresBooleanas.Reserva_11;
+            bits[12] = auxiliaresBooleanas.Reserva_12;
+            bits[13] = auxiliaresBooleanas.Reserva_13;
+            bits[14] = auxiliaresBooleanas.Reserva_14;
+            bits[15] = auxiliaresBooleanas.Reserva_15;
+            bits[16] = auxiliaresBooleanas.Reserva_16;
+            bits[17] = auxiliaresBooleanas.Reserva_17;
+            bits[18] = auxiliaresBooleanas.Reserva_18;
+            bits[19] = auxiliaresBooleanas.Reserva_19;
+            bits[20] = auxiliaresBooleanas.Reserva_20;
+            bits[21] = auxiliaresBooleanas.Reserva_21;
+            bits[22] = auxiliaresBooleanas.Reserva_22;
+            bits[23] = auxiliaresBooleanas.Reserva_23;
+            bits[24] = auxiliaresBooleanas.Reserva_24;
+            bits[25] = auxiliaresBooleanas.Reserva_25;
+            bits[26] = auxiliaresBooleanas.Reserva_26;
+            bits[27] = auxiliaresBooleanas.Reserva_27;
+            bits[28] = auxiliaresBooleanas.Reserva_28;
+            bits[29] = auxiliaresBooleanas.Reserva_29;
+            bits[30] = auxiliaresBooleanas.Reserva_30;
+            bits[31] = auxiliaresBooleanas.Reserva_31;
+
+            return Conversions.Bit_To_Dword(ref bits, true);
+        }
 
         //Commando Producao
         //=====================================================================================================================================

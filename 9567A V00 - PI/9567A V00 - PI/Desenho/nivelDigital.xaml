@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="_9567A_V00___PI.Desenho.nivelDigital"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_9567A_V00___PI.Desenho" xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             mc:Ignorable="d" Height="29.535" Width="29.147">
+    <Grid>
+        <ed:Arc x:Name="nivel" ArcThicknessUnit="Percent" EndAngle="360" HorizontalAlignment="Left" Height="25" Stretch="None" StartAngle="0" VerticalAlignment="Top" Width="25" Fill="#FFA2FF00" ArcThickness="1" Stroke="Black"/>
+    </Grid>
+</UserControl>

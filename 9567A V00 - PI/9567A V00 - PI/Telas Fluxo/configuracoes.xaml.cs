@@ -25,6 +25,8 @@ namespace _9567A_V00___PI.Telas_Fluxo
 
         Telas_Fluxo.Configuracoes.Especificacoes especificaoes = new Configuracoes.Especificacoes();
 
+        Utilidades.VariaveisGlobais.AuxiliaresBooleanas dummyAuxiliaresProcesso = new Utilidades.VariaveisGlobais.AuxiliaresBooleanas();
+
         public configuracoes()
         {
             InitializeComponent();
@@ -57,24 +59,27 @@ namespace _9567A_V00___PI.Telas_Fluxo
             spConfiguracao.Children.Add(especificaoes);
         }
 
+
+
+
         private void BT_AutomaticAll_Click(object sender, RoutedEventArgs e)
         {
             inputDialog = new Utilidades.messageBox("Automático", "Deseja Passar os equipamentos para automático!", MaterialDesignThemes.Wpf.PackIconKind.Information, "Sim", "Não");
 
             if (inputDialog.ShowDialog() == true)
             {
-                //VariaveisGlobais.Buffer_PLC[4].Enable_Read = false;
+                VariaveisGlobais.Buffer_PLC[0].Enable_Read = false;
 
-                //dummyAuxiliaresProcesso = Utilidades.VariaveisGlobais.auxiliaresProcesso;
-
-
-                //dummyAuxiliaresProcesso.Set_Automatico_Equipamentos = true;
-                //Utilidades.VariaveisGlobais.auxiliaresProcesso = dummyAuxiliaresProcesso;
+                dummyAuxiliaresProcesso = Utilidades.VariaveisGlobais.auxiliaresBooleanos;
 
 
-                //Comunicacao.Sharp7.S7.SetDWordAt(VariaveisGlobais.Buffer_PLC[4].Buffer, 56, Move_Bits.AuxiliaresProcessoToDword(Utilidades.VariaveisGlobais.auxiliaresProcesso)); //Atualiza os Bits do command
+                dummyAuxiliaresProcesso.Automatico_Equips = true;
+                Utilidades.VariaveisGlobais.auxiliaresBooleanos = dummyAuxiliaresProcesso;
 
-                //VariaveisGlobais.Buffer_PLC[4].Enable_Write = true;
+
+                Comunicacao.Sharp7.S7.SetDWordAt(VariaveisGlobais.Buffer_PLC[0].Buffer, 126, Move_Bits.AuxiliaresBooleanasToDword(Utilidades.VariaveisGlobais.auxiliaresBooleanos)); //Atualiza os Bits do command
+
+                VariaveisGlobais.Buffer_PLC[0].Enable_Write = true;
             }
         }
     }

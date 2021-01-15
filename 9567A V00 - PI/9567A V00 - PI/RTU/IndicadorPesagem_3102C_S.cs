@@ -31,6 +31,10 @@ namespace _9567A_V00___PI.RTU
 
         private string AuXErro = "";
 
+        private bool BloqueiaLeitura;
+        private int auxBloqueia;
+
+
         #endregion
 
         /// <summary>
@@ -70,6 +74,12 @@ namespace _9567A_V00___PI.RTU
         /// </summary>
         public bool ErrorModbus_GS { get => ErrorModbus; }
 
+
+        /// <summary>
+        /// Bloqueia a leitura do Modbus até o Reset
+        /// </summary>
+        public bool BloqueiaLeitura_GS { get => BloqueiaLeitura; set => BloqueiaLeitura = value; }
+
         /// <summary>
         /// Atualiza a leitura Modbus.
         /// </summary>
@@ -90,7 +100,7 @@ namespace _9567A_V00___PI.RTU
 
             //Inicia o Valor do peso da balança = 0.
             PesoAtualBalanca = 0;
-            //Verifica se a coneção de Holding register leu o valor solicitado pela Modbus.
+            //Verifica se a conexão de Holding register leu o valor solicitado pela Modbus.
             if (valorLeitura.Length == 6)
             {
                 //Recebe p valor do peso atual da balança no indice 3
@@ -98,6 +108,11 @@ namespace _9567A_V00___PI.RTU
 
                 //Força o erro de leitura Modbus sempre para false.
                 ErrorModbus = false;
+
+                //Se possui leitura reseta o cantador de erros
+                auxBloqueia = 0;
+                BloqueiaLeitura = false;
+
 
                 return true;
             }
@@ -121,6 +136,16 @@ namespace _9567A_V00___PI.RTU
         
                         AuXErro = ErroAtual;
                     }
+                }
+
+                //Verifica quantos erros deu de leitura
+                auxBloqueia++;
+
+                //Se possuir mais de 3 erros quando solicitado bloqueia a leitura até o reset da balança ser utilizado.
+                if (auxBloqueia > 3)
+                {
+                    BloqueiaLeitura = true;
+                    auxBloqueia = 0;
                 }
 
                 return false;
