@@ -100,12 +100,14 @@ namespace _9567A_V00___PI
             Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = true;
             Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = false;
 
-            //Utilidades.VariaveisGlobais.Buffer_PLC[2].Name = "DB Produção Ensaque";
-            //Utilidades.VariaveisGlobais.Buffer_PLC[2].DBNumber = 25;
-            //Utilidades.VariaveisGlobais.Buffer_PLC[2].Start = 0;
-            //Utilidades.VariaveisGlobais.Buffer_PLC[2].Size = 16;
-            //Utilidades.VariaveisGlobais.Buffer_PLC[2].Enable_Read = false;
-            //Utilidades.VariaveisGlobais.Buffer_PLC[2].Enable_Write = false;
+            Utilidades.VariaveisGlobais.Buffer_PLC[2].Name = "DB Indicador Peso Balança";
+            Utilidades.VariaveisGlobais.Buffer_PLC[2].DBNumber = 17;
+            Utilidades.VariaveisGlobais.Buffer_PLC[2].Start = 0;
+            Utilidades.VariaveisGlobais.Buffer_PLC[2].Size = 6;
+            Utilidades.VariaveisGlobais.Buffer_PLC[2].Enable_Read = true;
+            Utilidades.VariaveisGlobais.Buffer_PLC[2].Enable_Write = false;
+
+
 
             //Utilidades.VariaveisGlobais.Buffer_PLC[3].Name = "DB Auxiliares";
             //Utilidades.VariaveisGlobais.Buffer_PLC[3].DBNumber = 22;
@@ -213,9 +215,6 @@ namespace _9567A_V00___PI
             }
         }
 
-
-
-
         private void timer_Tick(object sender, EventArgs e)
         {
 
@@ -230,14 +229,16 @@ namespace _9567A_V00___PI
 
             if (Comunicacao.Sharp7.S7.GetIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[0].Buffer, 0) == 1000)
             {
+                //Verifica se está bloqueado ou não a balança.
+                if (!VariaveisGlobais.balancaPrincipal.BloqueiaLeitura_GS)
+                {
+                    //Atualiza Balança
+                    VariaveisGlobais.balancaPrincipal.LeituraModbus();
 
-                //Atualiza Balança
-                //VariaveisGlobais.balancaPrincipal.LeituraModbus();
-
-                //Escreve o peso lido da balança
-                //Lembrando que -1 simboliza erro na leitura.
-                //VariaveisGlobais.balancaPrincipal.EscritaCLP(0, 2);
-
+                    //Escreve o peso lido da balança
+                    //Lembrando que -1 simboliza erro na leitura.
+                    VariaveisGlobais.balancaPrincipal.EscritaCLP(2, 2);
+                }
 
                 ////Atualiza Dword Geral de auxiliares Processo.
                 Utilidades.VariaveisGlobais.auxiliaresBooleanos = Move_Bits.DwordTocontroleAuxiliaresBooleanas(Comunicacao.Sharp7.S7.GetDWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[0].Buffer, 126), Utilidades.VariaveisGlobais.auxiliaresBooleanos);

@@ -30,13 +30,24 @@ namespace _9567A_V00___PI.Telas_Fluxo
 
         public void AtualizaFluxo() 
         {
+            //Sinaliza o sensor de nível do silo pulmão.
             nivelDigital_Designer.Nivel_Baixo_GS = VariaveisGlobais.auxiliaresBooleanos.NivelSilo;
 
+            //Atualiza o botão de emergência
             AtualizaEmergencia(Utilidades.VariaveisGlobais.auxiliaresBooleanos.Emergencia);
 
+            //Envia os valores para o label
+            lbCorrenteTD1.Content = TD1_Designer.Equip_GS.Command_Get.INV.Corrente_Atual + "  (A)";
+            lbVelocidadeTD1.Content = TD1_Designer.Equip_GS.Command_Get.INV.Velocidade_Atual + " RPM";
+
+            //Chama atualização da balança.
+            pesoBalanca.Balanca(VariaveisGlobais.balancaPrincipal);
+           
+            slot1.atualizaReceita(VariaveisGlobais.controleProducao);
+            slot2.atualizaReceita(VariaveisGlobais.controleProducao);
+            slot3.atualizaReceita(VariaveisGlobais.controleProducao);
 
         }
-
 
         #region Click List
 
@@ -72,7 +83,6 @@ namespace _9567A_V00___PI.Telas_Fluxo
 
         private void btEmergencia_Click(object sender, RoutedEventArgs e)
         {
-
             VariaveisGlobais.AuxiliaresBooleanas dummyAuxiliaresProcesso = Utilidades.VariaveisGlobais.auxiliaresBooleanos;
 
             if (dummyAuxiliaresProcesso.Emergencia)
@@ -89,9 +99,6 @@ namespace _9567A_V00___PI.Telas_Fluxo
                     Comunicacao.Sharp7.S7.SetDWordAt(VariaveisGlobais.Buffer_PLC[0].Buffer, 126, Move_Bits.AuxiliaresBooleanasToDword(Utilidades.VariaveisGlobais.auxiliaresBooleanos)); //Atualiza os Bits do command
 
                     VariaveisGlobais.Buffer_PLC[0].Enable_Write = true;
-
-
-
                 }
             }
             else
@@ -109,13 +116,8 @@ namespace _9567A_V00___PI.Telas_Fluxo
 
                     VariaveisGlobais.Buffer_PLC[0].Enable_Write = true;
 
-
-
-
                 }
             }
-
-
         }
 
         private void AtualizaEmergencia(bool emergencia) 
@@ -133,5 +135,6 @@ namespace _9567A_V00___PI.Telas_Fluxo
                 btEmergencia.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
+
     }
 }

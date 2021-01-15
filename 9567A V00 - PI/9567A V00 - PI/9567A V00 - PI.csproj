@@ -107,6 +107,9 @@
     <Compile Include="DataBase\SqlFunctionsReceitas.cs" />
     <Compile Include="DataBase\SqlFunctionsUsers.cs" />
     <Compile Include="DataBase\SqlGlobalFuctions.cs" />
+    <Compile Include="Desenho\balancaAutomatica.xaml.cs">
+      <DependentUpon>balancaAutomatica.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Desenho\Motor.xaml.cs">
       <DependentUpon>Motor.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,9 @@
     <Compile Include="Telas Fluxo\Producao\ConfiguracaoReceitaProducao.xaml.cs">
       <DependentUpon>ConfiguracaoReceitaProducao.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Telas Fluxo\Producao\controleSlot.xaml.cs">
+      <DependentUpon>controleSlot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Telas Fluxo\Producao\OrdemEmProducao.xaml.cs">
       <DependentUpon>OrdemEmProducao.xaml</DependentUpon>
     </Compile>
@@ -238,6 +244,10 @@
     <Compile Include="Utilidades\Move_Bits.cs" />
     <Compile Include="Utilidades\TopMost.cs" />
     <Compile Include="Utilidades\VariaveisGlobais.cs" />
+    <Page Include="Desenho\balancaAutomatica.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Desenho\Motor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -369,6 +379,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Telas Fluxo\Producao\ConfiguracaoReceitaProducao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas Fluxo\Producao\controleSlot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
