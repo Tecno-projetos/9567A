@@ -20,7 +20,6 @@ namespace _9567A_V00___PI.Utilidades
 
         public static RTU.IndicadorPesagem_3102C_S balancaPrincipal = new RTU.IndicadorPesagem_3102C_S(9600, 8, System.IO.Ports.Parity.None, System.IO.Ports.StopBits.One, "COM2", 2);
 
-
         #region Structs
 
         public struct diagnosticoProfinet
@@ -133,6 +132,7 @@ namespace _9567A_V00___PI.Utilidades
             public bool Reserva_9;
             public bool Reserva_10;
 
+            //Variaveis lidas e escritas PLC
             public short StatusDosagem;
             public short StatusMistura;
             public short StatusExpedicao;
@@ -145,6 +145,10 @@ namespace _9567A_V00___PI.Utilidades
             public float Peso_Parcial_Produzindo;
             public int TempoLimpezaDosagem;
             public int TempoLimpezaMisturador;
+
+            //Variaveis auxiliares supervisao
+            public bool HabilitadoDosarEmManual;
+            public bool SolicitaDosarEmManual;
         }
 
         public struct type_SS
@@ -1258,7 +1262,7 @@ namespace _9567A_V00___PI.Utilidades
 
     public class ProdutoReceita
     {
-        public Produto produto { get; set; }
+        public Produto produto = new Produto();
 
         public float pesoProdutoReceita = 0.0f; //Peso na receita base
 
@@ -1301,7 +1305,7 @@ namespace _9567A_V00___PI.Utilidades
 
         public bool FinalizouProducao { get; set; } //Finalizou Produção
 
-        public Receita receita { get; set; } //Receita Base
+        public Receita receita = new Receita(); //Receita Base
 
     }
 
