@@ -24,6 +24,7 @@ namespace _9567A_V00___PI.Telas_Fluxo
         Utilidades.messageBox inputDialog;
         public Telas_Fluxo.Producao.ProducaoTelaInicial TelaInicialProducao = new Producao.ProducaoTelaInicial();
         public Telas_Fluxo.Producao.ConfiguracaoReceitaProducao TelaConfiguracaoReceitaProducao = new Producao.ConfiguracaoReceitaProducao();
+        public Telas_Fluxo.Producao.OrdemEmProducao TelaOrdemEmProducao = new Producao.OrdemEmProducao();
 
         public producao()
         {
@@ -55,7 +56,11 @@ namespace _9567A_V00___PI.Telas_Fluxo
 
         private void btEmProducao_Click(object sender, RoutedEventArgs e)
         {
-
+            if (spControleProducao != null)
+            {
+                spControleProducao.Children.Clear();
+            }
+            spControleProducao.Children.Add(TelaOrdemEmProducao);
         }
 
         private void btRelatorio_Click(object sender, RoutedEventArgs e)

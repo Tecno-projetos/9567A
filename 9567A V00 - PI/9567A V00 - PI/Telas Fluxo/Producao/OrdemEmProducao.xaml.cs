@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,12 +89,55 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
         private void DataGrid_Ordens_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (DataGrid_Ordens.SelectedIndex != -1)
+            {
+                var rowList = (DataGrid_Ordens.ItemContainerGenerator.ContainerFromIndex(DataGrid_Ordens.SelectedIndex) as DataGridRow).Item as DataRowView;
 
+                var index = Utilidades.VariaveisGlobais.OrdensProducao.FindIndex(x => x.id == Convert.ToInt32(rowList.Row.ItemArray[0]));
+
+                DataTable dt = new DataTable();
+
+                dt.Columns.Add("Produto");
+                dt.Columns.Add("Peso(kg)");
+                dt.Columns.Add("Tolerância(%)");
+
+                foreach (var item in Utilidades.VariaveisGlobais.OrdensProducao[index].receita.listProdutos)
+                {
+                    DataRow dr = dt.NewRow();
+
+                    dr["Produto"] = item.produto.descricao;
+                    dr["Peso(kg)"] = item.pesoProdutoReceita;
+                    dr["Tolerância(%)"] = item.tolerancia;
+                    dt.Rows.Add(dr);
+                }
+
+                DataGrid_Produtos.Dispatcher.Invoke(delegate { DataGrid_Produtos.ItemsSource = dt.DefaultView; });
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (Utilidades.VariaveisGlobais.OrdensProducao.Count >= 1)
+            {
 
+                DataTable dt = new DataTable();
+
+                dt.Columns.Add("Nº");
+                dt.Columns.Add("Nome");
+                dt.Columns.Add("Peso");
+
+                foreach (var ordem in Utilidades.VariaveisGlobais.OrdensProducao)
+                {
+                    DataRow dr = dt.NewRow();
+
+                    dr["Nº"] = ordem.id;
+                    dr["Nome"] = ordem.receita.nomeReceita;
+                    dr["Peso"] = ordem.pesoTotalProducao;
+                    dt.Rows.Add(dr);
+                }
+
+                DataGrid_Ordens.Dispatcher.Invoke(delegate { DataGrid_Ordens.ItemsSource = dt.DefaultView; });
+            }
         }
     }
 }

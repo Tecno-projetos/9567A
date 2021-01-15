@@ -224,7 +224,7 @@ namespace _9567A_V00___PI.DataBase
                     try
                     {
                         int idProd = -1;
-                        string CommandString = "SELECT MAX(Id) AS maxid FROM ProducaoProdutos";
+                        string CommandString = "SELECT MAX(IdProducaoReceita) AS maxid FROM ProducaoProdutos";
                         dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
 
                         dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
@@ -266,7 +266,7 @@ namespace _9567A_V00___PI.DataBase
                         Command.Parameters.AddWithValue("@IdProduto", item.produto.id);
                         Command.Parameters.AddWithValue("@NomeProduto", item.produto.descricao);
                         Command.Parameters.AddWithValue("@Codigo", item.produto.codigo);
-                        Command.Parameters.AddWithValue("@Codigo", item.produto.observacao);
+                        Command.Parameters.AddWithValue("@Observacao", item.produto.observacao);
                         Command.Parameters.AddWithValue("@PesoProdutoReceita", item.pesoProdutoReceita);
                         Command.Parameters.AddWithValue("@PesoProdutoDesejado", item.pesoProdutoDesejado);
                         Command.Parameters.AddWithValue("@PesoProdutoDosado", item.pesoProdutoDosado);
@@ -294,7 +294,7 @@ namespace _9567A_V00___PI.DataBase
             }
         }
 
-        public static int AddProducao(Utilidades.Producao producao)
+        public static int AddProducaoBD(Utilidades.Producao producao)
         {
             Utilidades.messageBox inputDialog;
             int ret = -1;

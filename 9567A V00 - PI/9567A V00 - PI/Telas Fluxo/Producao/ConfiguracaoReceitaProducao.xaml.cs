@@ -32,28 +32,38 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
         private void btContinuar_Click(object sender, RoutedEventArgs e)
         {
-            inputDialog = new Utilidades.messageBox("Confirmação", "Você tem certeza que deseja iniciar a produção?", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
-
-            inputDialog.ShowDialog();
-
-            if (inputDialog.DialogResult == true)
+            if (VariaveisGlobais.controleProducao.Producao0 == -1)
             {
-                //Preenche data inicial e data final
-                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count -1].dateTimeInicioProducao = DateTime.Now;
-                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = DateTime.Now;
-                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].pesoTotalProducao = Convert.ToSingle(txtPesoDesejado.Text);
+                inputDialog = new Utilidades.messageBox("Confirmação", "Você tem certeza que deseja iniciar a produção?", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
-                //Preenche que iniciou a produção
-                Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = true;
+                inputDialog.ShowDialog();
 
-                DataBase.SQLFunctionsProducao.AddProducao(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+                if (inputDialog.DialogResult == true)
+                {
+                    //Preenche data inicial e data final
+                    Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeInicioProducao = DateTime.Now;
+                    Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = DateTime.Now;
+                    Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].pesoTotalProducao = Convert.ToSingle(txtPesoDesejado.Text);
 
-                //Verifica qual Produção esta em execução e carrega a produção
-                DataBase.SQLFunctionsProducao.AtualizaOrdemProducaoEmExecucao();
+                    //Preenche que iniciou a produção
+                    Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = true;
 
-                if (this.IniciouProducao != null)
-                    this.IniciouProducao(this, e);
+                    DataBase.SQLFunctionsProducao.AddProducaoBD(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+
+                    //Verifica qual Produção esta em execução e carrega a produção
+                    DataBase.SQLFunctionsProducao.AtualizaOrdemProducaoEmExecucao();
+
+                    if (this.IniciouProducao != null)
+                        this.IniciouProducao(this, e);
+                }
             }
+            else
+            {
+                inputDialog = new Utilidades.messageBox("Liberado", "Verifique se tem alguma produção na dosagem", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+            }
+
         }
 
         private void txtPesoDesejado_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
