@@ -9,9 +9,42 @@
              d:DesignHeight="450" d:DesignWidth="800" Width="1024" Height="675">
     <Grid Background="#FF7F7F7F" RenderTransformOrigin="0.5,0.5">
 
-        <Image HorizontalAlignment="Left" Height="680" VerticalAlignment="Top" Width="550" Source="/9567A V00 - PI;component/Imagens/LayoutCorreto.PNG" Margin="472,0,0,-5"/>
+        <Image HorizontalAlignment="Left" Height="680" VerticalAlignment="Top" Width="293" Source="/9567A V00 - PI;component/Imagens/planta.png" Margin="729,0,0,-5"/>
 
-        <Desenho:Motor x:Name="BMP1_Designer" HorizontalAlignment="Left" Height="40" Margin="798,330,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
+        <Desenho:Motor x:Name="BMP1_Designer" HorizontalAlignment="Left" Height="40" Margin="653,270,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.5,0.5">
+            <Desenho:Motor.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:Motor.RenderTransform>
+        </Desenho:Motor>
+        <Label Content="BMP-1" HorizontalAlignment="Left" Height="28" Margin="664,252,0,395" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="BMP2_Designer" HorizontalAlignment="Left" Height="40" Margin="653,339,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.5,0.5">
+            <Desenho:Motor.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:Motor.RenderTransform>
+        </Desenho:Motor>
+        <Label Content="BMP-2" HorizontalAlignment="Left" Height="28" Margin="664,321,0,326" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="TD1_Designer" HorizontalAlignment="Left" Height="40" Margin="682,510,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.5,0.5">
+            <Desenho:Motor.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:Motor.RenderTransform>
+        </Desenho:Motor>
+        <Label Content="TD-1" HorizontalAlignment="Left" Height="28" Margin="685,494,0,153" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="FM1_Designer" HorizontalAlignment="Left" Height="40" Margin="952,51,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
             <Desenho:Motor.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
@@ -21,40 +54,7 @@
                 </TransformGroup>
             </Desenho:Motor.RenderTransform>
         </Desenho:Motor>
-        <Label Content="BMP-1" HorizontalAlignment="Left" Height="28" Margin="788,312,0,335" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Desenho:Motor x:Name="BMP2_Designer" HorizontalAlignment="Left" Height="40" Margin="798,399,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
-            <Desenho:Motor.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Desenho:Motor.RenderTransform>
-        </Desenho:Motor>
-        <Label Content="BMP-2" HorizontalAlignment="Left" Height="28" Margin="788,381,0,266" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Desenho:Motor x:Name="TD1_Designer" HorizontalAlignment="Left" Height="40" Margin="544,490,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
-            <Desenho:Motor.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Desenho:Motor.RenderTransform>
-        </Desenho:Motor>
-        <Label Content="TD-1" HorizontalAlignment="Left" Height="28" Margin="534,472,0,175" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Desenho:Motor x:Name="FM1_Designer" HorizontalAlignment="Left" Height="40" Margin="544,70,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
-            <Desenho:Motor.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Desenho:Motor.RenderTransform>
-        </Desenho:Motor>
-        <Label Content="FM-1" HorizontalAlignment="Left" Height="28" Margin="534,52,0,595" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Label Content="FM-1" HorizontalAlignment="Left" Height="28" Margin="942,33,0,614" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
         <DataGrid x:Name="DataGrid_Receita" Margin="11,45,579,0" CanUserAddRows="False"
             HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Black" Foreground="Black"
             HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlTextColor}}"
@@ -105,7 +105,7 @@
                 <materialDesign:PackIcon Kind="ArrowRightBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
             </Grid>
         </Button>
-        <Desenho:registro x:Name="RP1_Designer" HorizontalAlignment="Left" Height="30" Margin="550,335,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
+        <Desenho:registro x:Name="RP1_Designer" HorizontalAlignment="Left" Height="30" Margin="759,210,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
             <Desenho:registro.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="2" ScaleY="2"/>
@@ -115,7 +115,7 @@
                 </TransformGroup>
             </Desenho:registro.RenderTransform>
         </Desenho:registro>
-        <Desenho:registro x:Name="RP2_Designer" HorizontalAlignment="Left" Height="30" Margin="550,420,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
+        <Desenho:registro x:Name="RP2_Designer" HorizontalAlignment="Left" Height="30" Margin="699,434,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
             <Desenho:registro.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="2" ScaleY="2"/>
@@ -125,7 +125,7 @@
                 </TransformGroup>
             </Desenho:registro.RenderTransform>
         </Desenho:registro>
-        <Desenho:registro x:Name="RP3_Designer" HorizontalAlignment="Left" Height="30" Margin="805,535,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
+        <Desenho:registro x:Name="RP3_Designer" HorizontalAlignment="Left" Height="30" Margin="968,450,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
             <Desenho:registro.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="2" ScaleY="2"/>
@@ -135,6 +135,28 @@
                 </TransformGroup>
             </Desenho:registro.RenderTransform>
         </Desenho:registro>
+        <Label Content="RP2 - RP3" HorizontalAlignment="Left" Height="28" Margin="677,407,0,240" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Label Content="RP-1" HorizontalAlignment="Left" Height="28" Margin="738,184,0,463" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Label Content="RP-4" HorizontalAlignment="Left" Height="28" Margin="946,418,0,229" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Button x:Name="btEmergencia" Margin="777,629,0,0" Background="Red" BorderBrush="Black" Click="btEmergencia_Click" Height="43" VerticalAlignment="Top" HorizontalAlignment="Left" Width="133">
+            <Grid Width="130" Height="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <materialDesign:PackIcon x:Name="pckIcon1" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="-1,4,101,6" Height="30" Width="Auto" HorizontalAlignment="Stretch"/>
+                <TextBlock x:Name="txtVirtual1" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,12,0,5" Width="128" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Emergência" Height="23"/>
+            </Grid>
+        </Button>
+        <Desenho:nivelDigital x:Name="nivelDigital_Designer" HorizontalAlignment="Left" Height="25" Margin="842,489,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="0.5,0.5">
+            <Desenho:nivelDigital.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Desenho:nivelDigital.RenderTransform>
+        </Desenho:nivelDigital>
 
     </Grid>
 </UserControl>

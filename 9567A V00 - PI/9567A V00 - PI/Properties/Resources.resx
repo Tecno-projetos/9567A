@@ -148,6 +148,9 @@
   <data name="Manutenção_Desativada" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagens\Manutenção_Desativada.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="planta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagens\planta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Reset1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagens\Reset1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

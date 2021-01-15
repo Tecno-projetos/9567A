@@ -44,6 +44,48 @@ namespace _9567A_V00___PI.Utilidades
 
         }
 
+
+        public struct AuxiliaresBooleanas
+        {
+
+            public bool Emergencia;
+            public bool Automatico_Equips;
+            public bool NivelSilo;
+            public bool Reserva_3;
+            public bool Reserva_4;
+            public bool Reserva_5;
+            public bool Reserva_6;
+            public bool Reserva_7;
+            public bool Reserva_8;
+            public bool Reserva_9;
+            public bool Reserva_10;
+            public bool Reserva_11;
+            public bool Reserva_12;
+            public bool Reserva_13;
+            public bool Reserva_14;
+            public bool Reserva_15;
+            public bool Reserva_16;
+            public bool Reserva_17;
+            public bool Reserva_18;
+            public bool Reserva_19;
+            public bool Reserva_20;
+            public bool Reserva_21;
+            public bool Reserva_22;
+            public bool Reserva_23;
+            public bool Reserva_24;
+            public bool Reserva_25;
+            public bool Reserva_26;
+            public bool Reserva_27;
+            public bool Reserva_28;
+            public bool Reserva_29;
+            public bool Reserva_30;
+            public bool Reserva_31;
+
+        }
+
+
+
+
         public struct IndicadorPesagem
         {
 
@@ -714,6 +756,8 @@ namespace _9567A_V00___PI.Utilidades
             DataBase.SQLFunctionsProducao.Create_Table_Producao();
             DataBase.SQLFunctionsProducao.Create_Table_ProducaoProdutos();
         }
+
+        public static AuxiliaresBooleanas auxiliaresBooleanos = new AuxiliaresBooleanas();
 
         public static List<Produto> listProdutos = new List<Produto>();
 

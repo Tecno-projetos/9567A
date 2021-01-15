@@ -110,6 +110,9 @@
     <Compile Include="Desenho\Motor.xaml.cs">
       <DependentUpon>Motor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Desenho\nivelDigital.xaml.cs">
+      <DependentUpon>nivelDigital.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Desenho\registro.xaml.cs">
       <DependentUpon>registro.xaml</DependentUpon>
     </Compile>
@@ -236,6 +239,10 @@
     <Compile Include="Utilidades\TopMost.cs" />
     <Compile Include="Utilidades\VariaveisGlobais.cs" />
     <Page Include="Desenho\Motor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Desenho\nivelDigital.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -497,6 +504,9 @@
       <Project>{ff96b252-2b24-44a1-a09c-6401b5d7ed23}</Project>
       <Name>Modbus</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\planta.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />

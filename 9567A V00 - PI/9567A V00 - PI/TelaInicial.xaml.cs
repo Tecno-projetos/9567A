@@ -80,8 +80,8 @@ namespace _9567A_V00___PI
             VariaveisGlobais.Fluxo.FM1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 94, 0, "Captação de Pó", "FM-1", "4", "15");
            
             VariaveisGlobais.Fluxo.RP1_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Registro, 114, 0, "Atuador 1", "RP-1", "-", "16/17");
-            VariaveisGlobais.Fluxo.RP2_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Registro, 118, 0, "Atuador 2", "RP-2", "-", "16/17");
-            VariaveisGlobais.Fluxo.RP3_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Registro, 122, 0, "Atuador 3", "RP-3", "-", "16/17");
+            VariaveisGlobais.Fluxo.RP2_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Registro, 118, 0, "Atuador 2-3", "RP-2-3", "-", "16/17");
+            VariaveisGlobais.Fluxo.RP3_Designer.loadEquip(Utilidades.typeEquip.Atuador, Utilidades.typeCommand.Registro, 122, 0, "Atuador 4", "RP-4", "-", "16/17");
 
 
             #region Configuração Buffers PLC
@@ -234,19 +234,18 @@ namespace _9567A_V00___PI
                 //Atualiza Balança
                 //VariaveisGlobais.balancaPrincipal.LeituraModbus();
 
-                ////Escreve o peso lido da balança
-                ////Lembrando que -1 simboliza erro na leitura.
+                //Escreve o peso lido da balança
+                //Lembrando que -1 simboliza erro na leitura.
                 //VariaveisGlobais.balancaPrincipal.EscritaCLP(0, 2);
 
-                ////Atualiza Niveis Silos
-                //Utilidades.VariaveisGlobais.niveis = Move_Bits.Dword_TO_NIveis(Comunicacao.Sharp7.S7.GetDWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[3].Buffer, 0), Utilidades.VariaveisGlobais.niveis);
 
                 ////Atualiza Dword Geral de auxiliares Processo.
-                //Utilidades.VariaveisGlobais.auxiliaresProcesso = Move_Bits.DwordTocontroleAuxiliaresProcesso(Comunicacao.Sharp7.S7.GetDWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[4].Buffer, 56), Utilidades.VariaveisGlobais.auxiliaresProcesso);
+                Utilidades.VariaveisGlobais.auxiliaresBooleanos = Move_Bits.DwordTocontroleAuxiliaresBooleanas(Comunicacao.Sharp7.S7.GetDWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[0].Buffer, 126), Utilidades.VariaveisGlobais.auxiliaresBooleanos);
 
+                //Atualzia SIlo
+                VariaveisGlobais.Fluxo.AtualizaFluxo();
 
                 //Atualização Equip
-
                 VariaveisGlobais.Fluxo.BMP1_Designer.actualize_Equip = true;
                 VariaveisGlobais.Fluxo.BMP2_Designer.actualize_Equip = true;
                 VariaveisGlobais.Fluxo.TD1_Designer.actualize_Equip = true;
