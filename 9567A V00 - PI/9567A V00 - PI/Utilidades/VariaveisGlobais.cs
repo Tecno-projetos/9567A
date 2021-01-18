@@ -108,6 +108,12 @@ namespace _9567A_V00___PI.Utilidades
 
         public struct ControleProducao
         {
+            public ControleProducao(string value) : this()
+            {
+                indexProduto = -1;
+                indexProdutoOld = -1;
+            }
+
             public int Producao0;  //DOSAGEM
             public int Producao1;  //MISTURA
             public int Producao2;  //EXPEDIÇÃO
@@ -149,8 +155,10 @@ namespace _9567A_V00___PI.Utilidades
             //Variaveis auxiliares supervisao
             public bool HabilitadoDosarEmManual;
             public int indexProduto;
+            public int indexProdutoOld;
             public int indexProducao;
             public bool primeiroProdutoDosar;
+            public bool EncerrarDosagem;
         }
 
         public struct type_SS
@@ -1248,8 +1256,18 @@ namespace _9567A_V00___PI.Utilidades
                 VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
                                                                                                 VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
                 ].tolerancia = Convert.ToSingle(row.ItemArray[8]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].iniciouDosagem = Convert.ToBoolean(row.ItemArray[9]);
+
+                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos[
+                                                                                                VariaveisGlobais.OrdensProducao[VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos.Count - 1
+                ].finalizouDosagem = Convert.ToBoolean(row.ItemArray[10]);  
             }
         }
+
+        
     }
 
     public class Produto
@@ -1273,6 +1291,10 @@ namespace _9567A_V00___PI.Utilidades
         public float pesoProdutoDosado = 0.0f; //Peso dosado na produção
 
         public float tolerancia = 0.0f; //Tolerância
+
+        public bool iniciouDosagem = false;
+
+        public bool finalizouDosagem = false;
     }
 
     public class Receita

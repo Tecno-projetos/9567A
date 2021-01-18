@@ -117,6 +117,12 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                     statusSlot.Background = new SolidColorBrush(Colors.Green);
                     statusSlot.Foreground = new SolidColorBrush(Colors.White);
                 }
+                else if (controleProducao.StatusDosagem == 5)
+                {
+                    statusSlot.Content = "Dosado aguardando condições";
+                    statusSlot.Background = new SolidColorBrush(Colors.Orange);
+                    statusSlot.Foreground = new SolidColorBrush(Colors.Black);
+                }
                 else
                 {
                     statusSlot.Content = "Erro";

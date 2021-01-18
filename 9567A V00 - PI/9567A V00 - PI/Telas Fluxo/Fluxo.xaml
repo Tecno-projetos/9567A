@@ -55,14 +55,14 @@
             </Desenho:Motor.RenderTransform>
         </Desenho:Motor>
         <Label Content="FM-1" HorizontalAlignment="Left" Height="28" Margin="942,33,0,614" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <DataGrid x:Name="DataGrid_Receita" Margin="11,45,704,0" CanUserAddRows="False"
+        <DataGrid x:Name="DataGrid_Produtos" Margin="11,45,704,0" CanUserAddRows="False"
             HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Black" Foreground="Black"
             HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlTextColor}}"
             VerticalGridLinesBrush="{DynamicResource MaterialDesignDarkBackground}" BorderBrush="{x:Null}" BorderThickness="1"
             CanUserDeleteRows ="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"   
             ScrollViewer.VerticalScrollBarVisibility="Auto" Height="465" Cursor="Hand" IsReadOnly="True" AlternatingRowBackground="#FF7F7F7F" 
             RowBackground="White" HorizontalScrollBarVisibility="Hidden" Background="White" FontSize="24" FontFamily="Segoe UI Emoji" GridLinesVisibility="All" 
-            SelectionMode="Single"  AutoGenerateColumns="True" RowHeight="40" >
+            SelectionMode="Single"  AutoGenerateColumns="True" RowHeight="40" LoadingRow="DataGrid_Produtos_LoadingRow" >
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
@@ -82,25 +82,25 @@
 
             </DataGrid.ColumnHeaderStyle>
         </DataGrid>
-        <Label Content="Receitas" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="320" Foreground="White" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="Produtos Produção:" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="320" Foreground="White" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="11,33,0,0" Stroke="White" VerticalAlignment="Top" Width="309"/>
 
-        <Button x:Name="btUpList" Margin="69,559,901,70" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btUpList_Click" >
+        <Button x:Name="btUpList" Margin="129,520,0,0" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btUpList_Click" HorizontalAlignment="Left" Width="54" Height="46" VerticalAlignment="Top" >
             <Grid Width="42" Height="42" Margin="0">
                 <materialDesign:PackIcon Kind="ArrowUpBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
             </Grid>
         </Button>
-        <Button x:Name="btDownList" Margin="69,611,901,18" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btDownList_Click" >
+        <Button x:Name="btDownList" Margin="129,572,0,0" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btDownList_Click" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54" >
             <Grid Width="42" Height="42" Margin="0">
                 <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
             </Grid>
         </Button>
-        <Button x:Name="btLeftList" Margin="12,582,958,46" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btLeftList_Click" >
+        <Button x:Name="btLeftList" Margin="72,543,0,0" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btLeftList_Click" Height="47" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54" >
             <Grid Width="42" Height="42" Margin="0">
                 <materialDesign:PackIcon Kind="ArrowLeftBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
             </Grid>
         </Button>
-        <Button x:Name="btRightList" Margin="126,582,844,46" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btRightList_Click" >
+        <Button x:Name="btRightList" Margin="186,543,0,0" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btRightList_Click" Height="47" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54" >
             <Grid Width="42" Height="42" Margin="0">
                 <materialDesign:PackIcon Kind="ArrowRightBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
             </Grid>
@@ -138,13 +138,13 @@
         <Label Content="RP2 - RP3" HorizontalAlignment="Left" Height="28" Margin="677,407,0,240" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
         <Label Content="RP-1" HorizontalAlignment="Left" Height="28" Margin="738,179,0,468" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
         <Label Content="RP-4" HorizontalAlignment="Left" Height="28" Margin="946,418,0,229" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Button x:Name="btEmergencia" Margin="777,629,0,0" Background="Red" BorderBrush="Black" Click="btEmergencia_Click" Height="43" VerticalAlignment="Top" HorizontalAlignment="Left" Width="133">
-            <Grid Width="130" Height="40">
+        <Button x:Name="btEmergencia" Margin="744,629,0,0" Background="Red" BorderBrush="Black" Click="btEmergencia_Click" Height="43" VerticalAlignment="Top" HorizontalAlignment="Left" Width="166">
+            <Grid Width="156" Height="40">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <materialDesign:PackIcon x:Name="pckIcon1" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="-1,4,101,6" Height="30" Width="Auto" HorizontalAlignment="Stretch"/>
-                <TextBlock x:Name="txtVirtual1" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,12,0,5" Width="128" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Emergência" Height="23"/>
+                <TextBlock x:Name="txtVirtual1" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,12,0,5" Width="114" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Emergência" Height="23"/>
             </Grid>
         </Button>
         <Desenho:nivelDigital x:Name="nivelDigital_Designer" HorizontalAlignment="Left" Height="25" Margin="842,489,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="0.5,0.5">
@@ -164,16 +164,16 @@
         <Producao:controleSlot x:Name="slot1" HorizontalAlignment="Left" Height="162" Margin="325,45,0,0" VerticalAlignment="Top" Width="335"/>
         <Producao:controleSlot x:Name="slot2" HorizontalAlignment="Left" Height="162" Margin="325,202,0,0" VerticalAlignment="Top" Width="335" NameSlot_GS="Mistura" SlotPertence_GS="1"/>
         <Producao:controleSlot x:Name="slot3" HorizontalAlignment="Left" Height="162" Margin="325,358,0,0" VerticalAlignment="Top" Width="335" NameSlot_GS="Expedição" SlotPertence_GS="2"/>
-        <Button x:Name="btAtivaDesativa" Margin="328,515,0,0" Background="#FF40B215" BorderBrush="Black" Width="150" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Grid Width="155" Height="40">
+        <Button x:Name="btManualAuto" Margin="328,570,0,0" Background="#FF40B215" BorderBrush="Black" Width="321" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Click="btManualAuto_Click">
+            <Grid Width="311" Height="40">
                 <materialDesign:PackIcon x:Name="pckIcon" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="2,-6,0,-7" Height="30" Width="30"/>
-                <TextBlock x:Name="txtVirtual" Text="Manual" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,12,10,10" Width="144" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="txtVirtual" Text="Manual" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,12,10,10" Width="269" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             </Grid>
         </Button>
-        <Button Margin="499,515,0,0" Background="#FFE8FF02" BorderBrush="Black" Width="150" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Grid Width="155" Height="40">
+        <Button x:Name="BT_confirma" Margin="328,515,0,0" Background="#FFE8FF02" BorderBrush="Black" Width="321" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BT_confirma_Click">
+            <Grid Width="311" Height="40">
                 <materialDesign:PackIcon x:Name="pckIcon2" Kind="Information" VerticalAlignment="Center" Foreground="Black" Margin="2,-6,0,-7" Height="30" Width="30"/>
-                <TextBlock x:Name="txtVirtual2" Text="Troca Produto" FontFamily="Champagne &amp; Limousines" Foreground="Black" Margin="10,12,10,10" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtVirtual2" Text="Troca Produto" FontFamily="Champagne &amp; Limousines" Foreground="Black" Margin="32,12,10,10" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </Button>
 

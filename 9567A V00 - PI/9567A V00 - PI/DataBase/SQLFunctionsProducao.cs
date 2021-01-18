@@ -107,6 +107,8 @@ namespace _9567A_V00___PI.DataBase
                             "PesoProdutoDesejado real," +
                             "PesoProdutoDosado real," +
                             "Tolerancia real," +
+                            "IniciouDosagem bit," +
+                            "FinalizouDosagem bit," +
                             "CONSTRAINT FK_IdProducaoReceita FOREIGN KEY (IdProducaoReceita) REFERENCES Producao(Id));";
 
                         dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
@@ -250,7 +252,9 @@ namespace _9567A_V00___PI.DataBase
                             "PesoProdutoReceita, " +
                             "PesoProdutoDesejado, " +
                             "PesoProdutoDosado, " +
-                            "Tolerancia) VALUES (" +
+                            "Tolerancia, " +
+                            "IniciouDosagem, " +
+                            "FinalizouDosagem) VALUES (" +
                             "@IdProducaoReceita, " +
                             "@IdProduto, " +
                             "@NomeProduto, " +
@@ -259,7 +263,9 @@ namespace _9567A_V00___PI.DataBase
                             "@PesoProdutoReceita, " +
                             "@PesoProdutoDesejado, " +
                             "@PesoProdutoDosado, " +
-                            "@Tolerancia)";
+                            "@Tolerancia, " +
+                            "@IniciouDosagem, " +
+                            "@FinalizouDosagem)";
 
                         Command = SqlGlobalFuctions.ReturnCommand(query, Call);
                         Command.Parameters.AddWithValue("@IdProducaoReceita", producao.id);
@@ -271,6 +277,8 @@ namespace _9567A_V00___PI.DataBase
                         Command.Parameters.AddWithValue("@PesoProdutoDesejado", item.pesoProdutoDesejado);
                         Command.Parameters.AddWithValue("@PesoProdutoDosado", item.pesoProdutoDosado);
                         Command.Parameters.AddWithValue("@Tolerancia", item.tolerancia);
+                        Command.Parameters.AddWithValue("@IniciouDosagem", item.iniciouDosagem);
+                        Command.Parameters.AddWithValue("@FinalizouDosagem", item.finalizouDosagem);
 
                         Call.Open();
                         ret = Command.ExecuteNonQuery();
@@ -405,6 +413,109 @@ namespace _9567A_V00___PI.DataBase
 
             return Data;
         }
+
+        public static int Update_PesoDosado_Produto(int idProducao, int codigoProduto, float valorDosado)
+        {
+            int ret = -1;
+            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+            {
+                try
+                {
+                    string valDosado = valorDosado.ToString(CultureInfo.GetCultureInfo("en-US"));
+
+                    string CommandString = "UPDATE ProducaoProdutos SET PesoProdutoDosado = '" + valDosado + "' WHERE IdProducaoReceita = " + idProducao + " AND " +
+                        "IdProduto = " + codigoProduto + ";";
+
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
+                    dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
+
+                    Call.Open();
+                    ret = Command.ExecuteNonQuery();
+                    Call.Close();
+                    return ret;
+                }
+                catch (Exception ex)
+                {
+                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                    ret = -1;
+                    return ret;
+                }
+            }
+            else
+            {
+                return ret;
+            }
+
+        }
+
+        public static int Update_PesoDosadoTotal(int idProducao, float valorDosado)
+        {
+            int ret = -1;
+            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+            {
+                try
+                {
+                    string valDosado = valorDosado.ToString(CultureInfo.GetCultureInfo("en-US"));
+
+                    string CommandString = "UPDATE Producao SET PesoTotalProduzido = '" + valDosado + "' WHERE Id = " + idProducao + ";";
+
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
+                    dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
+
+                    Call.Open();
+                    ret = Command.ExecuteNonQuery();
+                    Call.Close();
+                    return ret;
+                }
+                catch (Exception ex)
+                {
+                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                    ret = -1;
+                    return ret;
+                }
+            }
+            else
+            {
+                return ret;
+            }
+
+        }
+
+        public static int Update_FinalizaProducao(int idProducao)
+        {
+            int ret = -1;
+            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+            {
+                try
+                {
+                    dynamic DTnow = new DateTime();
+                    DTnow = DateTime.Now;
+                    DTnow = DTnow.ToString("yyyyMMdd") + " " + DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+
+                    string CommandString = "UPDATE Producao SET FinalizouProducao = 'true', DataFimProducao = '" + DTnow + "'  WHERE Id = " + idProducao + ";";
+
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
+                    dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
+
+                    Call.Open();
+                    ret = Command.ExecuteNonQuery();
+                    Call.Close();
+                    return ret;
+                }
+                catch (Exception ex)
+                {
+                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                    ret = -1;
+                    return ret;
+                }
+            }
+            else
+            {
+                return ret;
+            }
+
+        }
+
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using _9567A_V00___PI.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,39 +50,106 @@ namespace _9567A_V00___PI.Telas_Fluxo
 
             BT_confirma.IsEnabled = VariaveisGlobais.controleProducao.HabilitadoDosarEmManual;
 
+            //Atualiza texto do botão
+            if (VariaveisGlobais.controleProducao.primeiroProdutoDosar)
+            {
+                txtVirtual2.Text = "Iniciar Dosagem";
+            }
+            else if (VariaveisGlobais.controleProducao.EncerrarDosagem)
+            {
+                txtVirtual2.Text = "Encerrar Dosagem";
+            }
+            else
+            {
+                txtVirtual2.Text = "Prx. Produto";
+            }
+
+            if (VariaveisGlobais.controleProducao.Manual_Automatico)
+            {
+                txtVirtual.Text = "Em Automático";
+            }
+            else
+            {
+                txtVirtual.Text = "Em Manual";
+            }
+
+
+            AtualizaProdutosProducao();
         }
 
         #region Click List
 
         private void btLeftList_Click(object sender, RoutedEventArgs e)
         {
-            var scroll = (VisualTreeHelper.GetChild(DataGrid_Receita, 0) as Decorator).Child as ScrollViewer;
+            var scroll = (VisualTreeHelper.GetChild(DataGrid_Produtos, 0) as Decorator).Child as ScrollViewer;
 
             scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset - 20);
         }
 
         private void btDownList_Click(object sender, RoutedEventArgs e)
         {
-            var scroll = (VisualTreeHelper.GetChild(DataGrid_Receita, 0) as Decorator).Child as ScrollViewer;
+            var scroll = (VisualTreeHelper.GetChild(DataGrid_Produtos, 0) as Decorator).Child as ScrollViewer;
 
             scroll.ScrollToVerticalOffset(scroll.VerticalOffset + 5);
         }
 
         private void btRightList_Click(object sender, RoutedEventArgs e)
         {
-            var scroll = (VisualTreeHelper.GetChild(DataGrid_Receita, 0) as Decorator).Child as ScrollViewer;
+            var scroll = (VisualTreeHelper.GetChild(DataGrid_Produtos, 0) as Decorator).Child as ScrollViewer;
 
             scroll.ScrollToHorizontalOffset(scroll.HorizontalOffset + 20);
         }
 
         private void btUpList_Click(object sender, RoutedEventArgs e)
         {
-            var scroll = (VisualTreeHelper.GetChild(DataGrid_Receita, 0) as Decorator).Child as ScrollViewer;
+            var scroll = (VisualTreeHelper.GetChild(DataGrid_Produtos, 0) as Decorator).Child as ScrollViewer;
 
             scroll.ScrollToVerticalOffset(scroll.VerticalOffset - 5);
         }
 
         #endregion
+
+        private void AtualizaProdutosProducao()
+        {
+            //Verifica se tem OP na dosagem
+            if (VariaveisGlobais.controleProducao.Producao0 > 0)
+            {
+                VariaveisGlobais.controleProducao.indexProducao = Utilidades.VariaveisGlobais.OrdensProducao.FindIndex(x => x.id == VariaveisGlobais.controleProducao.Producao0);
+
+                if (VariaveisGlobais.controleProducao.indexProducao != -1)
+                {
+
+                    DataTable dt = new DataTable();
+
+                    dt.Columns.Add("Produto");
+                    dt.Columns.Add("Peso");
+                    dt.Columns.Add("Peso Dosado");
+
+                    int i = 0;
+                    //Verifica o produto a dosar
+                    foreach (var produtos in Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos)
+                    {
+                        DataRow dr = dt.NewRow();
+
+                        dr["Produto"] = produtos.produto.descricao;
+                        dr["Peso"] = produtos.pesoProdutoDesejado;
+                        dr["Peso Dosado"] = produtos.pesoProdutoDosado;
+
+                        dt.Rows.Add(dr);
+
+                        i++;
+                    }
+
+                    DataGrid_Produtos.Dispatcher.Invoke(delegate { DataGrid_Produtos.ItemsSource = dt.DefaultView; });
+                }
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+
+                DataGrid_Produtos.Dispatcher.Invoke(delegate { DataGrid_Produtos.ItemsSource = dt.DefaultView; });
+            }
+        }
 
         private void btEmergencia_Click(object sender, RoutedEventArgs e)
         {
@@ -159,26 +227,88 @@ namespace _9567A_V00___PI.Telas_Fluxo
                 if (VariaveisGlobais.controleProducao.primeiroProdutoDosar)
                 {
                     VariaveisGlobais.controleProducao.Dosando = true;
+                    VariaveisGlobais.controleProducao.primeiroProdutoDosar = false;
                 }
                 else
                 {
                     VariaveisGlobais.controleProducao.Troca_Produto = true;
                 }
 
-                //Atualiza Valores dos pesos do produto
-                VariaveisGlobais.controleProducao.PesoDosar = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].pesoProdutoDesejado;
-                VariaveisGlobais.controleProducao.PesoTolerancia = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].tolerancia;
 
-                Comunicacao.Sharp7.S7.SetWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 18, Utilidades.Move_Bits.ControleProducaoToWord(VariaveisGlobais.controleProducao));
-                Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 26, VariaveisGlobais.controleProducao.PesoDosar);
-                Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 30, VariaveisGlobais.controleProducao.PesoTolerancia);
+                if (VariaveisGlobais.controleProducao.EncerrarDosagem)
+                {
+
+                    DataBase.SQLFunctionsProducao.Update_PesoDosadoTotal(Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.controleProducao.Peso_Total_Produzindo);
+                    Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].pesoTotalProduzido = VariaveisGlobais.controleProducao.Peso_Total_Produzindo;
+
+                    //Atualiza Valores dos pesos do produto
+                    VariaveisGlobais.controleProducao.PesoDosar = 0;
+                    VariaveisGlobais.controleProducao.PesoTolerancia = 0;
+                    VariaveisGlobais.controleProducao.Troca_Produto = false;
+                    VariaveisGlobais.controleProducao.Dosando = false;
+                    Comunicacao.Sharp7.S7.SetWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 18, Utilidades.Move_Bits.ControleProducaoToWord(VariaveisGlobais.controleProducao));
+                    Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 26, 0);
+                    Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 30, 0);
+
+                    VariaveisGlobais.controleProducao.EncerrarDosagem = false;
+                }
+                else
+                {
+                    //Atualiza Valores dos pesos do produto
+                    VariaveisGlobais.controleProducao.PesoDosar = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].pesoProdutoDesejado;
+                    VariaveisGlobais.controleProducao.PesoTolerancia = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].tolerancia;
+
+                    Comunicacao.Sharp7.S7.SetWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 18, Utilidades.Move_Bits.ControleProducaoToWord(VariaveisGlobais.controleProducao));
+                    Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 26, VariaveisGlobais.controleProducao.PesoDosar);
+                    Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 30, VariaveisGlobais.controleProducao.PesoTolerancia);
+                }
 
                 Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = true;
 
                 VariaveisGlobais.controleProducao.HabilitadoDosarEmManual = false;
-                VariaveisGlobais.controleProducao.primeiroProdutoDosar = false;
+
 
             }
+        }
+
+        private void DataGrid_Produtos_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            try
+            {
+                int IndexAtual = e.Row.GetIndex();
+
+                //Verifica o item atual é o mesmo que o produto atual que esta em produção
+                if (IndexAtual == VariaveisGlobais.controleProducao.indexProduto &&
+                    VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].pesoTotalProduzido == 0 &&
+                    !VariaveisGlobais.controleProducao.HabilitadoDosarEmManual
+                    )
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.ForestGreen);
+                    e.Row.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                }
+                else if (VariaveisGlobais.controleProducao.HabilitadoDosarEmManual && !VariaveisGlobais.controleProducao.EncerrarDosagem)
+                {
+                    if (IndexAtual == (VariaveisGlobais.controleProducao.indexProduto - 1) &&
+                    VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].pesoTotalProduzido == 0)
+                    {
+                        e.Row.Background = new SolidColorBrush(Colors.ForestGreen);
+                        e.Row.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    }
+                }
+                else
+                {
+                    if (IndexAtual == (VariaveisGlobais.controleProducao.indexProduto) &&
+                        VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].pesoTotalProduzido == 0)
+                    {
+                        e.Row.Background = new SolidColorBrush(Colors.ForestGreen);
+                        e.Row.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+
         }
     }
 }
