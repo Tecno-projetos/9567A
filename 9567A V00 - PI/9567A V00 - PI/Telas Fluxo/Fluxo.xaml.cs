@@ -47,6 +47,8 @@ namespace _9567A_V00___PI.Telas_Fluxo
             slot2.atualizaReceita(VariaveisGlobais.controleProducao);
             slot3.atualizaReceita(VariaveisGlobais.controleProducao);
 
+            BT_confirma.IsEnabled = VariaveisGlobais.controleProducao.HabilitadoDosarEmManual;
+
         }
 
         #region Click List
@@ -136,5 +138,47 @@ namespace _9567A_V00___PI.Telas_Fluxo
             }
         }
 
+        private void btManualAuto_Click(object sender, RoutedEventArgs e)
+        {
+
+            Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
+
+            VariaveisGlobais.controleProducao.Manual_Automatico = !VariaveisGlobais.controleProducao.Manual_Automatico;
+
+            Comunicacao.Sharp7.S7.SetWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 18, Utilidades.Move_Bits.ControleProducaoToWord(VariaveisGlobais.controleProducao));
+            
+            Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = true;
+        }
+
+        private void BT_confirma_Click(object sender, RoutedEventArgs e)
+        {
+            if (VariaveisGlobais.controleProducao.HabilitadoDosarEmManual)
+            {
+                Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
+
+                if (VariaveisGlobais.controleProducao.primeiroProdutoDosar)
+                {
+                    VariaveisGlobais.controleProducao.Dosando = true;
+                }
+                else
+                {
+                    VariaveisGlobais.controleProducao.Troca_Produto = true;
+                }
+
+                //Atualiza Valores dos pesos do produto
+                VariaveisGlobais.controleProducao.PesoDosar = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].pesoProdutoDesejado;
+                VariaveisGlobais.controleProducao.PesoTolerancia = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].tolerancia;
+
+                Comunicacao.Sharp7.S7.SetWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 18, Utilidades.Move_Bits.ControleProducaoToWord(VariaveisGlobais.controleProducao));
+                Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 26, VariaveisGlobais.controleProducao.PesoDosar);
+                Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 30, VariaveisGlobais.controleProducao.PesoTolerancia);
+
+                Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = true;
+
+                VariaveisGlobais.controleProducao.HabilitadoDosarEmManual = false;
+                VariaveisGlobais.controleProducao.primeiroProdutoDosar = false;
+
+            }
+        }
     }
 }

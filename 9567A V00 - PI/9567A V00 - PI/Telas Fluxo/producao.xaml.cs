@@ -50,6 +50,8 @@ namespace _9567A_V00___PI.Telas_Fluxo
             {
                 //falta preencher algum valor
                 inputDialog = new Utilidades.messageBox("Falta informções", "Verifique se os valores na tela de configuração das especificações estão preenchidos!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+                inputDialog.ShowDialog();
+            
             }
 
         }

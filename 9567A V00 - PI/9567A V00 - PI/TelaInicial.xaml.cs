@@ -557,16 +557,16 @@ namespace _9567A_V00___PI
         public void controleDosagemProdutos()
         {
             //Verifica se tem OP na dosagem
-            if (VariaveisGlobais.controleProducao.Producao0 != -1)
+            if (VariaveisGlobais.controleProducao.Producao0 > 0)
             {
-                var index = Utilidades.VariaveisGlobais.OrdensProducao.FindIndex(x => x.id == VariaveisGlobais.controleProducao.Producao0);
+                VariaveisGlobais.controleProducao.indexProducao = Utilidades.VariaveisGlobais.OrdensProducao.FindIndex(x => x.id == VariaveisGlobais.controleProducao.Producao0);
 
-                if (index != -1)
+                if (VariaveisGlobais.controleProducao.indexProducao != -1)
                 {
 
                     int i = 0;
                     //Verifica o produto a dosar
-                    foreach (var produtos in Utilidades.VariaveisGlobais.OrdensProducao[index].receita.listProdutos)
+                    foreach (var produtos in Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos)
                     {
                         //Verifica o produto que ainda não foi dosado
                         if (produtos.pesoProdutoDosado == 0)
@@ -596,28 +596,28 @@ namespace _9567A_V00___PI
                                     VariaveisGlobais.controleProducao.PesoDosar = produtos.pesoProdutoDesejado;
                                     VariaveisGlobais.controleProducao.PesoTolerancia = produtos.tolerancia;
 
+                                    Comunicacao.Sharp7.S7.SetWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 18, Utilidades.Move_Bits.ControleProducaoToWord(VariaveisGlobais.controleProducao));
+                                    Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 26, VariaveisGlobais.controleProducao.PesoDosar);
+                                    Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 30, VariaveisGlobais.controleProducao.PesoTolerancia);
+
                                     Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = true;
                                 }
                                 //Solicita Dosar em manual
                                 else
                                 {
+                                    if (i == 0 || !VariaveisGlobais.controleProducao.Dosando)
+                                    {
+                                        VariaveisGlobais.controleProducao.primeiroProdutoDosar = true;
+                                    }
+
                                     VariaveisGlobais.controleProducao.HabilitadoDosarEmManual = true;
+                                    VariaveisGlobais.controleProducao.indexProduto = i;
                                 }
 
                             }
                         }
                         i++;
                     }
-
-                    //Verifica se a Ordem iniciou a dosagem
-
-
-
-                    if (!VariaveisGlobais.controleProducao.Dosando)
-                    {
-
-                    }
-
                 }
             }
 

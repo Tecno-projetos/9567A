@@ -53,8 +53,13 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                 if (controleProducao.Producao0 > 0)
                 {
                     var index = Utilidades.VariaveisGlobais.OrdensProducao.FindIndex(x => x.id == controleProducao.Producao0);
-                    lbOrdem.Content = Convert.ToString(controleProducao.Producao0);
-                    lbNomeReceita.Content = Convert.ToString( Utilidades.VariaveisGlobais.OrdensProducao[index].receita.nomeReceita);
+
+                    if (index != -1)
+                    {
+                        lbOrdem.Content = Convert.ToString(controleProducao.Producao0);
+                        lbNomeReceita.Content = Convert.ToString(Utilidades.VariaveisGlobais.OrdensProducao[index].receita.nomeReceita);
+                    }
+
 
                 }
                 else
@@ -130,8 +135,13 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                 if (controleProducao.Producao1 > 0)
                 {
                     var index = Utilidades.VariaveisGlobais.OrdensProducao.FindIndex(x => x.id == controleProducao.Producao1);
-                    lbOrdem.Content = Convert.ToString(controleProducao.Producao1);
-                    lbNomeReceita.Content = Convert.ToString(Utilidades.VariaveisGlobais.OrdensProducao[index].receita.nomeReceita);
+
+                    if (index != -1)
+                    {
+                        lbOrdem.Content = Convert.ToString(controleProducao.Producao1);
+                        lbNomeReceita.Content = Convert.ToString(Utilidades.VariaveisGlobais.OrdensProducao[index].receita.nomeReceita);
+                    }
+
 
                 }
                 else
@@ -211,8 +221,14 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                 if (controleProducao.Producao2 > 0)
                 {
                     var index = Utilidades.VariaveisGlobais.OrdensProducao.FindIndex(x => x.id == controleProducao.Producao2);
-                    lbOrdem.Content = Convert.ToString(controleProducao.Producao2);
-                    lbNomeReceita.Content = Convert.ToString(Utilidades.VariaveisGlobais.OrdensProducao[index].receita.nomeReceita);
+
+                    if (index != -1)
+                    {
+                        lbOrdem.Content = Convert.ToString(controleProducao.Producao2);
+                        lbNomeReceita.Content = Convert.ToString(Utilidades.VariaveisGlobais.OrdensProducao[index].receita.nomeReceita);
+
+                    }
+
 
                 }
                 else

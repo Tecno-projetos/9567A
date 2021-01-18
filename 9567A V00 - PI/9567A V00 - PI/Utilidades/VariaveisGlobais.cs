@@ -148,7 +148,9 @@ namespace _9567A_V00___PI.Utilidades
 
             //Variaveis auxiliares supervisao
             public bool HabilitadoDosarEmManual;
-            public bool SolicitaDosarEmManual;
+            public int indexProduto;
+            public int indexProducao;
+            public bool primeiroProdutoDosar;
         }
 
         public struct type_SS

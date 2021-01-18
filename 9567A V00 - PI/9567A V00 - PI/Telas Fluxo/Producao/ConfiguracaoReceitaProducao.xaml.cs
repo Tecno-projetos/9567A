@@ -1,6 +1,7 @@
 ﻿using _9567A_V00___PI.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,13 +43,23 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                 {
                     //Preenche data inicial e data final
                     Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeInicioProducao = DateTime.Now;
+
                     Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = DateTime.Now;
-                    Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].pesoTotalProducao = Convert.ToSingle(txtPesoDesejado.Text);
 
                     //Preenche que iniciou a produção
                     Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = true;
 
+                    calculaApartirPesoTotalDesejado(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+
                     DataBase.SQLFunctionsProducao.AddProducaoBD(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+
+                    Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
+
+                    VariaveisGlobais.controleProducao.Producao0 = Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].id;
+
+                    Comunicacao.Sharp7.S7.SetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 2, VariaveisGlobais.controleProducao.Producao0);
+
+                    Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = true;
 
                     //Verifica qual Produção esta em execução e carrega a produção
                     DataBase.SQLFunctionsProducao.AtualizaOrdemProducaoEmExecucao();
@@ -72,7 +83,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
             txtReceber.Text = Utilidades.VariaveisGlobais.floatingKeypad(txtReceber.Text, 6).ToString();
 
-            calculaApartirPesoTotalDesejado(false);
+            calculaApartirPesoTotalDesejado(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
         }
 
         private void txtQtdReceita_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -86,99 +97,81 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
             txtPesoMaximoPermitido.Text = "300.0";
         }
 
-        private bool calculaApartirPesoTotalDesejado(bool AddBateladas)
+        private bool calculaApartirPesoTotalDesejado(Utilidades.Producao producao)
         {
             bool ret = false;
-            //int pesoDesejado = 0;
-            //int pesoResto = 0;
-            //int countBatelada = 0;
+            int pesoDesejado = 0;
+            int pesoResto = 0;
+            int countBatelada = 0;
 
-            //if (!String.IsNullOrEmpty(txtPesoDesejado.Text))
-            //{
+            //atualiza o peso total da produção
+            Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].pesoTotalProducao = Convert.ToSingle(txtPesoDesejado.Text);
 
-            //    if (Int32.TryParse(txtPesoDesejado.Text, out pesoDesejado))
-            //    {
-            //        //atualiza o peso total da produção
-            //        Utilidades.VariaveisGlobais.ProducaoReceita.pesoTotalProducao = pesoDesejado;
+            if (!String.IsNullOrEmpty(txtPesoDesejado.Text))
+            {
 
-            //        //Calcula quantas bateladas inteiras terão utilizando o máximo permitido de peso
-            //        bateladas = pesoDesejado / Convert.ToInt32(txtPesoMaximoPermitido.Text);
+                if (Int32.TryParse(txtPesoDesejado.Text, out pesoDesejado))
+                {
+                    //Calcula peso total da receita
+                    float pesoTotalReceita = 0.0f;
+                    foreach (var produtos in Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos)
+                    {
+                        pesoTotalReceita = pesoTotalReceita += produtos.pesoProdutoReceita;
+                    }
 
-            //        //Calcula o peso da ultima batelada
-            //        pesoResto = pesoDesejado % Convert.ToInt32(txtPesoMaximoPermitido.Text);
+                    float fatorPeso = Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].pesoTotalProducao / pesoTotalReceita;
 
-            //        if (AddBateladas)
-            //        {
-            //            Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Clear();
+                    //Calcula Peso de cada produto
+                    foreach (var produtos in Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos)
+                    {
+                        produtos.pesoProdutoDesejado = Convert.ToSingle(Math.Round(fatorPeso * produtos.pesoProdutoReceita, 2));
 
-            //            //cria um dummy da batelada para poder inserir cada peso desejado para cada batelada
-            //            Utilidades.Batelada DummyBatelada = new Batelada();
+                    }
 
-            //            //passa por cada batelada e adiciona o peso das bateladas inteiras
-            //            for (int i = 0; i < bateladas; i++)
-            //            {
-            //                countBatelada += 1;
+                    ret = true;
+                }
+                else
+                {
+                    inputDialog = new Utilidades.messageBox("Valor não é inteiro", "Por favor verifique se o valor pertecem aos números inteiros", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
-            //                DummyBatelada = new Batelada();
+                    inputDialog.ShowDialog();
+                }
 
-            //                DummyBatelada.pesoDesejado = Convert.ToInt32(txtPesoMaximoPermitido.Text);
-            //                DummyBatelada.numeroBatelada = countBatelada;
-            //                Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Add(DummyBatelada);
-            //            }
+            }
+            else
+            {
+                inputDialog = new Utilidades.messageBox("Campo Necessário", "Por favor verifique se o campo Peso Total Desejado esta vazio!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
-            //            //Verifica se tem peso resto para adicionar na ultima batelada o restante (isso ira acontecer quando ocorrer valores que não forem multiplo do valor máximo permitido)
-            //            if (pesoResto > 0)
-            //            {
-            //                bateladas += 1;
-            //                countBatelada += 1;
-            //                DummyBatelada = new Batelada();
+                inputDialog.ShowDialog();
+            }
 
-            //                DummyBatelada.pesoDesejado = pesoResto;
-            //                DummyBatelada.numeroBatelada = countBatelada;
-            //                Utilidades.VariaveisGlobais.ProducaoReceita.batelada.Add(DummyBatelada);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            //Verifica se tem peso resto para adicionar na ultima batelada o restante (isso ira acontecer quando ocorrer valores que não forem multiplo do valor máximo permitido)
-            //            if (pesoResto > 0)
-            //            {
-            //                bateladas += 1;
-            //            }
-            //        }
-
-
-            //        //passa para a produção receita a quantidade de bateladas.
-            //        Utilidades.VariaveisGlobais.ProducaoReceita.quantidadeBateladas = bateladas;
-
-            //        ret = true;
-            //    }
-            //    else
-            //    {
-            //        if (AddBateladas)
-            //        {
-            //            inputDialog = new Utilidades.messageBox("Valor não é inteiro", "Por favor verifique se o valor pertecem aos números inteiros", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
-
-            //            inputDialog.ShowDialog();
-            //        }
-
-            //    }
-
-            //}
-            //else
-            //{
-            //    if (AddBateladas)
-            //    {
-            //        inputDialog = new Utilidades.messageBox("Campo Necessário", "Por favor verifique se o campo Peso Total Desejado esta vazio!", MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
-
-            //        inputDialog.ShowDialog();
-            //    }
-
-            //}
-
-            //atualizaValoresPesoVolumeQtdBatelada();
+            atualizaGridProdutos();
 
             return ret;
+        }
+
+        private void atualizaGridProdutos()
+        {
+            //Atualiza o Grid de equipamentos com os equipamentos que pertencem a receita selecionada.
+
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("Produto");
+            dt.Columns.Add("Peso(kg)");
+            dt.Columns.Add("Tolerância(%)");
+
+            foreach (var item in Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos)
+            {
+                DataRow dr = dt.NewRow();
+
+                dr["Produto"] = item.produto.descricao;
+                dr["Peso(kg)"] = item.pesoProdutoDesejado;
+                dr["Tolerância(%)"] = item.tolerancia;
+                dt.Rows.Add(dr);
+            }
+
+            DataGrid_Produtos.Dispatcher.Invoke(delegate { DataGrid_Produtos.ItemsSource = dt.DefaultView; });
+            
         }
 
         private void btVoltar_Click(object sender, RoutedEventArgs e)
