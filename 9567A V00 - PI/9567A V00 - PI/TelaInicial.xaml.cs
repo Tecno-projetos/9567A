@@ -430,7 +430,7 @@ namespace _9567A_V00___PI
                 spInical.Children.Clear();
 
                 spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
-
+                AtualizaButton(pckHome);
             }
         }
 
