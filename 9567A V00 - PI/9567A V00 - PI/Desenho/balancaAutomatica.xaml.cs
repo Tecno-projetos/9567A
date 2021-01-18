@@ -45,7 +45,7 @@ namespace _9567A_V00___PI.Desenho
                 lbStatusBalanca.Background = new SolidColorBrush(Color.FromRgb(89, 76, 76));
             }
 
-            LbPeso.Content = indicadorPesagem_3102C_S.PesoAtualBalanca_GS;
+            LbPeso.Content = indicadorPesagem_3102C_S.PesoAtualBalanca_GS + " kg";
 
 
             if (indicadorPesagem_3102C_S.BloqueiaLeitura_GS)
