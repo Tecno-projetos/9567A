@@ -164,16 +164,16 @@
         <Producao:controleSlot x:Name="slot1" HorizontalAlignment="Left" Height="162" Margin="325,45,0,0" VerticalAlignment="Top" Width="335"/>
         <Producao:controleSlot x:Name="slot2" HorizontalAlignment="Left" Height="162" Margin="325,202,0,0" VerticalAlignment="Top" Width="335" NameSlot_GS="Mistura" SlotPertence_GS="1"/>
         <Producao:controleSlot x:Name="slot3" HorizontalAlignment="Left" Height="162" Margin="325,358,0,0" VerticalAlignment="Top" Width="335" NameSlot_GS="Expedição" SlotPertence_GS="2"/>
-        <Button x:Name="btManualAuto" Margin="328,515,546,110" Background="#FF40B215" BorderBrush="Black" Width="150" Click="btManualAuto_Click">
+        <Button x:Name="btAtivaDesativa" Margin="328,515,0,0" Background="#FF40B215" BorderBrush="Black" Width="150" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Grid Width="155" Height="40">
                 <materialDesign:PackIcon x:Name="pckIcon" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="2,-6,0,-7" Height="30" Width="30"/>
-                <TextBlock x:Name="txtVirtual" Text="Manual" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,13,0,11" Width="154" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="txtVirtual" Text="Manual" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,12,10,10" Width="144" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             </Grid>
         </Button>
-        <Button x:Name="BT_confirma" Margin="499,515,375,110" Background="#FFE8FF02" BorderBrush="Black" Width="150" Click="BT_confirma_Click">
+        <Button Margin="499,515,0,0" Background="#FFE8FF02" BorderBrush="Black" Width="150" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Grid Width="155" Height="40">
                 <materialDesign:PackIcon x:Name="pckIcon2" Kind="Information" VerticalAlignment="Center" Foreground="Black" Margin="2,-6,0,-7" Height="30" Width="30"/>
-                <TextBlock x:Name="txtVirtual2" Text="Troca Produto" FontFamily="Champagne &amp; Limousines" Foreground="Black" Margin="0,13,0,11" Width="145" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="txtVirtual2" Text="Troca Produto" FontFamily="Champagne &amp; Limousines" Foreground="Black" Margin="10,12,10,10" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Button>
 

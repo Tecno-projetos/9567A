@@ -18,7 +18,7 @@ namespace _9567A_V00___PI.Utilidades
     {
         public static TelasAuxiliares.FirstLoading windowFirstLoading = new TelasAuxiliares.FirstLoading();
 
-        public static RTU.IndicadorPesagem_3102C_S balancaPrincipal = new RTU.IndicadorPesagem_3102C_S(9600, 8, System.IO.Ports.Parity.None, System.IO.Ports.StopBits.One, "COM2", 2);
+        public static RTU.IndicadorPesagem_3102C_S balancaPrincipal = new RTU.IndicadorPesagem_3102C_S(9600, 8, System.IO.Ports.Parity.None, System.IO.Ports.StopBits.One, "COM1", 2);
 
         #region Structs
 
