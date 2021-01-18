@@ -61,16 +61,26 @@ namespace _9567A_V00___PI.Telas_Fluxo
             }
             else
             {
-                txtVirtual2.Text = "Prx. Produto";
+                txtVirtual2.Text = "Próximo Produto";
             }
 
             if (VariaveisGlobais.controleProducao.Manual_Automatico)
             {
                 txtVirtual.Text = "Em Automático";
+                txtVirtual.Foreground = new SolidColorBrush(Colors.White);
+                pckIconManual.Foreground = new SolidColorBrush(Colors.White);
+
+                btManualAuto.Background = new SolidColorBrush(Colors.Green);
+                btManualAuto.Foreground = new SolidColorBrush(Colors.White);
             }
             else
             {
                 txtVirtual.Text = "Em Manual";
+
+                txtVirtual.Foreground = new SolidColorBrush(Colors.Black);
+                pckIconManual.Foreground = new SolidColorBrush(Colors.Black);
+                btManualAuto.Background = new SolidColorBrush(Colors.Yellow);
+                btManualAuto.Foreground = new SolidColorBrush(Colors.Black);
             }
 
 
