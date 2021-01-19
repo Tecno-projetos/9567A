@@ -219,6 +219,16 @@ namespace _9567A_V00___PI.Telas_Fluxo
         private void btManualAuto_Click(object sender, RoutedEventArgs e)
         {
 
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
+
             Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
 
             VariaveisGlobais.controleProducao.Manual_Automatico = !VariaveisGlobais.controleProducao.Manual_Automatico;
@@ -230,6 +240,15 @@ namespace _9567A_V00___PI.Telas_Fluxo
 
         private void BT_confirma_Click(object sender, RoutedEventArgs e)
         {
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
             if (VariaveisGlobais.controleProducao.HabilitadoDosarEmManual)
             {
                 Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;

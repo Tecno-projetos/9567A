@@ -116,6 +116,9 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
                     var index = Utilidades.VariaveisGlobais.listReceitas.FindIndex(x => x.id == Convert.ToInt32(rowList.Row.ItemArray[0]));
 
+                    //Recebe o idex da receita para se caso voltar apagar a receita da lista.
+                    Utilidades.VariaveisGlobais.dummyIndex_CriandoReceita = index;
+
                     //Passa a Receita desejada para a produção Receita
                     Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count -1].receita = Utilidades.VariaveisGlobais.listReceitas[index];
 

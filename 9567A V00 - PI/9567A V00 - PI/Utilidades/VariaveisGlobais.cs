@@ -650,7 +650,7 @@ namespace _9567A_V00___PI.Utilidades
 
         public static Telas_Fluxo.Fluxo Fluxo = new Telas_Fluxo.Fluxo();
 
-        //public static Usuarios.controleUsuario controleUsuario = new Usuarios.controleUsuario();
+        public static Usuarios.controleUsuario controleUsuario = new Usuarios.controleUsuario();
 
         public static Telas_Fluxo.manutencao manutencao = new Telas_Fluxo.manutencao();
 
@@ -784,6 +784,8 @@ namespace _9567A_V00___PI.Utilidades
         public static ControleProducao controleProducao = new ControleProducao();
 
         public static IndicadorPesagem indicadorPesagem = new IndicadorPesagem();
+
+        public static int dummyIndex_CriandoReceita; 
 
         #region Contole teclado
 

@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="_9567A_V00___PI.Usuarios.editarUsuario"
+             xmlns:local="clr-namespace:_9567A_V00___PI.Usuarios"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Utilidades="clr-namespace:_9567A_V00___PI.Utilidades"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Width="825" Height="675" Loaded="UserControl_Loaded">
+
+    <Grid Background="#FF7F7F7F">
+
+        <Grid.Resources  >
+
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+
+
+                <SolidColorBrush x:Key="brushWatermarkBackground" Color="#FF505050" />
+                <SolidColorBrush x:Key="brushWatermarkForeground" Color="White" />
+                <Utilidades:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />
+
+                <SolidColorBrush x:Key="brushWatermarkBorder" Color="White" />
+
+                <Style x:Key="EntryFieldStyle" TargetType="{x:Type Grid}" >
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="20,0" />
+                </Style>
+
+
+
+            </ResourceDictionary>
+
+        </Grid.Resources>
+
+        <materialDesign:PackIcon Kind="UserEdit" VerticalAlignment="Center" Foreground="White" Height="95" Margin="0,6,0,574" Width="825"/>
+        <Label Content="Editar Usuário" HorizontalAlignment="Left" VerticalAlignment="Top" Width="825" Foreground="White" FontSize="16" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,86,0,0"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="0,118,0,0" Stroke="White" VerticalAlignment="Top" Width="825"/>
+
+        <Label Content="Senha (*):" Height="34" Margin="455,172,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188" Foreground="White" FontWeight="Bold" FontSize="16"/>
+
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="455,211,15,423" Height="41" Background="#FF3C3C3C" >
+            <PasswordBox x:Name="txtSenha" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" PreviewMouseLeftButtonUp="openKeyboard"/>
+        </Grid>
+
+        <materialDesign:PackIcon Kind="FormTextboxPassword" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="417,171,370,470" BorderBrush="#FF040404"/>
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="417,211,370,423" BorderBrush="#FF040404"/>
+        <Label Content="Repetir Senha (*):" Height="34" Margin="455,267,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188" Foreground="White" FontWeight="Bold" FontSize="16"/>
+
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="455,306,15,328" Height="41" Background="#FF3C3C3C" >
+            <PasswordBox x:Name="txtSenha1" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" PreviewMouseLeftButtonUp="openKeyboard" />
+        </Grid>
+
+
+        <materialDesign:PackIcon Kind="FormTextboxPassword" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="417,266,370,375" BorderBrush="#FF040404"/>
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="417,306,370,328" BorderBrush="#FF040404"/>
+        <Label Content="E-mail" Height="34" Margin="455,376,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Grid Style="{StaticResource EntryFieldStyle}" Margin="455,415,15,219" Height="41" Background="#FF3C3C3C" >
+            <TextBlock Margin="5,0,6,5" Text="E-mail" Foreground="#FF919191" VerticalAlignment="Bottom" FontSize="14" >
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource TextInputToVisibilityConverter}">
+                        <Binding ElementName="txtEmail" Path="Text.IsEmpty" />
+                        <Binding ElementName="txtEmail" Path="IsFocused" />
+                    </MultiBinding>
+                </TextBlock.Visibility>
+            </TextBlock>
+            <TextBox x:Name="txtEmail" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" Margin="0,0,1,3" FontSize="14" VerticalAlignment="Bottom" Foreground="White" PreviewMouseLeftButtonUp="openKeyboard"/>
+        </Grid>
+        <materialDesign:PackIcon Kind="Mail" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="417,375,370,266" BorderBrush="#FF040404"/>
+        <materialDesign:PackIcon Kind="Pencil" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="417,415,370,219" BorderBrush="#FF040404"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="413,364,0,0" Stroke="White" VerticalAlignment="Top" Width="397"/>
+        <Label Content="Grupo do Usuário: (*)" Height="34" Margin="577,457,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <materialDesign:PackIcon Kind="UserGroupOutline" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="534,457,253,184" BorderBrush="#FF040404"/>
+
+        <ListBox Style="{StaticResource MaterialDesignListBox}" x:Name="listboxGroupUser" Margin="534,490,15,13">
+            <ListBoxItem x:Name="lbAdm" Width="143" Background="#FF3C3C3C" Height="50" Content="Administrador" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,5,0,0" IsSelected="True" PreviewMouseLeftButtonUp="lbAdm_PreviewMouseLeftButtonUp" />
+            <ListBoxItem x:Name="lbManutencao"  Height="50" Width="145" Content="Manutenção" Background="#FF3C3C3C" FontSize="16" Foreground="White" Margin="0,5,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" PreviewMouseLeftButtonUp="lbManutencao_PreviewMouseLeftButtonUp"/>
+            <ListBoxItem x:Name="lbOperador" Width="145" Height="50" Content="Operador" Margin="0,5,0,0" Background="#FF3C3C3C" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" PreviewMouseLeftButtonUp="lbOperador_PreviewMouseLeftButtonUp"/>
+        </ListBox>
+
+        <Button x:Name="btEditUsuario" Margin="293,612,297,13" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btEditUsuario_Click" >
+            <Grid Width="150">
+                <materialDesign:PackIcon Kind="UserAdd" VerticalAlignment="Center" Foreground="White" Margin="2,-6,0,-7" Height="30" Width="30"/>
+                <TextBlock  Text="Editar Usuário " FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="41,1,24,-1" Width="85" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </Button>
+
+
+        <materialDesign:PackIcon x:Name="pckAdm" Kind="CheckBox" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="555,500,227,130" BorderBrush="#FF040404"/>
+        <materialDesign:PackIcon x:Name="pckMan" Kind="CheckBox" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="555,555,227,75" BorderBrush="#FF040404"/>
+        <materialDesign:PackIcon x:Name="pckOperador" Kind="CheckBox" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="555,610,227,20" BorderBrush="#FF040404"/>
+        <Label Content="Nome do Usuário: " Height="34" Margin="62,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <materialDesign:PackIcon Kind="User" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="24,139,763,502" BorderBrush="#FF040404"/>
+        <ListBox x:Name="listbox" Margin="10,178,539,10" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="listbox_SelectionChanged"/>
+        <Label x:Name="lbUser" Content="User xxxx" Height="45" Margin="501,125,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="304" Foreground="White" FontWeight="Bold" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <materialDesign:PackIcon Kind="UserEdit" VerticalAlignment="Center" Foreground="White" Height="45" Margin="445,125,0,505" Width="60"/>
+
+
+
+    </Grid>
+</UserControl>
+
