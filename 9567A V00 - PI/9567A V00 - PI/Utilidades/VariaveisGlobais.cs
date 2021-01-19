@@ -952,21 +952,15 @@ namespace _9567A_V00___PI.Utilidades
                 {
                     if (controleProducao.TempoEstabilizacao != 0)
                     {
-                        if (controleProducao.TempoMistura != 0)
+                        if (controleProducao.TempoPulmaoVazio != 0)
                         {
-                            if (controleProducao.TempoPulmaoVazio != 0)
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
+                            return true;
                         }
                         else
                         {
                             return false;
                         }
+
                     }
                     else
                     {
@@ -1269,9 +1263,7 @@ namespace _9567A_V00___PI.Utilidades
             }
         }
 
-        
     }
-
     public class Produto
     {
         public int id { get; set; }

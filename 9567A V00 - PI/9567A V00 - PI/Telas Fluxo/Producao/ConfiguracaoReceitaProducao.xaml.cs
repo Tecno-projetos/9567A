@@ -40,98 +40,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
             InitializeComponent();
         }
 
-        private void btContinuar_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (Convert.ToDouble(txtPesoDesejado.Text) < 300 && Convert.ToDouble(txtPesoDesejado.Text) > 0)
-            {
-
-                if (VariaveisGlobais.controleProducao.Producao0 == -1)
-                {
-                    inputDialog = new Utilidades.messageBox("Confirmação", "Você tem certeza que deseja iniciar a produção? Após o inicio não poderá ser retirado a produção! ", MaterialDesignThemes.Wpf.PackIconKind.Error, "Sim", "Não");
-
-                    inputDialog.ShowDialog();
-
-                    if (inputDialog.DialogResult == true)
-                    {
-                        //Preenche data inicial e data final
-                        Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeInicioProducao = DateTime.Now;
-
-                        Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = DateTime.Now;
-
-                        //Preenche que iniciou a produção
-                        Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = true;
-
-                        calculaApartirPesoTotalDesejado(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
-
-                        DataBase.SQLFunctionsProducao.AddProducaoBD(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
-
-                        Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
-
-                        VariaveisGlobais.controleProducao.Producao0 = Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].id;
-
-                        Comunicacao.Sharp7.S7.SetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 2, VariaveisGlobais.controleProducao.Producao0);
-
-                        Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = true;
-
-                        //Verifica qual Produção esta em execução e carrega a produção
-                        DataBase.SQLFunctionsProducao.AtualizaOrdemProducaoEmExecucao();
-
-                        Iniciou = true;
-
-                        if (this.IniciouProducao != null)
-                            this.IniciouProducao(this, e);
-                    }
-                }
-                else
-                {
-                    inputDialog = new Utilidades.messageBox("Liberado", "Verifique se tem alguma produção na dosagem", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
-
-                    inputDialog.ShowDialog();
-                }
-            }
-            else 
-            {
-           
-                inputDialog = new Utilidades.messageBox("Liberado", "O peso está acima de 300 kg ou abaixo de 0 kg! Diminua a produção.", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
-
-                inputDialog.ShowDialog();
-
-
-            }
-        }
-
-        private void txtPesoDesejado_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            TextBox txtReceber = (TextBox)sender;
-
-            txtReceber.Text = Utilidades.VariaveisGlobais.floatingKeypad(txtReceber.Text, 6).ToString();
-
-            calculaApartirPesoTotalDesejado(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
-        }
-
-        private void txtQtdReceita_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            //Atualiza Peso máximo e volume máximo suportado
-
-            Iniciou = false;
-
-            txtPesoMaximoPermitido.Text = "300.0";
-
-            txtPesoDesejado.Text = "0";
-            txtQtdReceita.Text = "0";
-
-            pesoTodosProdutos = 0;
-            pesoProdutosReceita = 0;
-
-            CalculaPesoBaseReceita(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
-
-        }
+        #region Funções
 
         private bool calculaApartirPesoTotalDesejado(Utilidades.Producao producao)
         {
@@ -184,7 +93,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
             return ret;
         }
 
-        private bool CalculaPesoBaseReceita(Utilidades.Producao producao) 
+        private bool CalculaPesoBaseReceita(Utilidades.Producao producao)
         {
 
             foreach (var produtos in Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].receita.listProdutos)
@@ -197,7 +106,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
             return false;
         }
-
 
         private void atualizaGridProdutos()
         {
@@ -221,7 +129,95 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
 
             DataGrid_Produtos.Dispatcher.Invoke(delegate { DataGrid_Produtos.ItemsSource = dt.DefaultView; });
-            
+
+        }
+
+        #endregion
+
+        #region Clicks e Sender
+
+        private void btContinuar_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (Convert.ToDouble(txtPesoDesejado.Text) < 300 && Convert.ToDouble(txtPesoDesejado.Text) > 0)
+            {
+
+                if (VariaveisGlobais.controleProducao.Producao0 == -1)
+                {
+                    inputDialog = new Utilidades.messageBox("Confirmação", "Você tem certeza que deseja iniciar a produção? Após o inicio não poderá ser retirado a produção! ", MaterialDesignThemes.Wpf.PackIconKind.Error, "Sim", "Não");
+
+                    inputDialog.ShowDialog();
+
+                    if (inputDialog.DialogResult == true)
+                    {
+                        //Preenche data inicial e data final
+                        Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeInicioProducao = DateTime.Now;
+
+                        Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].dateTimeFimProducao = DateTime.Now;
+
+                        //Preenche que iniciou a produção
+                        Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].IniciouProducao = true;
+
+                        calculaApartirPesoTotalDesejado(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+
+                        DataBase.SQLFunctionsProducao.AddProducaoBD(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+
+                        Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
+
+                        VariaveisGlobais.controleProducao.Producao0 = Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1].id;
+
+                        Comunicacao.Sharp7.S7.SetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 2, VariaveisGlobais.controleProducao.Producao0);
+
+                        var index = Utilidades.VariaveisGlobais.OrdensProducao.FindIndex(x => x.id == VariaveisGlobais.controleProducao.Producao0);
+                  
+                        if (index != -1)
+                        {
+                            Int32 codigoReceita = Utilidades.VariaveisGlobais.OrdensProducao[index].receita.Codigo;
+
+                            Comunicacao.Sharp7.S7.SetDIntAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 34, Convert.ToInt32(DataBase.SqlFunctionsReceitas.getTempoMistura(codigoReceita)));
+                        }
+
+                        Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Write = true;
+
+                        //Verifica qual Produção esta em execução e carrega a produção
+                        DataBase.SQLFunctionsProducao.AtualizaOrdemProducaoEmExecucao();
+
+                        Iniciou = true;
+
+                        if (this.IniciouProducao != null)
+                            this.IniciouProducao(this, e);
+                    }
+                }
+                else
+                {
+                    inputDialog = new Utilidades.messageBox("Liberado", "Verifique se tem alguma produção na dosagem", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
+
+                    inputDialog.ShowDialog();
+                }
+            }
+            else
+            {
+
+                inputDialog = new Utilidades.messageBox("Liberado", "O peso está acima de 300 kg ou abaixo de 0 kg! Diminua a produção.", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+
+            }
+        }
+
+        private void txtPesoDesejado_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            TextBox txtReceber = (TextBox)sender;
+
+            txtReceber.Text = Utilidades.VariaveisGlobais.floatingKeypad(txtReceber.Text, 6).ToString();
+
+            calculaApartirPesoTotalDesejado(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+        }
+
+        private void txtQtdReceita_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
         }
 
         private void btVoltar_Click(object sender, RoutedEventArgs e)
@@ -271,6 +267,27 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
             }
         }
 
+        #endregion
+
+        #region User control Load
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Atualiza Peso máximo e volume máximo suportado
+
+            Iniciou = false;
+
+            txtPesoMaximoPermitido.Text = "300.0";
+
+            txtPesoDesejado.Text = "0";
+            txtQtdReceita.Text = "0";
+
+            pesoTodosProdutos = 0;
+            pesoProdutosReceita = 0;
+
+            CalculaPesoBaseReceita(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+
+        }
+
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             if (!Iniciou)
@@ -278,6 +295,10 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
                 Utilidades.VariaveisGlobais.OrdensProducao.RemoveAt(VariaveisGlobais.dummyIndex_CriandoReceita);
             }
 
+
         }
+        #endregion
+
+
     }
 }

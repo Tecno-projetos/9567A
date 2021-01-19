@@ -504,7 +504,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Imagens\Automasul.ico" />
+    <Resource Include="Imagens\Automasul.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Imagens\Automasul_horiz_branco.png" />

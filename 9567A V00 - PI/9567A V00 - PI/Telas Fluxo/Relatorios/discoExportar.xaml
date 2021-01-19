@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:local="clr-namespace:_9567A_V00___PI.Telas_Fluxo.Relatorios"
         mc:Ignorable="d"
-        Title="Exportar" Height="471" Width="233" ResizeMode="NoResize" Icon="/9567A V00 - PI;component/Imagens/Automasul.ico" WindowStartupLocation="CenterScreen" Topmost="True">
+        Title="Exportar" Height="471" Width="233" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" Icon="/9567A V00 - PI;component/Imagens/Automasul.ico">
 
     <Window.Resources>
         <ResourceDictionary>
