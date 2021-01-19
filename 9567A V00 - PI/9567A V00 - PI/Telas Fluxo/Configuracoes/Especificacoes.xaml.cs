@@ -75,8 +75,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Configuracoes
 
             txtTempoLimpezaMistura.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoLimpezaMisturador);
 
-            txtTempoMistura.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoMistura);
-
             txtTempoEstabilizacao.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoEstabilizacao);
 
             txtTempoPulmaoVazio.Text = Convert.ToString(VariaveisGlobais.controleProducao.TempoPulmaoVazio);
@@ -89,8 +87,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Configuracoes
             VariaveisGlobais.controleProducao.TempoLimpezaDosagem = Convert.ToInt32(txtTempoLimpezaDosagem.Text);
 
             VariaveisGlobais.controleProducao.TempoLimpezaMisturador = Convert.ToInt32(txtTempoLimpezaMistura.Text);
-
-            VariaveisGlobais.controleProducao.TempoMistura = Convert.ToInt32(txtTempoMistura.Text);
 
             VariaveisGlobais.controleProducao.TempoEstabilizacao = Convert.ToInt32(txtTempoEstabilizacao.Text);
 

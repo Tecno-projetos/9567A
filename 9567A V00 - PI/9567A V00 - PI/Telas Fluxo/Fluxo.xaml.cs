@@ -61,16 +61,26 @@ namespace _9567A_V00___PI.Telas_Fluxo
             }
             else
             {
-                txtVirtual2.Text = "Prx. Produto";
+                txtVirtual2.Text = "Próximo Produto";
             }
 
             if (VariaveisGlobais.controleProducao.Manual_Automatico)
             {
                 txtVirtual.Text = "Em Automático";
+                txtVirtual.Foreground = new SolidColorBrush(Colors.White);
+                pckIconManual.Foreground = new SolidColorBrush(Colors.White);
+
+                btManualAuto.Background = new SolidColorBrush(Colors.Green);
+                btManualAuto.Foreground = new SolidColorBrush(Colors.White);
             }
             else
             {
                 txtVirtual.Text = "Em Manual";
+
+                txtVirtual.Foreground = new SolidColorBrush(Colors.Black);
+                pckIconManual.Foreground = new SolidColorBrush(Colors.Black);
+                btManualAuto.Background = new SolidColorBrush(Colors.Yellow);
+                btManualAuto.Foreground = new SolidColorBrush(Colors.Black);
             }
 
 
@@ -209,6 +219,16 @@ namespace _9567A_V00___PI.Telas_Fluxo
         private void btManualAuto_Click(object sender, RoutedEventArgs e)
         {
 
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
+
             Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
 
             VariaveisGlobais.controleProducao.Manual_Automatico = !VariaveisGlobais.controleProducao.Manual_Automatico;
@@ -220,6 +240,15 @@ namespace _9567A_V00___PI.Telas_Fluxo
 
         private void BT_confirma_Click(object sender, RoutedEventArgs e)
         {
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
             if (VariaveisGlobais.controleProducao.HabilitadoDosarEmManual)
             {
                 Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;

@@ -9,9 +9,9 @@
              d:DesignHeight="450" d:DesignWidth="800" Width="1024" Height="675">
     <Grid Background="#FF7F7F7F" RenderTransformOrigin="0.5,0.5">
 
-        <Image HorizontalAlignment="Left" Height="680" VerticalAlignment="Top" Width="293" Source="/9567A V00 - PI;component/Imagens/planta.png" Margin="729,0,0,-5"/>
+        <Image HorizontalAlignment="Left" Height="680" VerticalAlignment="Top" Width="293" Source="/9567A V00 - PI;component/Imagens/planta.png" Margin="745,0,-14,-5"/>
 
-        <Desenho:Motor x:Name="BMP1_Designer" HorizontalAlignment="Left" Height="40" Margin="653,270,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.5,0.5">
+        <Desenho:Motor x:Name="BMP1_Designer" HorizontalAlignment="Left" Height="40" Margin="681,270,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.5,0.5">
             <Desenho:Motor.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="-1.5" ScaleY="1.5"/>
@@ -21,8 +21,8 @@
                 </TransformGroup>
             </Desenho:Motor.RenderTransform>
         </Desenho:Motor>
-        <Label Content="BMP-1" HorizontalAlignment="Left" Height="28" Margin="664,252,0,395" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Desenho:Motor x:Name="BMP2_Designer" HorizontalAlignment="Left" Height="40" Margin="653,339,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.5,0.5">
+        <Label Content="BMP-1" HorizontalAlignment="Left" Height="28" Margin="691,252,0,395" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="BMP2_Designer" HorizontalAlignment="Left" Height="40" Margin="681,339,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.5,0.5">
             <Desenho:Motor.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="-1.5" ScaleY="1.5"/>
@@ -32,8 +32,8 @@
                 </TransformGroup>
             </Desenho:Motor.RenderTransform>
         </Desenho:Motor>
-        <Label Content="BMP-2" HorizontalAlignment="Left" Height="28" Margin="664,321,0,326" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Desenho:Motor x:Name="TD1_Designer" HorizontalAlignment="Left" Height="40" Margin="670,510,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.5,0.5">
+        <Label Content="BMP-2" HorizontalAlignment="Left" Height="28" Margin="691,321,0,326" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="TD1_Designer" HorizontalAlignment="Left" Height="40" Margin="686,510,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.5,0.5">
             <Desenho:Motor.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="-1.5" ScaleY="1.5"/>
@@ -43,8 +43,8 @@
                 </TransformGroup>
             </Desenho:Motor.RenderTransform>
         </Desenho:Motor>
-        <Label Content="TD-1" HorizontalAlignment="Left" Height="28" Margin="673,494,0,153" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Desenho:Motor x:Name="FM1_Designer" HorizontalAlignment="Left" Height="40" Margin="952,51,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
+        <Label Content="TD-1" HorizontalAlignment="Left" Height="28" Margin="689,494,0,153" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Desenho:Motor x:Name="FM1_Designer" HorizontalAlignment="Left" Height="40" Margin="952,57,0,0" VerticalAlignment="Top" Width="57" RenderTransformOrigin="0.5,0.5">
             <Desenho:Motor.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
@@ -55,7 +55,7 @@
             </Desenho:Motor.RenderTransform>
         </Desenho:Motor>
         <Label Content="FM-1" HorizontalAlignment="Left" Height="28" Margin="942,33,0,614" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <DataGrid x:Name="DataGrid_Produtos" Margin="11,45,704,0" CanUserAddRows="False"
+        <DataGrid x:Name="DataGrid_Produtos" Margin="11,45,683,0" CanUserAddRows="False"
             HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Black" Foreground="Black"
             HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlTextColor}}"
             VerticalGridLinesBrush="{DynamicResource MaterialDesignDarkBackground}" BorderBrush="{x:Null}" BorderThickness="1"
@@ -82,29 +82,8 @@
 
             </DataGrid.ColumnHeaderStyle>
         </DataGrid>
-        <Label Content="Produtos Produção:" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="320" Foreground="White" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="11,33,0,0" Stroke="White" VerticalAlignment="Top" Width="309"/>
-
-        <Button x:Name="btUpList" Margin="129,520,0,0" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btUpList_Click" HorizontalAlignment="Left" Width="54" Height="46" VerticalAlignment="Top" >
-            <Grid Width="42" Height="42" Margin="0">
-                <materialDesign:PackIcon Kind="ArrowUpBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
-            </Grid>
-        </Button>
-        <Button x:Name="btDownList" Margin="129,572,0,0" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btDownList_Click" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54" >
-            <Grid Width="42" Height="42" Margin="0">
-                <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
-            </Grid>
-        </Button>
-        <Button x:Name="btLeftList" Margin="72,543,0,0" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btLeftList_Click" Height="47" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54" >
-            <Grid Width="42" Height="42" Margin="0">
-                <materialDesign:PackIcon Kind="ArrowLeftBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
-            </Grid>
-        </Button>
-        <Button x:Name="btRightList" Margin="186,543,0,0" Background="#FF505050" BorderBrush="Black" Opacity="1" Click="btRightList_Click" Height="47" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54" >
-            <Grid Width="42" Height="42" Margin="0">
-                <materialDesign:PackIcon Kind="ArrowRightBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
-            </Grid>
-        </Button>
+        <Label Content="Produtos Produção:" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="341" Foreground="White" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="11,33,0,0" Stroke="White" VerticalAlignment="Top" Width="330"/>
         <Desenho:registro x:Name="RP1_Designer" HorizontalAlignment="Left" Height="30" Margin="759,205,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
             <Desenho:registro.RenderTransform>
                 <TransformGroup>
@@ -115,7 +94,7 @@
                 </TransformGroup>
             </Desenho:registro.RenderTransform>
         </Desenho:registro>
-        <Desenho:registro x:Name="RP2_Designer" HorizontalAlignment="Left" Height="30" Margin="699,434,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
+        <Desenho:registro x:Name="RP2_Designer" HorizontalAlignment="Left" Height="30" Margin="715,434,0,0" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.5,0.5">
             <Desenho:registro.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="2" ScaleY="2"/>
@@ -135,16 +114,16 @@
                 </TransformGroup>
             </Desenho:registro.RenderTransform>
         </Desenho:registro>
-        <Label Content="RP2 - RP3" HorizontalAlignment="Left" Height="28" Margin="677,407,0,240" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Label Content="RP2 - RP3" HorizontalAlignment="Left" Height="28" Margin="693,407,0,240" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
         <Label Content="RP-1" HorizontalAlignment="Left" Height="28" Margin="738,179,0,468" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
         <Label Content="RP-4" HorizontalAlignment="Left" Height="28" Margin="946,418,0,229" VerticalAlignment="Center" Width="65" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
         <Button x:Name="btEmergencia" Margin="744,629,0,0" Background="Red" BorderBrush="Black" Click="btEmergencia_Click" Height="43" VerticalAlignment="Top" HorizontalAlignment="Left" Width="166">
-            <Grid Width="156" Height="40">
+            <Grid Width="161" Height="40">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <materialDesign:PackIcon x:Name="pckIcon1" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="-1,4,101,6" Height="30" Width="Auto" HorizontalAlignment="Stretch"/>
-                <TextBlock x:Name="txtVirtual1" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,12,0,5" Width="114" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Emergência" Height="23"/>
+                <materialDesign:PackIcon x:Name="pckIcon1" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="-1,4,0,6" Height="30" Width="56" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="txtVirtual1" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="42,12,0,5" Width="114" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Emergência" Height="23"/>
             </Grid>
         </Button>
         <Desenho:nivelDigital x:Name="nivelDigital_Designer" HorizontalAlignment="Left" Height="25" Margin="842,489,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="0.5,0.5">
@@ -157,23 +136,43 @@
                 </TransformGroup>
             </Desenho:nivelDigital.RenderTransform>
         </Desenho:nivelDigital>
-        <Label x:Name="lbCorrenteTD1" Content="125,00(A)" HorizontalAlignment="Left" Height="24" Margin="648,555,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="0.5,0.5" FontSize="16" Foreground="#FFB8B8B8" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="0,0,5,0"/>
-        <Label x:Name="lbVelocidadeTD1" Content="1800 RPM" HorizontalAlignment="Left" Height="18" Margin="648,579,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="0.5,0.5" Foreground="#FFB8B8B8" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="0,0,5,0" FontSize="14"/>
-        <Desenho:balancaAutomatica x:Name="pesoBalanca" HorizontalAlignment="Left" Height="140" Margin="766,255,0,0" VerticalAlignment="Top" Width="170"/>
+        <Label x:Name="lbCorrenteTD1" Content="125,00(A)" HorizontalAlignment="Left" Height="24" Margin="664,555,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="0.5,0.5" FontSize="16" Foreground="#FFB8B8B8" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="0,0,5,0"/>
+        <Label x:Name="lbVelocidadeTD1" Content="1800 RPM" HorizontalAlignment="Left" Height="18" Margin="664,579,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="0.5,0.5" Foreground="#FFB8B8B8" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="0,0,5,0" FontSize="14"/>
+        <Desenho:balancaAutomatica x:Name="pesoBalanca" HorizontalAlignment="Left" Height="140" Margin="778,255,0,0" VerticalAlignment="Top" Width="170"/>
 
-        <Producao:controleSlot x:Name="slot1" HorizontalAlignment="Left" Height="162" Margin="325,45,0,0" VerticalAlignment="Top" Width="335"/>
-        <Producao:controleSlot x:Name="slot2" HorizontalAlignment="Left" Height="162" Margin="325,202,0,0" VerticalAlignment="Top" Width="335" NameSlot_GS="Mistura" SlotPertence_GS="1"/>
-        <Producao:controleSlot x:Name="slot3" HorizontalAlignment="Left" Height="162" Margin="325,358,0,0" VerticalAlignment="Top" Width="335" NameSlot_GS="Expedição" SlotPertence_GS="2"/>
-        <Button x:Name="btManualAuto" Margin="328,570,0,0" Background="#FF40B215" BorderBrush="Black" Width="321" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Click="btManualAuto_Click">
+        <Producao:controleSlot x:Name="slot1" HorizontalAlignment="Left" Height="162" Margin="346,45,0,0" VerticalAlignment="Top" Width="335"/>
+        <Producao:controleSlot x:Name="slot2" HorizontalAlignment="Left" Height="162" Margin="346,202,0,0" VerticalAlignment="Top" Width="335" NameSlot_GS="Mistura" SlotPertence_GS="1"/>
+        <Producao:controleSlot x:Name="slot3" HorizontalAlignment="Left" Height="162" Margin="346,358,0,0" VerticalAlignment="Top" Width="335" NameSlot_GS="Expedição" SlotPertence_GS="2"/>
+        <Button x:Name="btManualAuto" Margin="349,609,0,0" Background="#FF40B215" BorderBrush="Black" Width="321" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Click="btManualAuto_Click">
             <Grid Width="311" Height="40">
-                <materialDesign:PackIcon x:Name="pckIcon" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="2,-6,0,-7" Height="30" Width="30"/>
-                <TextBlock x:Name="txtVirtual" Text="Manual" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="0,12,10,10" Width="269" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <materialDesign:PackIcon x:Name="pckIconManual" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="9,0,0,4" Height="36" Width="45"/>
+                <TextBlock x:Name="txtVirtual" Text="Manual" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="47,9,0,7" Width="264" FontSize="20" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </Grid>
         </Button>
-        <Button x:Name="BT_confirma" Margin="328,515,0,0" Background="#FFE8FF02" BorderBrush="Black" Width="321" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BT_confirma_Click">
+        <Button x:Name="BT_confirma" Margin="349,515,0,0" Background="#FFE8FF02" BorderBrush="Black" Width="321" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BT_confirma_Click">
             <Grid Width="311" Height="40">
-                <materialDesign:PackIcon x:Name="pckIcon2" Kind="Information" VerticalAlignment="Center" Foreground="Black" Margin="2,-6,0,-7" Height="30" Width="30"/>
-                <TextBlock x:Name="txtVirtual2" Text="Troca Produto" FontFamily="Champagne &amp; Limousines" Foreground="Black" Margin="32,12,10,10" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <materialDesign:PackIcon x:Name="pckIcon2" Kind="Information" VerticalAlignment="Center" Foreground="Black" Margin="2,-5,0,-5" Height="50" Width="55"/>
+                <TextBlock x:Name="txtVirtual2" Text="Troca Produto" FontFamily="Champagne &amp; Limousines" Foreground="Black" Margin="52,9,0,7" FontSize="20" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Width="259"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btUpList" Margin="122,540,825,85" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btUpList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowUpBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btDownList" Margin="122,595,825,30" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btDownList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btLeftList" Margin="40,565,907,60" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btLeftList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowLeftBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btRightList" Margin="204,565,743,60" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btRightList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowRightBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
             </Grid>
         </Button>
 

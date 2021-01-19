@@ -59,5 +59,31 @@ namespace _9567A_V00___PI.DataBase
 
             return Data;
         }
+
+
+        public static float getTempoMistura(Int32 IdReceita)
+        {
+            DataTable Data = new DataTable();
+
+            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+            {
+                try
+                {
+                    string CommandString = "SELECT PremixReceita.TempoMistura FROM PremixReceita WHERE Codigo = '" + IdReceita + "'";
+
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+
+                    dynamic Adapter = SqlGlobalFuctions.ReturnAdapter(CommandString, Utilidades.VariaveisGlobais.Connection_DB_Receitas_GS);
+
+                    Adapter.Fill(Data);
+                }
+                catch (Exception ex)
+                {
+                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                }
+            }
+
+            return Convert.ToSingle(Data.Rows[0][0]);
+        }
     }
 }

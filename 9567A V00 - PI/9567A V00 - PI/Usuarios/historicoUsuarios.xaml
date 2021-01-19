@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="_9567A_V00___PI.Usuarios.historicoUsuarios"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_9567A_V00___PI.Usuarios"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+            xmlns:Utilidades="clr-namespace:_9567A_V00___PI.Utilidades"
+            xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"   
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Width="825" Height="675" Loaded="UserControl_Loaded" >
+
+    <Grid Background="#FF7F7F7F">
+
+        <Grid.Resources  >
+
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+
+
+                <SolidColorBrush x:Key="brushWatermarkBackground" Color="#FF505050" />
+                <SolidColorBrush x:Key="brushWatermarkForeground" Color="White" />
+                <Utilidades:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />
+
+                <SolidColorBrush x:Key="brushWatermarkBorder" Color="White" />
+
+                <Style x:Key="EntryFieldStyle" TargetType="{x:Type Grid}" >
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="20,0" />
+                </Style>
+
+
+
+            </ResourceDictionary>
+
+        </Grid.Resources>
+
+        <materialDesign:PackIcon Kind="TableUser" VerticalAlignment="Center" Foreground="White" Height="95" Margin="0,6,0,574" Width="825"/>
+        <Label Content="Tabela Usuário" HorizontalAlignment="Left" VerticalAlignment="Top" Width="825" Foreground="White" FontSize="16" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,86,0,0"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="5" Margin="0,118,0,0" Stroke="White" VerticalAlignment="Top" Width="825"/>
+
+        <Button x:Name="btPesquisar" Margin="588,590,10,35" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btPesquisar_Click" >
+            <Grid Width="150">
+                <materialDesign:PackIcon Kind="Search" VerticalAlignment="Center" Foreground="White" Margin="2,-6,0,-7" Height="30" Width="30"/>
+                <TextBlock  Text="Pesquisar" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="55,0,10,0" Width="85" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </Button>
+        <ListBox x:Name="listbox" Margin="7,178,542,10" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="listbox_SelectionChanged"/>
+        <Label Content="Nome do Usuário: " Height="34" Margin="62,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <materialDesign:PackIcon Kind="User" VerticalAlignment="Stretch" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" Margin="24,139,763,502" BorderBrush="#FF040404"/>
+
+        <DataGrid x:Name="DataGridHistory" Margin="300,178,10,0" CanUserAddRows="False"
+            HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Bold" Foreground="Black"
+            ScrollViewer.CanContentScroll="True"
+            HorizontalGridLinesBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
+            VerticalGridLinesBrush="{DynamicResource brushWatermarkForeground}" BorderBrush="#000" BorderThickness="1"
+            ScrollViewer.HorizontalScrollBarVisibility="Visible"
+            CanUserDeleteRows ="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"   
+            ScrollViewer.VerticalScrollBarVisibility="Auto" Height="382" Cursor="Hand" IsReadOnly="True" IsEnabled="False" AlternatingRowBackground="#FF3C3C3C" RowBackground="WhiteSmoke" LoadingRow="DataGridHistory_LoadingRow" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+
+
+        <xctk:DateTimePicker x:Name="DTPStart" Height="30" Margin="301,139,0,0" VerticalAlignment="Top" Width="240" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Cursor="Hand" FontSize="14" CalendarWidth="500" RenderTransformOrigin="0,0" ButtonSpinnerLocation="Left"/>
+        <xctk:DateTimePicker x:Name="DTPEnd" Height="30" Margin="575,139,0,0" VerticalAlignment="Top" Width="240" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Cursor="Hand" FontSize="14" ButtonSpinnerLocation="Left" CalendarWidth="500"/>
+        <Button x:Name="btUpList" Margin="382,565,366,60" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btUpList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowUpBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btDownList" Margin="382,620,366,5" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btDownList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btLeftList" Margin="300,590,448,35" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btLeftList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowLeftBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btRightList" Margin="464,590,284,35" Background="#FF505050" BorderBrush="Black" Height="50" Opacity="1" Click="btRightList_Click" >
+            <Grid Width="42" Height="42" Margin="0">
+                <materialDesign:PackIcon Kind="ArrowRightBold" VerticalAlignment="Center" Foreground="White" Height="42" Width="42"/>
+            </Grid>
+        </Button>
+
+
+    </Grid>
+
+
+</UserControl>

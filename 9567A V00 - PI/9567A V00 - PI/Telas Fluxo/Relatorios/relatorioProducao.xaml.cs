@@ -93,25 +93,23 @@ namespace _9567A_V00___PI.Telas_Fluxo.Relatorios
                 inputDialog.ShowDialog();
 
 
-
-
                 //Original
-                //if (!Relatorios.ExportacaoRelatorios.exportProducao(fileName, Utilidades.functions.PesquisaDateInDateOut(producao.dataInicial_GS, producao.dataFinal_GS), "Produção Total", producao.dataInicial_GS, producao.dataFinal_GS))
-                //{
-                //    inputDialog = new Utilidades.messageBox("Erro", "Erro ao gerar relatório. Tente Novamente!", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
+                if (!Relatorios.ExportacaoRelatorios.exportProducao(fileName, "Produção Total", producao.dataInicial_GS, producao.dataFinal_GS))
+                {
+                    inputDialog = new Utilidades.messageBox("Erro", "Erro ao gerar relatório. Tente Novamente!", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
 
-                //    inputDialog.ShowDialog();
-                //}
-                //else
-                //{
-                //    producao.atualizaProjeto(fileName);
+                    inputDialog.ShowDialog();
+                }
+                else
+                {
+                    producao.atualizaProjeto(fileName);
 
-                //    if (NecessitaApagar)
-                //    {
-                //        File.Delete(OldfileName);
-                //        NecessitaApagar = false;
-                //    }
-                //}
+                    if (NecessitaApagar)
+                    {
+                        File.Delete(OldfileName);
+                        NecessitaApagar = false;
+                    }
+                }
             }
             else
             {
@@ -139,19 +137,19 @@ namespace _9567A_V00___PI.Telas_Fluxo.Relatorios
                     inputDialog.ShowDialog();
 
                     //Original
-                    //if (Relatorios.ExportacaoRelatorios.exportProducao(destinationFile, Utilidades.functions.PesquisaDateInDateOut(producao.dataInicial_GS, producao.dataFinal_GS), "Produção Total", producao.dataInicial_GS, producao.dataFinal_GS))
-                    //{
-                    //    inputDialog = new Utilidades.messageBox("Arquivo exportado", "O arquivo foi exportado com sucesso", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
+                    if (Relatorios.ExportacaoRelatorios.exportProducao(destinationFile, "Produção Total", producao.dataInicial_GS, producao.dataFinal_GS))
+                    {
+                       inputDialog = new Utilidades.messageBox("Arquivo exportado", "O arquivo foi exportado com sucesso", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
 
-                    //    inputDialog.ShowDialog();
-                    //}
-                    //else
-                    //{
-                    //    inputDialog = new Utilidades.messageBox("Erro", "Erro ao exportar relatório. Tente Novamente!", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
+                         inputDialog.ShowDialog();
+                    }
+                    else
+                    {
+                        inputDialog = new Utilidades.messageBox("Erro", "Erro ao exportar relatório. Tente Novamente!", MaterialDesignThemes.Wpf.PackIconKind.Information, "OK", "Fechar");
 
-                    //    inputDialog.ShowDialog();
+                        inputDialog.ShowDialog();
 
-                    //}
+                    }
                 }
                 else
                 {

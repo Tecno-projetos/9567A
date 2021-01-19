@@ -25,19 +25,7 @@
                     <TextBlock TextAlignment="Center" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="36,12,15,10" Width="119" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Em Produção"/>
                 </Grid>
             </Button>
-            <Button x:Name="btRetirarProducao" Margin="10,604,10,21" Background="#FFB90404" BorderBrush="Black" Height="50" Click="btRetirarProducao_Click">
-                <Grid Width="170" Height="40">
-                    <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center" Foreground="White" Margin="2,-6,0,-7" Height="30" Width="30"/>
-                    <TextBlock TextAlignment="Center" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="36,12,15,10" Width="119" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Retirar Produção"/>
-                </Grid>
-            </Button>
         </Grid>
         <StackPanel x:Name="spControleProducao" HorizontalAlignment="Left" Height="675" Margin="200,0,0,0" VerticalAlignment="Top" Width="824"/>
-        <Button x:Name="btRelatorio" Margin="10,259,834,366" Background="#FFFF0101" BorderBrush="Black" Height="50" Opacity="1" Click="btRelatorio_Click" >
-            <Grid Width="160" Height="36">
-                <materialDesign:PackIcon Kind="File" VerticalAlignment="Center" Foreground="White" Height="36" Width="39" Margin="-1,0,0,0"/>
-                <TextBlock  Text="Gerar Relatório" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="41,10,6,8" Width="113" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Grid>
-        </Button>
     </Grid>
 </UserControl>

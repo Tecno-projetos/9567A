@@ -37,11 +37,6 @@ namespace _9567A_V00___PI
 
         #endregion
 
-        Utilidades.messageBox inputDialog;
-
-        RTU.IndicadorPesagem_3102C_S inidicadorPesagem;
-
-
         public TelaInicial()
         {
             InitializeComponent();
@@ -73,6 +68,7 @@ namespace _9567A_V00___PI
             VariaveisGlobais.Load_Connection();
 
             #endregion
+
 
             VariaveisGlobais.Fluxo.BMP1_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 2, 0, "Misturador Motor 1", "BMP-1", "1", "12");
             VariaveisGlobais.Fluxo.BMP2_Designer.loadEquip(Utilidades.typeEquip.PD, Utilidades.typeCommand.PD, 22, 0, "Misturador Motor 2", "BMP-2", "2", "13");
@@ -152,12 +148,22 @@ namespace _9567A_V00___PI
 
             #endregion
 
+
+            VariaveisGlobais.producao.TelaConfiguracaoReceitaProducao.IniciouProducao += IniciouProducao;
+
             VariaveisGlobais.windowFirstLoading.Close();
+
             Utilidades.VariaveisGlobais.Window_Diagnostic.Closing += Window_Diagnostic_Closing;
+
+
+
+
 
 
             spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
 
+            //Atualiza Menu no CLick
+            AtualizaButton(pckHome);
 
             //Verifica se possui um alarme ativo.
             AlarmInSup.Visibility = Visibility.Hidden;
@@ -165,11 +171,27 @@ namespace _9567A_V00___PI
             DataBase.SQLFunctionsProducao.AtualizaOrdemProducaoEmExecucao();
         }
 
+        private void IniciouProducao(object sender, EventArgs e)
+        {
+            if (spInical != null)
+            {
+                spInical.Children.Clear();
+
+                spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
+                AtualizaButton(pckHome);
+            }
+        }
+
+        #region Events de telas
         private void Window_Diagnostic_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
             Utilidades.VariaveisGlobais.Window_Diagnostic.Hide();
         }
+
+        #endregion
+
+        #region Timers Tickers
 
         private void timerTickTack(object sender, EventArgs e)
         {
@@ -182,7 +204,6 @@ namespace _9567A_V00___PI
                 Utilidades.VariaveisGlobais.TickTack_GS = true;
             }
         }
-
 
         private void timer1s_Tick(object sender, EventArgs e)
         {
@@ -295,6 +316,7 @@ namespace _9567A_V00___PI
 
             VariaveisGlobais.CommunicationPLC.writeBufferPLC();//Chama a escrita no PLC
         }
+        #endregion
 
         #region Clicks
 
@@ -390,10 +412,13 @@ namespace _9567A_V00___PI
             {
                 logout();
 
-                //spInical.Children.Clear();
+                if (spInical != null)
+                {
+                    spInical.Children.Clear();
 
-
-
+                    spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
+                    AtualizaButton(pckHome);
+                }
             }
         }
 
@@ -421,6 +446,7 @@ namespace _9567A_V00___PI
                 btLogin.Focus();
             }
         }
+
         #endregion
 
         #region Clicks Menu
@@ -433,6 +459,50 @@ namespace _9567A_V00___PI
 
                 spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
                 AtualizaButton(pckHome);
+            }
+        }
+
+        private void btRelatorio_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
+            if (spInical != null)
+            {
+                spInical.Children.Clear();
+
+                spInical.Children.Add(Utilidades.VariaveisGlobais.relatorios);
+
+                AtualizaButton(pckRelatorio);
+
+            }
+        }
+
+        private void btManutencao_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+
+                inputDialog.ShowDialog();
+
+                return;
+            }
+
+            if (spInical != null)
+            {
+                spInical.Children.Clear();
+
+                spInical.Children.Add(Utilidades.VariaveisGlobais.manutencao);
+
+                AtualizaButton(pckManutencao);
+
             }
         }
 
@@ -486,6 +556,25 @@ namespace _9567A_V00___PI
             }
         }
 
+        private void btConfiguracoesUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            if (VariaveisGlobais.NumberOfGroup_GS == 0)
+            {
+                Utilidades.messageBox inputDialog = new Utilidades.messageBox(VariaveisGlobais.faltaUsuarioTitle, VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
+                inputDialog.ShowDialog();
+            }
+            else
+            {
+                spInical.Children.Clear();
+
+                spInical.Children.Add(Utilidades.VariaveisGlobais.controleUsuario);
+
+                Utilidades.VariaveisGlobais.controleUsuario.spControleUsuario.Children.Clear();
+
+                AtualizaButton(pckUser);
+
+            }
+        }
         #endregion
 
         #endregion
@@ -768,48 +857,6 @@ namespace _9567A_V00___PI
 
         #endregion
 
-        private void btRelatorio_Click(object sender, RoutedEventArgs e)
-        {
-            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
-            {
-                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
 
-                inputDialog.ShowDialog();
-
-                return;
-            }
-
-            if (spInical != null)
-            {
-                spInical.Children.Clear();
-
-                spInical.Children.Add(Utilidades.VariaveisGlobais.relatorios);
-
-                AtualizaButton(pckRelatorio);
-
-            }
-        }
-
-        private void btManutencao_Click(object sender, RoutedEventArgs e)
-        {
-            if (Utilidades.VariaveisGlobais.NumberOfGroup_GS == 0)
-            {
-                Utilidades.messageBox inputDialog = new messageBox(Utilidades.VariaveisGlobais.faltaUsuarioTitle, Utilidades.VariaveisGlobais.faltaUsuarioMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
-
-                inputDialog.ShowDialog();
-
-                return;
-            }
-
-            if (spInical != null)
-            {
-                spInical.Children.Clear();
-
-                spInical.Children.Add(Utilidades.VariaveisGlobais.manutencao);
-
-                AtualizaButton(pckManutencao);
-
-            }
-        }
     }
 }
