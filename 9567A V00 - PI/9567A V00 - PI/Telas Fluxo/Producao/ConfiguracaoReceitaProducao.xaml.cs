@@ -212,7 +212,15 @@ namespace _9567A_V00___PI.Telas_Fluxo.Producao
 
             txtReceber.Text = Utilidades.VariaveisGlobais.floatingKeypad(txtReceber.Text, 6).ToString();
 
+
+            pesoProdutosReceita = pesoProdutosReceita + (pesoTodosProdutos / 2);
+            txtQtdReceita.Text = Convert.ToString(pesoProdutosReceita / pesoTodosProdutos);
+
+
             calculaApartirPesoTotalDesejado(Utilidades.VariaveisGlobais.OrdensProducao[Utilidades.VariaveisGlobais.OrdensProducao.Count - 1]);
+          
+
+
         }
 
         private void txtQtdReceita_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
