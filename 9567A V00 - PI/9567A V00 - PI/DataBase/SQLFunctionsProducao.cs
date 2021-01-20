@@ -523,7 +523,7 @@ namespace _9567A_V00___PI.DataBase
             {
                 try
                 {
-                    string CommandString = "UPDATE Producao SET IniciouDosagem = 'true' WHERE IdProducaoReceita = " + idProducao + " AND IdProduto = " + idProduto  + ";";
+                    string CommandString = "UPDATE ProducaoProdutos SET IniciouDosagem = 'true' WHERE IdProducaoReceita = " + idProducao + " AND IdProduto = " + idProduto  + ";";
 
                     dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
                     dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
@@ -553,7 +553,7 @@ namespace _9567A_V00___PI.DataBase
             {
                 try
                 {
-                    string CommandString = "UPDATE Producao SET FinalizouDosagem = 'true' WHERE IdProducaoReceita = " + idProducao + " AND IdProduto = " + idProduto + ";";
+                    string CommandString = "UPDATE ProducaoProdutos SET FinalizouDosagem = 'true' WHERE IdProducaoReceita = " + idProducao + " AND IdProduto = " + idProduto + ";";
 
                     dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
                     dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
