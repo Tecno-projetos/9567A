@@ -140,8 +140,31 @@
 
         </Grid>
         <StackPanel x:Name="spInical" HorizontalAlignment="Left" Height="676" VerticalAlignment="Top" Width="1021" Margin="-1,0,0,0"/>
-        <materialDesign:PackIcon x:Name="AlarmInSup" Kind="Warning" VerticalAlignment="Top" Foreground="#FFF3FF00" Margin="537,658,0,0" HorizontalAlignment="Left" Width="46" Height="47"/>
+        <materialDesign:PackIcon x:Name="AlarmInSup" Kind="Warning" VerticalAlignment="Top" Foreground="#FFF3FF00" Margin="615,658,0,0" HorizontalAlignment="Left" Width="46" Height="47"/>
 
+        <Rectangle x:Name="REC_No_Connection" HorizontalAlignment="Left" Height="675" Margin="-5,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="1029" Opacity="0.53" Fill="Red" ScrollViewer.VerticalScrollBarVisibility="Hidden" d:IsHidden="True"/>
+        <Rectangle x:Name="REC_PLC_STOP" HorizontalAlignment="Left" Height="675" Margin="-5,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="1021" Opacity="0.53" Fill="#FFFFDC00" d:IsHidden="True"/>
+        <TextBlock x:Name="LB_PLC_STOP" TextWrapping="Wrap" Text="PLC EM STOP" HorizontalAlignment="Center" Height="224" Margin="338,216,321,0" VerticalAlignment="Top" Width="357" FontSize="80" Foreground="Black" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" OpacityMask="Black" d:IsHidden="True">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="1.97"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+
+        <TextBlock x:Name="LB_No_Connection" Text="SEM CONEXÃO COM CLP" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" Height="332" Margin="290,165,291,0" VerticalAlignment="Top" Width="435" FontSize="80" Foreground="White" RenderTransformOrigin="0.5,0.5" d:IsHidden="True">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="2" ScaleY="1.97"/>
+                    <SkewTransform AngleX="0.454"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.984"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
 
     </Grid>

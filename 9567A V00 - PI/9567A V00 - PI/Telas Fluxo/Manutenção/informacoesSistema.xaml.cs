@@ -152,10 +152,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Manutenção
 
 
             }
-
-
-
-
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -176,22 +172,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Manutenção
             }
         }
 
-        private void btLimpar_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (VariaveisGlobais.NumberOfGroup_GS < 3)
-            {
-                Utilidades.messageBox inputDialog = new Utilidades.messageBox(Utilidades.VariaveisGlobais.faltaPermissaoTitle, Utilidades.VariaveisGlobais.faltaPermissaoMessage, MaterialDesignThemes.Wpf.PackIconKind.Error, "OK", "Fechar");
-                inputDialog.ShowDialog();
-            }
-            else
-            {
-                //Apago do banco para 6 meses
-                DataBase.SqlGlobalFuctions.AutoDelete(6);
-
-
-            }
-        }
 
         private void btSair_Click(object sender, RoutedEventArgs e)
         {
@@ -203,7 +183,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Manutenção
 
                 return;
             }
-
 
             string nomeProcesso = Process.GetCurrentProcess().ProcessName;
             // Obtém todos os processos com o nome do atual

@@ -155,11 +155,6 @@ namespace _9567A_V00___PI
 
             Utilidades.VariaveisGlobais.Window_Diagnostic.Closing += Window_Diagnostic_Closing;
 
-
-
-
-
-
             spInical.Children.Add(Utilidades.VariaveisGlobais.Fluxo);
 
             //Atualiza Menu no CLick
@@ -207,11 +202,45 @@ namespace _9567A_V00___PI
 
         private void timer1s_Tick(object sender, EventArgs e)
         {
-            //Chama a atulização da Manutenção
-            VariaveisGlobais.manutencao.atualizaManutencao();
 
             try
             {
+                //Chama a atulização da Manutenção
+                VariaveisGlobais.manutencao.atualizaManutencao();
+
+                #region Conexão
+
+                LB_No_Connection.Dispatcher.Invoke(delegate { LB_No_Connection.Visibility = Visibility.Hidden; });
+                REC_No_Connection.Dispatcher.Invoke(delegate { REC_No_Connection.Visibility = Visibility.Hidden; });
+
+                if (Utilidades.VariaveisGlobais.CommunicationPLC.ConnectionStatus_GS == 1 || VariaveisGlobais.manutencao.TelaManutencaoAtiva_Get)
+                {
+                    LB_PLC_STOP.Dispatcher.Invoke(delegate { LB_PLC_STOP.Visibility = Visibility.Hidden; });
+                    REC_PLC_STOP.Dispatcher.Invoke(delegate { REC_PLC_STOP.Visibility = Visibility.Hidden; });
+                }
+                else if (Utilidades.VariaveisGlobais.CommunicationPLC.ConnectionStatus_GS == 0)
+                {
+                    LB_PLC_STOP.Dispatcher.Invoke(delegate { LB_PLC_STOP.Visibility = Visibility.Visible; });
+                    REC_PLC_STOP.Dispatcher.Invoke(delegate { REC_PLC_STOP.Visibility = Visibility.Visible; });
+                }
+
+
+                if (!Utilidades.VariaveisGlobais.CommunicationPLC.PLCConnected_GS && !VariaveisGlobais.manutencao.TelaManutencaoAtiva_Get)
+                {
+                    LB_No_Connection.Dispatcher.Invoke(delegate { LB_No_Connection.Visibility = Visibility.Visible; });
+                    REC_No_Connection.Dispatcher.Invoke(delegate { REC_No_Connection.Visibility = Visibility.Visible; });
+
+                    LB_PLC_STOP.Dispatcher.Invoke(delegate { LB_PLC_STOP.Visibility = Visibility.Hidden; });
+                    REC_PLC_STOP.Dispatcher.Invoke(delegate { REC_PLC_STOP.Visibility = Visibility.Hidden; });
+                }
+                else
+                {
+                    LB_No_Connection.Dispatcher.Invoke(delegate { LB_No_Connection.Visibility = Visibility.Hidden; });
+                    REC_No_Connection.Dispatcher.Invoke(delegate { REC_No_Connection.Visibility = Visibility.Hidden; });
+
+                }
+                #endregion
+
                 DataTable dt = new DataTable();
 
                 dt = DataBase.SqlFunctionsEquips.GetGridAlarm_Table_EquipAlarmEvent();

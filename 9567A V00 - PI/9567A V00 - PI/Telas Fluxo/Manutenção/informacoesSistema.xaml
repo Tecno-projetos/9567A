@@ -55,12 +55,6 @@
                 <TextBlock x:Name="txtVirtual" Text="Habilita/Desabilita" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="15,12,0,10" Width="155" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </Button>
-        <Button x:Name="btLimpar" Margin="290,605,284,20" Background="Red" BorderBrush="Black" Height="50" Click="btLimpar_Click">
-            <Grid Width="255" Height="40">
-                <materialDesign:PackIcon x:Name="pckIcon1" Kind="Information" VerticalAlignment="Center" Foreground="White" Margin="2,-6,0,-7" Height="30" Width="30"/>
-                <TextBlock x:Name="txtVirtual1" FontFamily="Champagne &amp; Limousines" Foreground="White" Margin="37,12,43,10" Width="175" FontSize="14" FontWeight="Normal" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="Limpar "/><Run Text="Últimos 6 mêses "/><Run Text="BD"/></TextBlock>
-            </Grid>
-        </Button>
         <Button x:Name="btSair" Margin="560,605,29,20" Background="#FF505050" BorderBrush="Black" Height="50" Click="btSair_Click">
             <Grid Width="165" Height="29">
                 <materialDesign:PackIcon Kind="ExitToApp" VerticalAlignment="Center" Foreground="Red" Margin="0,0,0,-3" Height="32" Width="30"/>
