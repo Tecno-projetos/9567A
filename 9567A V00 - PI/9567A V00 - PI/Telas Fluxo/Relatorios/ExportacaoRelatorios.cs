@@ -17,7 +17,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Relatorios
     class ExportacaoRelatorios
     {
         //#region Exportar PDF
-
         /// <summary>
         /// Produções existentes
         /// </summary>
@@ -280,7 +279,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Relatorios
 
         }
 
-       
         #region Complementos relatórios
         private static PdfPTable tableProducao(float[] colsW, string nomeColuna1, string nomeColuna2, bool comBorda)
         {
@@ -316,12 +314,9 @@ namespace _9567A_V00___PI.Telas_Fluxo.Relatorios
 
                 tabela.AddCell(getNewCell(nomeColuna1, titulo, Element.ALIGN_LEFT, 5, PdfPCell.NO_BORDER, preto, branco));
                 tabela.AddCell(getNewCell(nomeColuna2, titulo, Element.ALIGN_LEFT, 5, PdfPCell.NO_BORDER, preto, branco));
-
-
             }
 
             return tabela;
-
 
         }
 
@@ -414,7 +409,6 @@ namespace _9567A_V00___PI.Telas_Fluxo.Relatorios
 
         public class PDFFooter : PdfPageEventHelper
         {
-
             PdfTemplate template;
             PdfContentByte cb;
 
@@ -493,6 +487,7 @@ namespace _9567A_V00___PI.Telas_Fluxo.Relatorios
 
             return cell;
         }
+
         private static PdfPCell getNewCell(string Texto, Font Fonte, int Alinhamento, float Espacamento, BaseColor CorBorda, BaseColor CorFundo)
         {
             var cell = new PdfPCell(new Phrase(Texto, Fonte));
