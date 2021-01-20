@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:_9567A_V00___PI"
         xmlns:Desenho="clr-namespace:_9567A_V00___PI.Desenho" xmlns:local1="clr-namespace:_9567A_V00___PI.Utilidades" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="_9567A_V00___PI.TelaInicial"
         mc:Ignorable="d"
-       Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Background="#FF7F7F7F" WindowStyle="None" ResizeMode="NoResize">
+       Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Background="#FF7F7F7F" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized">
 
     <Window.Resources>
 
