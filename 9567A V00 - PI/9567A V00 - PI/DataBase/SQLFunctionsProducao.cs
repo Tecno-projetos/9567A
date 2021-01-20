@@ -516,6 +516,64 @@ namespace _9567A_V00___PI.DataBase
 
         }
 
+        public static int Update_IniciouDosagemProduto(int idProducao, int idProduto)
+        {
+            int ret = -1;
+            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+            {
+                try
+                {
+                    string CommandString = "UPDATE Producao SET IniciouDosagem = 'true' WHERE IdProducaoReceita = " + idProducao + " AND IdProduto = " + idProduto  + ";";
 
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
+                    dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
+
+                    Call.Open();
+                    ret = Command.ExecuteNonQuery();
+                    Call.Close();
+                    return ret;
+                }
+                catch (Exception ex)
+                {
+                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                    ret = -1;
+                    return ret;
+                }
+            }
+            else
+            {
+                return ret;
+            }
+        }
+
+        public static int Update_FinalizouDosagemProduto(int idProducao, int idProduto)
+        {
+            int ret = -1;
+            if (Utilidades.VariaveisGlobais.DB_Connected_GS)
+            {
+                try
+                {
+                    string CommandString = "UPDATE Producao SET FinalizouDosagem = 'true' WHERE IdProducaoReceita = " + idProducao + " AND IdProduto = " + idProduto + ";";
+
+                    dynamic Call = SqlGlobalFuctions.ReturnCall(Utilidades.VariaveisGlobais.Connection_DB_Producao_GS);
+                    dynamic Command = SqlGlobalFuctions.ReturnCommand(CommandString, Call);
+
+                    Call.Open();
+                    ret = Command.ExecuteNonQuery();
+                    Call.Close();
+                    return ret;
+                }
+                catch (Exception ex)
+                {
+                    Utilidades.VariaveisGlobais.Window_Buffer_Diagnostic.List_Error = ex.ToString();
+                    ret = -1;
+                    return ret;
+                }
+            }
+            else
+            {
+                return ret;
+            }
+        }
     }
 }
