@@ -705,6 +705,12 @@ namespace _9567A_V00___PI
                 //Verifica se existe a OP no BD
                 if (VariaveisGlobais.controleProducao.indexProducao != -1)
                 {
+                    if (VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC && VariaveisGlobais.controleProducao.Troca_Produto)
+                    {
+                        VariaveisGlobais.controleProducao.Troca_Produto = false;
+                        InicioDosagem();
+                    }
+
                     //Verifica o produto que esta sendo produzido
                     int i = 0;
                     foreach (var produtos in Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos)
@@ -715,6 +721,7 @@ namespace _9567A_V00___PI
                             //Atualiza index do produto 
                             VariaveisGlobais.controleProducao.indexProduto = i;
 
+                            
                             if (VariaveisGlobais.controleProducao.Manual_Automatico)
                             {
                                 if (produtos.iniciouDosagem)
@@ -730,50 +737,77 @@ namespace _9567A_V00___PI
                                             VariaveisGlobais.controleProducao.PesoTolerancia = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].tolerancia;
                                             VariaveisGlobais.controleProducao.Dosando = true;
                                             VariaveisGlobais.controleProducao.Troca_Produto = true;
+                                            VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC = false;
+                                            VariaveisGlobais.controleProducao.Estabilizado = false;
                                             InicioDosagem();
                                         }
                                     }
 
-                                    //Finalizada dosagem da produção
-                                    if ((i + 1) == Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos.Count &&
-                                        VariaveisGlobais.controleProducao.Estabilizado)
+                                    //Finaliza Dosagem
+                                    if (VariaveisGlobais.controleProducao.Estabilizado && VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC)
                                     {
-                                        DataBase.SQLFunctionsProducao.Update_PesoDosadoTotal(Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.controleProducao.Peso_Total_Produzindo);
-                                        Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].pesoTotalProduzido = VariaveisGlobais.controleProducao.Peso_Total_Produzindo;
+                                        if (DataBase.SQLFunctionsProducao.Update_FinalizouDosagemProduto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].produto.id) > 0)
+                                        {
+                                            VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].finalizouDosagem = true;
 
-                                        VariaveisGlobais.controleProducao.PesoDosar = 0;
-                                        VariaveisGlobais.controleProducao.PesoTolerancia = 0;
-                                        VariaveisGlobais.controleProducao.Troca_Produto = false;
-                                        VariaveisGlobais.controleProducao.Dosando = false;
+                                            if (DataBase.SQLFunctionsProducao.Update_PesoDosado_Produto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].produto.id, VariaveisGlobais.controleProducao.Peso_Parcial_Produzindo) > 0)
+                                            {
+                                                //Verifica se é o ultimo produto
+                                                if (i + 1 == VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos.Count)
+                                                {
+                                                    DataBase.SQLFunctionsProducao.Update_PesoDosadoTotal(Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.controleProducao.Peso_Total_Produzindo);
+                                                    Utilidades.VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].pesoTotalProduzido = VariaveisGlobais.controleProducao.Peso_Total_Produzindo;
 
-                                        InicioDosagem();
+                                                    VariaveisGlobais.controleProducao.PesoDosar = 0;
+                                                    VariaveisGlobais.controleProducao.PesoTolerancia = 0;
+                                                    VariaveisGlobais.controleProducao.Troca_Produto = false;
+                                                    VariaveisGlobais.controleProducao.Dosando = false;
+                                                    VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC = false;
+                                                    InicioDosagem();
+                                                }
+
+                                            }
+                                        }
                                     }
 
                                 }
                                 else
                                 {
-
-                                    if (i -1 >0)
-                                    {
-                                        if (DataBase.SQLFunctionsProducao.Update_FinalizouDosagemProduto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto - 1].produto.id) > 0)
-                                        {
-                                            if (DataBase.SQLFunctionsProducao.Update_IniciouDosagemProduto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].produto.id) > 0)
-                                            {
-                                                VariaveisGlobais.controleProducao.Troca_Produto = true;
-                                                InicioDosagem();
-                                            }
-
-                                        }
-                                    }
-                                    else
+                                    //Verifica se não é o primeiro produto
+                                    if (i -1 >=0)
                                     {
                                         if (DataBase.SQLFunctionsProducao.Update_IniciouDosagemProduto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].produto.id) > 0)
                                         {
+                                            VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].iniciouDosagem = true;
+
                                             VariaveisGlobais.controleProducao.Troca_Produto = true;
+                                            VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC = false;
+                                            VariaveisGlobais.controleProducao.Estabilizado = false;
+                                            VariaveisGlobais.controleProducao.PesoDosar = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].pesoProdutoDesejado;
+                                            VariaveisGlobais.controleProducao.PesoTolerancia = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].tolerancia;
+
+                                            InicioDosagem();
+                                        }
+                                    }
+                                    else //Se for o primeiro produto
+                                    {
+                                        if (DataBase.SQLFunctionsProducao.Update_IniciouDosagemProduto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].produto.id) > 0)
+                                        {
+                                            VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].iniciouDosagem = true;
+                                            VariaveisGlobais.controleProducao.Dosando = true;
+                                            VariaveisGlobais.controleProducao.Troca_Produto = false;
+                                            VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC = true;
+                                            VariaveisGlobais.controleProducao.PesoDosar = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].pesoProdutoDesejado;
+                                            VariaveisGlobais.controleProducao.PesoTolerancia = VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].tolerancia;
+
                                             InicioDosagem();
                                         }
                                     }
                                 }
+
+                                VariaveisGlobais.controleProducao.EncerrarDosagem = false;
+                                VariaveisGlobais.controleProducao.HabilitadoDosarEmManual = false;
+                                VariaveisGlobais.controleProducao.primeiroProdutoDosar = false;
                             }
                             else
                             {
@@ -803,7 +837,7 @@ namespace _9567A_V00___PI
                                 }
 
                             }
-                            VariaveisGlobais.controleProducao.indexProduto = i;
+
                             VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].pesoProdutoDosado = VariaveisGlobais.controleProducao.Peso_Parcial_Produzindo;
 
                             break;
@@ -812,27 +846,6 @@ namespace _9567A_V00___PI
                         i++;
                     }
                 }
-
-                #region Verifica se o produto que esta dosando foi dosado pelo PLC
-
-                if (VariaveisGlobais.controleProducao.Estabilizado)
-                {
-                    //-1 erro catch
-                    //0 não realizado o update
-                    //1 realizado o update
-                    //if (!VariaveisGlobais.controleProducao.HabilitadoDosarEmManual && !VariaveisGlobais.controleProducao.Troca_Produto)
-                    //{
-                    //    if (DataBase.SQLFunctionsProducao.Update_PesoDosado_Produto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].produto.id, VariaveisGlobais.controleProducao.Peso_Parcial_Produzindo) > 0)
-                    //    {
-                    //        VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].pesoProdutoDosado = VariaveisGlobais.controleProducao.Peso_Parcial_Produzindo;
-                    //    }
-                    //}
-
-
-                }
-
-
-                #endregion
             }
             else
             {
