@@ -963,7 +963,7 @@ namespace _9567A_V00___PI.Utilidades
             execucaoProducao.Dosando = bits[0];
             execucaoProducao.Estabilizado = bits[1];
             execucaoProducao.Manual_Automatico = bits[2];
-            execucaoProducao.Reserva = bits[3];
+            execucaoProducao.IniciadoDosagemProduto_PLC = bits[3];
             execucaoProducao.Solicita_Descarga = bits[4];
             execucaoProducao.Troca_Produto = bits[5];
             execucaoProducao.Reserva_1 = bits[6];
@@ -987,7 +987,7 @@ namespace _9567A_V00___PI.Utilidades
             bits[0] = execucaoProducao.Dosando;
             bits[1] = execucaoProducao.Estabilizado;
             bits[2] = execucaoProducao.Manual_Automatico;
-            bits[3] = execucaoProducao.Reserva;
+            bits[3] = execucaoProducao.IniciadoDosagemProduto_PLC;
             bits[4] = execucaoProducao.Solicita_Descarga;
             bits[5] = execucaoProducao.Troca_Produto;
             bits[6] = execucaoProducao.Reserva_1;

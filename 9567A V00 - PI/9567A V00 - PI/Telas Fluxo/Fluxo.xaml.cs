@@ -259,6 +259,7 @@ namespace _9567A_V00___PI.Telas_Fluxo
                     Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
 
                     VariaveisGlobais.controleProducao.Dosando = true;
+                    VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC = false;
                     VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].iniciouDosagem = true;
 
                     //Atualiza Valores dos pesos do produto
@@ -280,7 +281,8 @@ namespace _9567A_V00___PI.Telas_Fluxo
             }
             else
             {
-                if (DataBase.SQLFunctionsProducao.Update_FinalizouDosagemProduto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto ].produto.id) > 0)
+                if (DataBase.SQLFunctionsProducao.Update_FinalizouDosagemProduto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto ].produto.id) > 0 &&
+                    VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC)
                 {
                     if (DataBase.SQLFunctionsProducao.Update_PesoDosado_Produto(VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].id, VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto].produto.id, VariaveisGlobais.controleProducao.Peso_Parcial_Produzindo) > 0)
                     {
@@ -296,6 +298,8 @@ namespace _9567A_V00___PI.Telas_Fluxo
                                 Utilidades.VariaveisGlobais.Buffer_PLC[1].Enable_Read = false;
 
                                 VariaveisGlobais.controleProducao.Troca_Produto = true;
+                                VariaveisGlobais.controleProducao.Estabilizado = false;
+                                VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC = false;
                                 VariaveisGlobais.OrdensProducao[VariaveisGlobais.controleProducao.indexProducao].receita.listProdutos[VariaveisGlobais.controleProducao.indexProduto + 1].iniciouDosagem = true;
 
                                 //Atualiza Valores dos pesos do produto
@@ -322,6 +326,7 @@ namespace _9567A_V00___PI.Telas_Fluxo
                             VariaveisGlobais.controleProducao.PesoTolerancia = 0;
                             VariaveisGlobais.controleProducao.Troca_Produto = false;
                             VariaveisGlobais.controleProducao.Dosando = false;
+                            VariaveisGlobais.controleProducao.IniciadoDosagemProduto_PLC = false;
                             Comunicacao.Sharp7.S7.SetWordAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 18, Utilidades.Move_Bits.ControleProducaoToWord(VariaveisGlobais.controleProducao));
                             Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 26, 0);
                             Comunicacao.Sharp7.S7.SetRealAt(Utilidades.VariaveisGlobais.Buffer_PLC[1].Buffer, 30, 0);

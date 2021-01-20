@@ -124,7 +124,7 @@ namespace _9567A_V00___PI.Utilidades
             public bool Dosando;                    
             public bool Estabilizado;
             public bool Manual_Automatico;
-            public bool Reserva;
+            public bool IniciadoDosagemProduto_PLC;
             public bool Solicita_Descarga;
             public bool Troca_Produto;
             public bool Reserva_1;
